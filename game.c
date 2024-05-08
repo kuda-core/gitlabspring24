@@ -9,6 +9,8 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+char* words();
+
 int main(int argc, char *argv[])
 {
 	int choice = 0;
@@ -219,6 +221,42 @@ int main(int argc, char *argv[])
 			case 38:
 			{
 				puts("room38");
+				printf("You see Skeleton. What will you do?");
+				int hc = 0;
+				int r = rand() % (5+1 - 1) +1 ;
+				int health[] = {1,2,3,4,5};
+				int skel = health[r];
+				while (skel >0)
+				{
+					printf("\nPress 1 for attack\n"); 
+					printf("Press 2 for Defend\n");
+					printf("Press 3 to Sing\n");
+					printf("Press 4 to Stare\n");
+					printf("Press 5 to run\n");
+					scanf("%d",&hc);
+					if (hc == 1)
+					{
+						printf("You attacked the skeleton it looks damaged");
+					skel = skel -1;
+					}
+					if (hc == 2)
+					{
+						printf("The Skeleton stood there as you you blocked yourself");
+					}
+					if (hc == 3)
+                                        {
+                                                printf("%s",words());
+                                        }
+					if (hc == 4)
+                                        {
+                                                printf("%s",words());
+                                        }
+					if (hc == 5)
+					{
+						printf("You left the room");
+						break;
+					}
+				}	
 				break;
 			}
 			case 39:
@@ -323,23 +361,10 @@ int main(int argc, char *argv[])
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+char* words()
+{
+	return "The skeleton look at you strangely \n";
+}
 
 
 
