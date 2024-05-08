@@ -1,5 +1,5 @@
 //contributors
-//
+//th3cod3rbab3
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+
+void guessGame();
 
 int main(int argc, char *argv[])
 {
@@ -44,6 +46,161 @@ int main(int argc, char *argv[])
 			case 3:
 			{
 				puts("room3");
+				//int main(void) {
+  
+int choice = 1;
+
+  while(choice >= 1 && choice <= 5)
+    {
+    printf("Oh no.. you have entered room 3, this should be fun.. Remember depending on what door you choose, you will have to make lots of choices.. Let's begin choose from the following door: \n Door 1 \n Door 2 \n Door 3 \n Door 4 \n Door 5 \n Select -1 to Exit \n Whatever you do, do not choose Door 5 \n Okay now go ahead make your selection: ");
+    scanf("%d",&choice);
+  
+  if (choice == 1)
+  {
+     int pick = -1 ;
+          int array [] = {5,3,1,4,2};
+          printf("\n");
+          printf("Oh no you have selected to enter door 1.. \n"); 
+          printf("In this room you will be told you fortune, I have created an array with 5 elements, you will pick a number 0-4, and depending on your choice you will be given a number in return, depending on the number you get back that will be your fortune..\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("Fortune List:\n");
+    
+       printf("1. Never give up. You're not a failure if you don't give up.\n");
+       printf("2. Hard work pays off in the future, laziness pays off now.\n ");
+       printf("3. Now is the time to try something new.\n");
+       printf("4. You learn from your mistakes... You will learn a lot today.\n");
+       printf("5. A chance meeting opens new doors to success and friendship.\n"); 
+    printf("\n");
+    printf("\n");
+    
+        while(pick < 0 || pick > 4)
+        {
+        printf("Pick a number 0-4: ");
+        scanf(" %d", &pick); 
+        }
+         printf("Your fortune is: %d\n", array[pick]);   
+  }
+  
+  else if (choice == 2)
+    
+  {
+    int diceSize = 6;
+    srand(time(NULL));
+    int dice = rand() % diceSize; 
+    int roll = 0;
+    
+    printf("You have entered door 2 \n");
+    printf("In this room you will be given a dice to roll, you will get to choose a number between 1-6, do you think you will be able to guess the number you rolled? \n"); 
+    printf("May the odds be ever in your favor.. \n");
+    printf("Now whenever you are ready, enter the number you think you will roll:");
+    scanf(" %d", & roll);
+    while(roll >= 0 && roll <= 6)
+      {
+    if (roll == dice)
+    {
+      printf("Congratulations you have guessed the number you rolled, you have won the game \n");
+      break;
+    }
+    else
+    {
+      printf("Sorry you have not guessed the number you rolled, you have lost the game \n");
+       printf("The number rolled was %d \n", dice);
+      break;
+    }
+  }
+  }
+
+  else if (choice == 3)
+    
+  {
+    int age = 0;
+    printf("Sorry you have entered door 3,  here lives an angry alien, he will ask your age.\n");
+    printf("Alien: Alright, spill the beans! How many years have you been hogging all the oxygen on this planet?\n");
+    printf("Alien: Come on hurry up I don't have all day, enter your age here:");
+    scanf(" %d", & age);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("Alien: Hmmm, I see you are %d years old, just know that people are lying when they say age is just a number because you are old BYE!!\n",age);
+    
+  }
+
+  else if (choice == 4)
+  {
+    printf("Welcome to door four, in this room it will be endless wonders and boundless treasures!\n");
+    printf("CONGRATS!!\n");
+    printf("YOU HAVE\n");
+    printf("W ........");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("O .......");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("sorry its stuck");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("Lets try this again ");
+    printf("CONGRATS!! ... Oh, wait, scratch that. You've entered this room and behold... it is absolutely nothing BYE! \n");
+
+    
+  }  
+
+   else if (choice == 5) 
+   {
+     printf("You have entered door 5 \n");
+     guessGame();
+   }
+
+  else if(choice == -1)
+  {
+    printf("You have exited the game from room 3\n");
+
+    //return EXIT_SUCCESS;
+    break;
+  }
+
+  else
+  {
+    printf("You made an invalid selection. Try again. \n");
+    
+  }
+    
+    }
+
+  //return break;
+  //}
+
 				break;
 			}
 			case 4:
@@ -321,6 +478,34 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
+void guessGame()
+{
+  int size = 10;
+  srand(time(NULL));
+  int randomNum = rand() % size; 
+  int rand = 0;
+  
+  printf("Oh no, you have entered the Guessing Game.\n");
+  printf("I am thinking of a number try to guess what number I have selected between 1 and 10:\n");
+  printf("When ever you are ready, enter a number: \n");
+  scanf(" %d", &rand);
+  while(rand <= 10 && rand >= 1)
+  {
+    if (rand == randomNum)
+    {
+      printf("Darn, we selected the same number! \n");
+      printf("You win this time we will meet again, and I will make sure I win next time. \n");
+      break;
+    }
+    else
+    {
+      printf("Haha I knew you would never guess my number, sadly we did not select the same number. \n");
+      printf("I selected %d \n", randomNum);
+      printf("You lost this game. Haha Loser!! \n");
+      break;
+    }
+  }
+}
 
 
 
