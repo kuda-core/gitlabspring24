@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
 					scanf("%d",&hc);
 					if (hc == 1)
 					{
-						printf("You attacked the skeleton it looks damaged");
+						printf("You attacked the skeleton it looks damaged\n");
 					skel = skel -1;
 					}
 					if (hc == 2)
