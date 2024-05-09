@@ -24,6 +24,7 @@ void blackJack();
 int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
+int randomNumRoom41();
 
 void FinalArea(int level);
 bool trap_d10();
@@ -296,12 +297,128 @@ int main(int argc, char *argv[])
 				puts("room40");
 				break;
 			}
-			case 41:
+			case 41://Saul Moreno
 			{
-				puts("room41");
+				int room41 = 0;
+        int counter = 1;
+        int userNum = 0;
+        int userInput = 0;
+        int pointTotal = 0;
+        int arrayEscape[] = {0,0,0,0,0};
+				puts("Welcome! To Room 41");
+				printf("In order to survive this room you need to fill out this gauge by answering questions\n");
+        printf("The questions are based off a point system. The easier ones being low numbers, \n");
+        printf("the hard ones being high numbers. You must reach higher than 15 points to be let out\n"); 
+        printf("Since I am generous I will give you a free point between 1-5 ");
+				room41 = randomNumRoom41();
+        arrayEscape[0] = room41;
+				printf("The number is %d\n", room41);
+        while(counter < 5)
+        {
+          printf("Pick a number between 1-5: ");
+          scanf("%d", &userNum);
+          switch(userNum){
+            case 1: 
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Is two + two = 1: ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 1;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 2:
+            printf("Hit 1 for true and 2 for false\n");
+              printf("Is Ada Lovelace considered the first programmer? ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 1)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 2;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;             
+            case 3:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Is LISP The first object orientated language? ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 3;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 4:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Java is an object oriented language that has pointers? ");
+              scanf("%d", &userInput);
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 4;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 5:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Python provides very little support for iteration? ");
+              scanf("%d", &userInput);
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 5;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            default:
+              printf("Error!");
+              break;
+
+          }//end switch(userNum){
+
+          counter++;
+        }// end  while(counter < 5)
+
+        for(int i = 0; i < 5; i++)
+        {
+          pointTotal = arrayEscape[i] + pointTotal;
+        }
+
+        printf("------------------>Your total points are: %d <--------------------------\n", pointTotal);
+        if(pointTotal >= 15)
+          printf("You have escaped successfully!!!\n");
+        else
+          printf("You have failed. Leave your body, but your soul may move to the next room\n");
+
 				break;
 			}
-			case 42:
+			case 42: 
 			{
 				puts("room42");
 				break;
@@ -455,36 +572,6 @@ void FinalArea(int level)
    printf("You make your way to the time machine, panting heavily and set the date to the day you were in front of all the rooms...\nYou made it back!\n\nROOM CLEAR!\n\n");
    return;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 void coinFlip() {
@@ -1041,7 +1128,12 @@ bool trap_d10()
 }
 
 
-
+int randomNumRoom41()
+{
+ srand(time(NULL));
+ int randomNum = rand() % 5 + 1;
+ return randomNum;
+}
 
 
 
