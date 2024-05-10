@@ -17,6 +17,7 @@
 
 //AK
 
+// dailycrocs
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -94,6 +95,7 @@ int health = 100;
 
 void generateGold();
 
+void dragonbarrowChoices();
 
 int main(int argc, char *argv[])
 {
@@ -355,7 +357,92 @@ while (choice != 0)
 			}
 			case 10:
 			{
-				puts("room10");
+				printf("\n There are subtle hints to follow as you explore, but this is your warning that your decisions have dire consequences... \n");
+				printf("\n Dragonbarrow Castle \n\n");
+				printf(" As you face the fortress, you notice three pathways: \n 1. Left, towards the Gardens \n 2. Forward, to the Castle Gate corridor \n 3. Right, up the stairs towards the East Tower\n");
+				int x = 0;
+				printf("\n Which path will you take?: \n\n");
+				scanf(" %d",&x);
+				while(x == 1)
+				{
+					printf("\n Gardens \n\n");
+					printf("\n As you enter the gardens, you notice a cultist statue, and a side entrance into the West Tower.\n");
+					int y = 0;
+					printf(" Where will you go?\n");
+					printf(" 1. Examine the cultist statue\n");
+					printf(" 2. Enter the West Tower entrance\n\n");
+					scanf(" %d", &y);
+					if(y == 1)
+					{
+						printf("\n The cultist statue contained a lethal curse.\n");
+						printf("\n The curse sends you back... \n\n");
+						break;
+					}
+					else if(y == 2)
+					{
+						printf("\n West Tower \n\n");
+						printf(" As you open the door, a suspicious masked peddler is seen looting decayed corpses.\n");
+						printf(" The masked peddler notices you standing in the doorway, and throws a sac over you.\n");
+						printf(" You feel yourself being moved, and hear the sound of rushing water.\n");
+						printf(" You realize you are back in the corridor full of doors...\n\n");
+						break;
+					}
+					else
+					{
+						printf(" This is not an option\n ");
+					}
+				}
+				while(x == 2)
+				{
+					printf("\n Castle Gate corridor \n\n");
+					printf(" The Castle Gate corridor leads to an open courtyard of steps with two large doors to head through.\n ");
+					printf(" One door seems to lead to the inner chambers, the other seems to lead to a dining hall.\n");
+					int z = 0;
+					printf(" Where will you go?\n");
+					printf(" 1. Inner chambers\n");
+					printf(" 2. Dining Hall\n\n");
+					scanf(" %d", &z);
+					if(z == 1)
+					{
+					dragonbarrowChoices();
+					break;
+					}
+					else if(z == 2)
+					{
+						dragonbarrowChoices();
+						break;
+					}
+					else
+					{
+						printf(" This is not an option \n");
+					}
+				}
+				while(x == 3)
+				{
+					printf("\n East Tower Entrance \n\n");
+					printf(" The East Tower courtyard is filled with undead domestic servants covered in Rot.\n");
+					printf(" However, if you are able to make your way past these undead, there are two paths available for you...\n");
+					int eastTower = 0;
+					printf(" Pick your path\n");
+					printf(" 1. Corridor past the undead\n");
+					printf(" 2. Climb stairs to the Battlement\n\n");
+					scanf(" %d", &eastTower);
+					if(eastTower == 1)
+					{
+						dragonbarrowChoices();
+						break;
+					}
+					else if(eastTower == 2)
+					{
+						printf(" At the top of the battlement, you notice a shiny stone.\n");
+						printf(" As you pick up the shiny stone, a giant crow descends upon you and brings you back to the corridor of doors...\n\n");
+						break;
+					}
+					else
+					{
+						printf(" This is not an option \n");
+					}
+				}
 				break;
 			}
 			case 11:
@@ -3290,7 +3377,50 @@ bool trap_d10()
 
 
 
+void dragonbarrowChoices()
+{
+	const char *conseq[] =
+	{
+		" Upon opening the door, you find yourself among a barricade of colossal ballistas set up by Exiled Foot soldiers awaiting your arrival, and proceed to shoot you. \n\n YOU DIED.\n",
+		" The door creaks open to reveal a room with a chest. Upon closer inspection, you notice the slight breathing and carefully step away.\n\n",
+		" Upon opening the heavy door, you find yourself face to face with a ferocious dragon. You quickly flee and are able to make your way to safety.\n\n",
+		" Upon opening the heavy door, you find yourself in a room filled with Rot. You slowly lose consciousness and feel yourself being dragged.\n\n",
+		" Upon opening the heavy door, you find yourself in the boss room.\n Defeat Diarmuid, Descendant of Fianna to discover a Great Rune and a path to escape the fortress.\n\n"
+	};
 
+	int random_index = rand() % 5;
+
+	if(random_index == 4)
+	{
+		srand(time(NULL));
+		int randomNum = rand() % 100 + 1;
+		int guessAttack;
+
+		printf(" Diarmuid, Descendant of Fianna is the Cursed Lord of this stronghold.\n");
+		printf(" Defeat him to gain his Great Rune and escape the cursed fortress.\n");
+		printf(" You must cast an attack value (1-100), and it must be higher than Diarmuid's\n");
+		printf(" Enter attack value: \n");
+		scanf(" %d", &guessAttack);
+
+		if(guessAttack > randomNum)
+		{
+			printf(" Diarmuid, Descendant of Fianna has been slain!\n");
+			printf(" Collect the Great Rune and make your way back to the corridor of doors...\n\n");
+		}
+		else if(guessAttack < randomNum)
+		{
+			printf(" Diarmuid's strength has overpowered you..\n\n YOU DIED \n");
+		}
+		else
+		{
+			printf(" The overwhelming strength converges...\n");
+		}
+	}
+		else
+		{
+			printf("%s\n", conseq[random_index]);
+		}
+}
 
 
 
