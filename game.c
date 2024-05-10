@@ -74,6 +74,13 @@ int positionGenerator();
 
 int diceResult(int user, int cpu);
 
+
+int swordAttack();
+int bowAttack();
+int hammerAttack();
+int daggerAttack();
+int axeAttack();
+
 void game_Start(void);
 
 int attemptPurchase();
@@ -82,6 +89,7 @@ void findFlower(void);
 double areaRec(int len, int h);
 double areaT(int b, int h);
 int factorial(int n);
+
 
 
 // Global variables for room 17
@@ -2844,6 +2852,392 @@ while (choice != 0)
 			case 43:
 			{
 				puts("room43");
+				srand(time(NULL));
+				    
+				    char weaponChoice, playersTurn;
+				    int playerHealth = 100;
+				    int monsterHealth = 100;
+				    int monsterDamage;
+				    int potion[3] = {20, 20, 20};
+				    int remainingPotions = 3;
+				    
+				    printf("Pitch Black....\nSuddenly light.\n");
+				    printf("You are in a room.\nTable and chair on one side.\nChest on the other.\n");
+				    printf("You open the chest.\n");
+				    printf("The chest contains five weapons: Sword, Bow, Hammer, Dagger, Axe\n");
+				    printf("Which will you choose:\n- s for Sword\n- b for Bow\n- h for Hammer\n- d for Dagger\n- a for Axe\n");
+				    
+				    do
+				    {
+				        printf("Choice: ");
+				        scanf(" %c", &weaponChoice);
+				    }while(weaponChoice != 's' && weaponChoice != 'b' && weaponChoice != 'h' && weaponChoice != 'd' && weaponChoice != 'a');
+				    
+				    if(weaponChoice == 's')
+				    {
+				        printf("\nYou choose Sword\n\n");
+				    }
+				    else if(weaponChoice == 'b')
+				    {
+				        printf("\nYou choose Bow\n\n");
+				    }
+				    else if(weaponChoice == 'h')
+				    {
+				        printf("\nYou choose Hammer\n\n");
+				    }
+				    else if(weaponChoice == 'd')
+				    {
+				        printf("\nYou choose Dagger\n\n");
+				    }
+				    else
+				    {
+				        printf("\nYou choose Axe\n\n");
+				    }
+				    
+				    printf("A door appears and fire spawns around you forcing you to go through.\n");
+				    printf("You are in a colosseum and there is a monster ready to fight you.\n");
+				    printf("You have 3 potions to heal, each healing 20 hp.\n");
+				    printf("You have 100hp\nMonster has 100hp.\n\n");
+				    
+				    //Sword
+				    if(weaponChoice == 's')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = swordAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Bow
+				    if(weaponChoice == 'b')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = bowAttack();
+				                attack += bowAttack();
+				                attack += bowAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Hammer
+				    if(weaponChoice == 'h')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = hammerAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 8) + 8;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            printf("Monster attacks again!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Dagger
+				    if(weaponChoice == 'd')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = daggerAttack();
+				                attack += daggerAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 6) + 10;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Axe
+    				if(weaponChoice == 'a')
+    				{
+        				do
+        				{
+            					printf("Monster's Health: %d\n", monsterHealth);
+            					printf("Current HP: %d\n", playerHealth);
+            					printf("Remaining potions: %d\n", remainingPotions);
+            					printf("Do you attack('a') or heal('h'): ");
+            					scanf(" %c", &playersTurn);
+            
+            					if(playersTurn != 'h')
+            					{
+                					int attack = axeAttack();
+                					monsterHealth -= attack;
+                					printf("Monster's HP: %d\n\n", monsterHealth);
+            					}
+            					else
+            					{
+                					if(potion[0] == 20)
+                					{
+                    						playerHealth += potion[0];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[0] = 0;
+                					}
+                					else if(potion[1] == 20)
+                					{
+                    						playerHealth += potion[1];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[1] = 0;
+                					}
+                					else if(potion[2] == 20)
+                					{
+                    						playerHealth += potion[2];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[2] = 0;
+                					}
+                					else
+                					{
+                						printf("Out of potions!\n");
+                    						printf("Your HP is unchanged at: %d\n\n", playerHealth);
+                					}
+            					}
+            
+            					printf("Monster attacks!\n");
+            					monsterDamage = (rand() % 11) + 5;
+            					playerHealth -= monsterDamage;
+            					printf("Monster does %d damage.\n", monsterDamage);
+            					printf("Your HP: %d\n\n", playerHealth);
+            
+            
+        				}while(playerHealth > 0 && monsterHealth > 0);
+        
+        				if(playerHealth > 0)
+        				{
+            					printf("YOU WIN!!!\n\n");
+        				}
+        				else
+        				{
+            					printf("YOU DIED!!!\n\n");
+        				}
+    				}
+
 				break;
 			}
 			case 44:
@@ -3112,6 +3506,62 @@ printf("You may now go back to the main room now. GOOD LUCK \n)");
 	return EXIT_SUCCESS;
 }
 
+
+
+
+//Sword does 5 - 10 damage and attacks every turn
+int swordAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 5;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Bow does 2 - 5 damage but shoots 3 times per turn 
+int bowAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 4) + 2;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Hammer does 15 - 25 damage but hits every other turn
+int hammerAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 15;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Dagger does 4 - 8 damage but hits twice per turn
+int daggerAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 5) + 4;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Axe does 3 - 12 damage and hits every turn
+int axeAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 3;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+
+
+
+
+
+
+
+
 void exploreRoom(int roomNo)
 {
 	switch(roomNo)
@@ -3167,6 +3617,7 @@ void eyeGame(void)
 		puts("You lose. Try again.");
   	}
 }
+
 
 void generateGold() {
 	int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
