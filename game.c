@@ -84,7 +84,11 @@ int selectRandom(int lower, int upper, int count);
 char* pullLever(int seed);
 
 void processRoom23();
+
+int healthBar(bool damage, int currentHealth);
+
 void characterSelection(int num);
+
 
 void chooseDoor();
 void chooseWeapon();
@@ -492,6 +496,55 @@ while (choice != 0)
 			case 11:
 			{
 				puts("room11");
+				printf("You have entered the chest room! 5 chests are guarded by a monster.\n");
+                                printf("Your health is at 100 HP.\n");
+                                printf("Open each chest one by one and try to guess the one integer passcode.\n");
+                                printf("You will have five tries to guess the passcode that is between 0 & 9.\n");
+                                printf("Each incorrect guess is a 20 HP blow by the monster.\n");
+                                printf("Goodluck!\n");
+
+                                srand(time(NULL));
+                                int numChests[] = {1, 2, 3, 4, 5};
+                                int currentHealth = 100;
+                                int choice = 0;
+
+                                for(int i = 0; i < sizeof(numChests) / sizeof(numChests[0]); i++)
+                                {
+                                        bool damage = false;
+                                        for(int j = 0; j < 5; j++)
+                                        {
+                                                int randNum = rand() % 10;
+                                                printf("\nGuess Chest %d's passcode: \n", i + 1);
+                                                scanf("%d", &choice);
+
+                                                while(choice != randNum)
+                                                {
+                                                        damage = true;
+                                                        currentHealth = healthBar(damage, currentHealth);
+                                                        printf("STRUCK! You have lost 20 HP. Your current health is %d \n", currentHealth);
+                                                        if(currentHealth <= 0)
+                                                        {
+                                                                printf("You have died. Game over.");
+                                                                return EXIT_SUCCESS;
+                                                        }
+                                                        if(choice < randNum)
+                                                        {
+                                                                printf("Your guess is too low.\n");
+                                                        }
+                                                        else if (choice > randNum)
+                                                        {
+                                                                printf("Your guess is too high.\n");
+                                                        }
+                                                        printf("Try again: ");
+                                                        scanf("%d", &choice);
+                                                }
+                                                printf("\nYou guessed the correct passcode!\nHealth restored!\n");
+                                                currentHealth = 100;
+                                                break;
+                                        }
+                                }
+                                printf("\n\nCongratualtions traveler! You have survived the chest room!\n");
+                                break;
 				break;
 			}
 			case 12:
@@ -2269,7 +2322,15 @@ char* pullLever(int seed)
 }
 
 
-
+int healthBar(bool damage, int health) 
+{
+  int tempHealth  = health;
+  if (damage == true)
+  {
+    tempHealth = health - 20;
+  }
+  return tempHealth;
+}
 
 
 
