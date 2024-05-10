@@ -74,6 +74,7 @@ int selectRandom(int lower, int upper, int count);
 char* pullLever(int seed);
 
 void processRoom23();
+void characterSelection(int num);
 
 void chooseDoor();
 void chooseWeapon();
@@ -866,6 +867,62 @@ while (choice != 0)
 			case 30:
 			{
 				puts("room30");
+				    srand(time(NULL));
+
+    int choice;
+    do
+    {
+        printf("\nAdventure Time RPG Menu\n-----------------------------\n");
+        printf("1. Select Character\n");
+        printf("2. Choose Weapons for Adventure Pack\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int randomIndex = rand() % 6;
+            characterSelection(randomIndex);
+            break;
+        }
+        case 2:
+        {
+            // Inventory
+            int adventurePack[3];
+            char *inventory[] = {"Mushroom Bomb", "Finn's Sword", "Ax Bass", "Candy Cane Shot Gun", "Demon Blood Sword", "Peppermint Butler's Steak Collection"};
+            printf("\nWeapons\n--------------------------------------\n");
+            for (int i = 0; i < 6; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[i]);
+            }
+
+            printf("Please choose three weapons to put in your adventure pack.\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("Enter Selection %d: ", i + 1);
+                scanf("%d", &adventurePack[i]);
+            }
+
+            printf("Adventure Pack:\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[adventurePack[i] - 1]);
+            }
+            break;
+        }
+        case 3:
+            printf("Exiting the Adventure Time RPG. Goodbye!\n");
+            break;
+        default:
+            printf("Invalid choice. Please enter a number between 1 and 3.\n");
+            break;
+        }
+
+    } while (choice != 3);
+
+
 				break;
 			}
 			case 31:
@@ -3408,6 +3465,13 @@ bool trap_d10()
     bool d2 = rand() % 2;
     return d2;
 }
+
+void characterSelection(int num)
+{
+    char *character[6] = {"Marceline the Vampire Queen", "Finn the Human", "Jake the Dog", "BMO", "Ice King", "Princess Bubblegum"};
+    printf("\nCharacter Guide\n-------------------------------------\nYour guide will be: %s! \n", character[num]);
+}
+
 
    int selectRandom(int lower, int upper, int count) {
             lower = 1;
