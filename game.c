@@ -33,6 +33,9 @@ void rollTheDice_Race();
 
 void FinalArea(int level);
 bool trap_d10();
+
+void randomEffect(int potionIndex);
+
 int selectRandom(int lower, int upper, int count);
 
 char* pullLever(int seed);
@@ -57,6 +60,7 @@ char choices[5][100];
 int health = 100;
 
 void generateGold();
+
 
 int main(int argc, char *argv[])
 {
@@ -1260,6 +1264,31 @@ while (choice != 0)
 			case 50:
 			{
 				puts("room50");
+			
+				printf("Welcome to Room 50. ");
+				printf("5 potions are here, they are: ");
+				char *potions[5] = {"1.red","2.blue","3.green","4.pink","5.black"};
+				
+				int i;
+				for(i=0; i<5;i++)
+				{
+					printf("%s\n",potions[i]);
+				}
+
+				int potion;
+				printf("Pick a potion to drink(1-5): ");
+				scanf("%d", &potion);
+
+				if(potion<1||potion>5)
+				{
+					printf("You choose to not drink.");
+				}else
+				{
+					printf("Your chose to drink potion: %s\n",potions[potion-1]);
+					randomEffect(potion);
+				}
+
+
 				break;
 			}
 			case 51:
@@ -1603,7 +1632,21 @@ char* pullLever(int seed)
 
 
 
+void randomEffect(int potionIndex)
+{
+	int randomEffectIndex = rand()%2;
+	srand(time(NULL));
 
+	char *potionEffects[5][2]={
+	{"Your become confident","Your feel happy"},
+	{"Your feel warm","You feel cold"},
+	{"You grow shorter","You grow larger"},
+	{"You get a gold","You get an apple"},
+	{"You start dancing","You start singing"}
+	};
+
+	printf("Random effect: %s\n",potionEffects[potionIndex-1][randomEffectIndex]);
+}
 
 
 
