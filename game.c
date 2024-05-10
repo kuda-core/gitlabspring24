@@ -2,16 +2,23 @@
 
 //Suave714
 
-
+// Dedman
 // Subject 0023
-
+//jingle
 //Dom I.
 //Andre J Leos
 //Elias Dawarpana
+//Gretel Castillo
 
 //Patrick Polanco
 
 //AK
+
+
+//Carlos
+
+//AK
+
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -21,6 +28,12 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <math.h>
+
+
+void exploreLocation(int locationChoice);
+
+void randomTreasure();
+void playGame();
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -30,15 +43,51 @@ void blackJack();
 int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
+int diceResult(int user, int cpu);
 
+
+
+// Global variables for room 17
+char inputComputerSymbol = ' ';
+char inputPlayerSymbol = ' ';
+
+void chooseRoomFor17();
+
+void room17RoomOneLevelOne();
+void room17RoomOneLevelTwo();
+
+void room17RoomTwoLevelOne();
+void room17RoomTwoLevelTwo();
+
+void room17RoomThreeLevelOne();
+void room17RoomThreeLevelTwo();
+
+void room17RoomFourLevelOne();
+
+void room17RoomFiveLevelOne();
+void printBoard(char board[3][3]);
+char getChosenSymbol(char c);
+void playerTurn(char board[3][3]);
+void placeMove(char board[3][3], int position, char symbol);
+bool isValidMove(char board[3][3], int position);
+bool isGameFinished(char board[3][3]);
+bool hasContestantWon(char board[3][3], char symbol);
 void FinalArea(int level);
 bool trap_d10();
+int selectRandom(int lower, int upper, int count);
+
+void randomEffect(int potionIndex);
+
 int selectRandom(int lower, int upper, int count);
 
 char* pullLever(int seed);
 
 void processRoom23();
+
 int healthBar(bool damage, int currentHealth);
+
+void characterSelection(int num);
+
 
 void chooseDoor();
 void chooseWeapon();
@@ -58,6 +107,7 @@ char choices[5][100];
 int health = 100;
 
 void generateGold();
+
 
 int main(int argc, char *argv[])
 {
@@ -84,6 +134,40 @@ int main(int argc, char *argv[])
 			case 1:
 			{
 				puts("room1");
+				int again = 1;
+				char animals[3][6] = {"Dog", "Cat", "Turtle"};
+				puts("You open the door and enter a room with another 5 doors.");
+				
+				while(again)
+				{
+					printf("Choose one of the 5 doors. ");
+					scanf("%d", &choice);
+					switch(choice)
+					{
+						case 1:
+							puts("You open the door and found a treasure chest!");
+							randomTreasure();
+							break;
+						case 2:
+							puts("The door is locked.");
+							break;
+						case 3:
+							puts("You open the door and get attacked!");
+							printf("You were bitten by a %s\n", animals[rand() % 3]);
+							break;
+						case 4:
+							puts("You open the door and find a friendly animal!");
+							printf("you walk up and pet the %s\n", animals[rand() % 3]);
+							break;
+						case 5:
+							puts("You open the door and find nothing.");
+							break;
+						default:
+							puts("....");
+					}
+					printf("Do you want to open another door? (1 for yes, 0 for no): ");
+					scanf("%d", &again);
+				}
 				break;
 			}
 			case 2:
@@ -393,7 +477,39 @@ while (choice != 0)
 			}
 			case 15:
 			{
-				puts("room15");
+        int choice        = 0;
+        int galacticDate  = rand() % 3000 + 7000;
+        char exploreAgain = 'y';
+
+        printf("Welcome to the Infinite Frontier! Galactic date: %d\n", galacticDate);
+        printf("\nIn the vast expanse of the cosmos, humanity's thirst for exploration knows no bounds. ");
+        printf("Our story begins aboard the ISS Explorer, a state-of-the-art spacecraft embarking ");
+        printf("on a daring mission to chart uncharted territories and uncover the mysteries of the universe.\n");
+
+        printf("\nAs a member of the crew, you play a crucial role in this epic journey. ");
+        printf("Your mission is to explore the Infinite Frontier, a region of space teeming with exotic worlds, ");
+        printf("cosmic anomalies, and enigmatic phenomena waiting to be discovered.\n");
+        printf("\nAre you ready to embark on an adventure of a lifetime? Let's begin!\n");
+
+        while (tolower(exploreAgain) != 'n')
+        {
+          puts("\nChoose a location to explore:");
+          puts("\t1. Unknown Planet");
+          puts("\t2. Stellar Anomaly");
+          puts("\t3. Rogue Asteroid Belt");
+          puts("\t4. Enigmatic Black Hole");
+          puts("\t5. Cosmic Mirage\n");
+          puts("Enter your choice: ");
+          scanf("%d", &choice);
+
+          exploreLocation(choice);
+
+          puts("\nDo you want to explore another location? (y/n):");
+          scanf(" %c", &exploreAgain);
+        }
+
+        printf("Thanks %s for exploring the Infinite Frontier!\n", name);
+        printf("\n");
 				break;
 			}
 			case 16:
@@ -404,6 +520,61 @@ while (choice != 0)
 			case 17:
 			{
 				puts("room17");
+				srand(time(NULL));
+
+                		// Number User Chose
+                		int num = 0;
+
+                		// Number for room chosen
+                		int roomNum = 0;
+
+            			printf("WELCOME TO SUPERNATURAL FINDINGS! A FANTASY RPG GAME WHERE YOUR TASK IS TO FIND THE GOLEM AND DEFEAT IT BY COMPLETEING CERTAIN LEVELS\n");
+            			printf("BUT BEFORE YOU START THE GAME YOU MUST FIRST BE ASSIGNED A SUPPERNATURAL CHARACTER TO PLAY\n");
+            			printf("IT'S A VERY SIMPLE TASK! PICK A NUMBER BETWEEN 1 - 20: \n");
+            			scanf("%d", &num);
+
+
+            			while (num < 1 || num > 20)
+            			{
+                			printf("INVALID NUMBER. PICK A NUMBER BETWEEN 1 - 20: \n");
+                			scanf("%d", &num);
+            			}
+
+
+    				// Loop used to assign supernatural creature to user
+    				if(num == 1 || num <= 5)
+    				{
+        				printf("SUPERNATURAL CREATURE YOU'VE BEEN ASSIGNED: WEREWOLF\n");
+    				}
+    				else if(num == 6 || num <= 10)
+    				{
+        				printf("SUPERNATURAL CREATURE YOU'VE BEEN ASSIGNED: VAMPIRE\n");
+    				}
+    				else if(num == 11 || num <= 15)
+    				{
+        				printf("SUPERNATURAL CREATURE YOU'VE BEEN ASSIGNED: MERMAID\n");
+    				}
+   				 else if(num == 16 || num <= 20)
+    				{
+        				printf("SUPERNATURAL CREATURE YOU'VE BEEN ASSIGNED: DRAGON\n");
+    				}
+
+    				// Backstory
+    				printf("\n");
+    				printf("NOW IT'S TIME TO START THE GAME.\n");
+    				printf("BUT FIRST YOU NEED THE BACKSTORY.\n");
+    				printf("IN A KINGDOM THAT EXISTS SOMEWHERE, PEOPLE HAVE FLED IN FEAR OF THE CREATURE THAT IS TERRORIZING THE PEACE.\n");
+    				printf("THAT CREATURE IS KNOWN AS THE GOLEM. A FATHER AND SON HAVE CAUGHT SIGHT OF THE CREATURE NEAR THE ABANDONED VICTORIAN CASTLE.\n");
+    				printf("THEY EVEN STATED THAT THEY SAW IT GO INSIDE. THEY HAVE ASKED FOR YOUR HELP IN ORDER TO ELIMINATE THE GOLEM.\n");
+    				printf("YOUR TASK IS TO GO INSIDE THE OLD NOW ABANDONED VICTORIAN CASTLE, LOOK INTO ROOMS OF YOUR CHOICE, FIND THE GOLEM, AND DEFEAT IT.\n");
+    				printf("IN THE ROOMS THERE ARE LITTLE GAMES AND LEVELS YOU HAVE TO PASS IN ORDER TO CLEAR THE ROOMS AND FIND GOLEM.\n");
+    				printf("AFTER EACH GAME IN EACH ROOM IT WILL LET YOU KNOW WHETHER YOU FOUND THE GOLEM OR DIDNT AND WILL HAVE TO LOOK FOR IT ANOTHER ROOM.\n");
+
+    				printf("NOW THAT YOU HAVE THE NECESSARY INFORMATION TO DEAFEAT THE GOLEM YOU CAN START THE GAME\n");
+    				printf("THERE ARE ROOMS WHERE THE GOLEM COULD BE AND IN THESE ROOMS THERE ARE CERTAIN TASKS YOU MUST COMPLETE AND AT THE END OF ALL THE TASKS IN THE ROOM IT WILL DETERMINE IF YOU HAVE FOUND THE GOLEM OR NOT.\n");
+    				printf("IF THE GOLEM IS NOT FOUND IN THE ROOM OF YOUR CHOICE YOU CAN CHOOSE ANOTHER ROOM AFTERWARDS UNTIL THE GOLEM IS FOUND.\n");
+
+    				chooseRoomFor17();
 				break;
 			}
 			case 18:
@@ -413,7 +584,335 @@ while (choice != 0)
 			}
 			case 19:
 			{
-				puts("room19");
+				srand(time(0));
+                int x, W = 0, L = 5;
+                printf("You look around the dim room. Then suddely, the door behind you closes shut.\nYou keep walking forward until you notice a dining table with a man sitting across from it.\nHe hands you a weird alien like device that says: \nWelcome to Room 19! Here you get to play games in order to escape. Pick any game and win 5 times.\nYou get five lives. Good Luck! \n");
+                char f;
+                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                scanf(" %c", &f);
+                while(W != 5 && L != 0)
+                        {
+                            printf("------------------------------\n");
+                            printf("Pick a game to play\n");
+                            printf("[1] - Rock Paper Scissor\n");
+                            printf("[2] - Flip a coin\n");
+                            printf("[3] - Lottery\n");
+                            printf("[4] - Dice\n");
+                            printf("[5] - ? \n");
+                            printf("Lives [%d]         Wins[%d]\n", L, W);
+                            printf("------------------------------\n");
+                            scanf("%d", &x);
+
+                            if (x == 1)
+                                {
+                                    char CPU, USER;
+                                    srand(time(0));
+                                    int number = (rand() % 3) + 1;
+                                    if (number == 1)
+                                            {
+                                                CPU = 'R';
+                                            }
+                                    else if(number == 2)
+                                            {
+                                                CPU = 'P';
+                                            }
+                                    else if(number == 3)
+                                            {
+                                                CPU = 'S';
+                                            }
+                                    int r;
+                                    printf("------------------------------\n");
+                                    printf("Rock Paper Scissor.\n");
+                                    printf("Choose!\n(1) --- Rock\n(2) --- Paper\n(3) --- Scissor\n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &r);
+                                    if (r == 1)
+                                            {
+                                                USER = 'R';
+                                            }
+                                    else if(r == 2)
+                                            {
+                                                USER = 'P';
+                                            }
+                                    else if(r == 3)
+                                            {
+                                                USER =  'S';
+                                            }
+                                    printf("------------------------------\n");
+                                    //Draw
+                                    if(USER == CPU)
+                                            {
+                                                printf("The game is a draw\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                            }
+                                    //paper wins
+                                    if(USER == 'P' && CPU == 'R')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'R' && CPU == 'P')
+                                            {
+                                                printf("You Loose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+                                    //rock wins
+                                    if (USER == 'R' && CPU == 'S')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'S' && CPU == 'R')
+                                            {
+                                                printf("You Lose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+                                     //Scissors wins
+                                    if (USER == 'S' && CPU == 'P')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'P' && CPU == 'S')
+                                            {
+                                                printf("You Lose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 2)
+                                {
+                                    int m;
+                                    srand(time(0));
+                                    int number = (rand() % 2) + 1;
+
+                                    printf("------------------------------\n");
+                                    printf("Feeling risky with a 50/50\nHead or Tails?\n");
+                                    printf("(1) --- Heads\n(2) --- Tails\n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &m);
+
+                                    printf("------------------------------\n");
+                                    if(number == 1 && m == 1)
+                                        {
+                                            printf("Coin lands... Heads\n");
+                                            printf("You win! Your choice: Heads\n");
+                                            W++;
+                                        }
+                                    else if(number == 1 && m == 2)
+                                        {
+                                            printf("Coin lands... Heads\n");
+                                            printf("You lose! Your choice: Tails\n");
+                                            L--;
+                                        }
+
+                                    //lands Tails
+                                    if(number == 2 && m == 2)
+                                        {
+                                            printf("Coin lands... Tails\n");
+                                            printf("You win! Your choice: Tails\n");
+                                            W++;
+                                        }
+                                    else if(number == 2 && m == 1)
+                                        {
+                                            printf("Coin lands... Tails\n");
+                                            printf("You lose! Your choice: Heads\n");
+                                            L--;
+                                        }
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 3)
+                                {
+                                    int match = 0;
+                                    int lott[7];
+                                    int winLott[7];
+                                    printf("------------------------------\n");
+                                    printf("Welcome to lotery.\nMatch 3 numbers out of the 7 and you win!\n");
+                                    for(int x = 0; x < 7; x++)
+                                    {
+
+                                        printf("Choose any number between 0-9 for each entry\n");
+                                        printf("Entry (%d) \n", x + 1);
+                                        scanf("%d", &lott[x]);
+                                    }
+
+                                    srand(time(NULL));
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        int number = (rand() %10);
+                                        winLott[x] = number;
+                                    }
+                                    printf("------------------------------\n");
+                                    printf("Your lottery\n");
+
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        printf("| %d |", lott[x]);
+                                    }
+                                    printf("\n");
+                                    printf("------------------------------\n");
+                                    printf("\n");
+
+                                    printf("------------------------------\n");
+                                    printf("Winning Numbers\n");
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        printf("| %d |", winLott[x]);
+                                    }
+                                    printf("\n");
+                                    printf("------------------------------\n");
+                                    printf("\n");
+
+                                    for( int x = 0; x < 7; x++)
+                                    {
+                                        if(lott[x] == winLott[x])
+                                        {
+                                            match++;
+                                        }
+                                    }
+
+                                    if (match >= 3)
+                                    {
+                                        printf("Congratulation You WON!\n You have %d matches\n", match);
+                                        W++;
+                                    }
+                                    else if (match < 3)
+                                    {
+                                        printf("You loose. You have %d matches\n", match);
+                                        L--;
+                                    }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if(x == 4)
+                                {
+                                    int input, userNum, cpuNum;
+                                    srand(time(0));
+
+                                    printf("------------------------------\n");
+                                    printf("Rolling Dice\nPretty simple, if you roll a higher number you win\n");
+                                    printf("Press (1) to roll\n");
+                                    printf("------------------------------\n");
+                                    scanf("%d" , &input);
+
+                                    printf("------------------------------\n");
+                                    if (input == 1)
+                                        {
+                                            userNum = (rand() % 6 ) + 1;
+                                            cpuNum = (rand() % 6 ) + 1;
+                                        }
+
+                                    int results = diceResult(userNum, cpuNum);
+
+                                    printf("------------------------------\n");
+                                    if(results ==1)
+                                        {
+                                            printf("You win!\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+                                            W++;
+                                        }
+                                    if(results == 2 )
+                                        {
+                                            printf("You loose.\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+                                            L--;
+                                        }
+                                    else if(results == 3)
+                                        {
+                                            printf("Its a draw.\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+
+                                        }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 5)
+                                {
+
+                                    int number, ranNum;
+                                    printf("------------------------------\n");
+                                    printf("Pick a number between 1-5 and if you guess right you win.\n");
+                                    printf("Enter number: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &number);
+                                    ranNum = (rand() % 5 ) + 1;
+
+
+                                    printf("------------------------------\n");
+                                    if(number == ranNum)
+                                        {
+                                            printf("You win!!\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            W++;
+
+                                        }
+                                    else if (number > ranNum)
+                                        {
+                                            printf("You loose.\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            L--;
+
+                                        }
+                                    else if (number < ranNum)
+                                        {
+                                            printf("You loose.\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            L--;
+
+                                        }
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+
+                                }
+
+                    if(W == 5)
+                              {
+                                printf("You won! Says the guy sitting across the dining table.\nA dooor behind him opens switfly, you make your way towards the door and suddely hear footsteps behind you.\nYou turn around before stepping out the door and notice the blindfolded man carrying a bat and wacks you on the head with it\n" );
+								char f;
+                                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                scanf(" %c", &f);
+
+
+
+                               }
+                    if (L == 0)
+                             {
+                                 printf("You loose! Says the guy sitting across the dining table.\nBefore you can say or do anything the blindfolded man approaches you and wacks you on the head with a bat.\n");
+								 char f;
+                                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                scanf(" %c", &f);
+                             }
+                        }
+				
 				break;
 			}
 			case 20:
@@ -460,6 +959,19 @@ while (choice != 0)
 			case 28:
 			{
 				puts("room28");
+				int gameRuns = 1;
+  printf("Hello new trainer, welcome to the world of pokemon\nLet's have a practice battle\n\n");
+  while(gameRuns == 1)
+    {
+      playGame();
+      printf("Would you like to battle me again? You can pick a new pokemon too\n1: Yes, 0: No\n");
+      scanf("%d", &gameRuns);
+      if(gameRuns == 1)
+      {
+        printf("\nAwesome, lets have another battle\n");
+      }
+    }
+  printf("Thank you for battling with me trainer, I hope to see you again");
 				break;
 			}
 
@@ -483,6 +995,62 @@ while (choice != 0)
 			case 30:
 			{
 				puts("room30");
+				    srand(time(NULL));
+
+    int choice;
+    do
+    {
+        printf("\nAdventure Time RPG Menu\n-----------------------------\n");
+        printf("1. Select Character\n");
+        printf("2. Choose Weapons for Adventure Pack\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int randomIndex = rand() % 6;
+            characterSelection(randomIndex);
+            break;
+        }
+        case 2:
+        {
+            // Inventory
+            int adventurePack[3];
+            char *inventory[] = {"Mushroom Bomb", "Finn's Sword", "Ax Bass", "Candy Cane Shot Gun", "Demon Blood Sword", "Peppermint Butler's Steak Collection"};
+            printf("\nWeapons\n--------------------------------------\n");
+            for (int i = 0; i < 6; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[i]);
+            }
+
+            printf("Please choose three weapons to put in your adventure pack.\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("Enter Selection %d: ", i + 1);
+                scanf("%d", &adventurePack[i]);
+            }
+
+            printf("Adventure Pack:\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[adventurePack[i] - 1]);
+            }
+            break;
+        }
+        case 3:
+            printf("Exiting the Adventure Time RPG. Goodbye!\n");
+            break;
+        default:
+            printf("Invalid choice. Please enter a number between 1 and 3.\n");
+            break;
+        }
+
+    } while (choice != 3);
+
+
 				break;
 			}
 			case 31:
@@ -1310,6 +1878,31 @@ while (choice != 0)
 			case 50:
 			{
 				puts("room50");
+			
+				printf("Welcome to Room 50. ");
+				printf("5 potions are here, they are: ");
+				char *potions[5] = {"1.red","2.blue","3.green","4.pink","5.black"};
+				
+				int i;
+				for(i=0; i<5;i++)
+				{
+					printf("%s\n",potions[i]);
+				}
+
+				int potion;
+				printf("Pick a potion to drink(1-5): ");
+				scanf("%d", &potion);
+
+				if(potion<1||potion>5)
+				{
+					printf("You choose to not drink.");
+				}else
+				{
+					printf("Your chose to drink potion: %s\n",potions[potion-1]);
+					randomEffect(potion);
+				}
+
+
 				break;
 			}
 			case 51:
@@ -1661,6 +2254,635 @@ int healthBar(bool damage, int health)
 
 
 
+void randomEffect(int potionIndex)
+{
+	int randomEffectIndex = rand()%2;
+	srand(time(NULL));
+
+	char *potionEffects[5][2]={
+	{"Your become confident","Your feel happy"},
+	{"Your feel warm","You feel cold"},
+	{"You grow shorter","You grow larger"},
+	{"You get a gold","You get an apple"},
+	{"You start dancing","You start singing"}
+	};
+
+	printf("Random effect: %s\n",potionEffects[potionIndex-1][randomEffectIndex]);
+}
+
+void chooseRoomFor17()
+{
+
+    // Number for room chosen
+    int roomNum = 0;
+
+    printf("\n");
+    printf("THERE ARE FIVE ROOMS WHERE THE GOLEM COULD BE: 1) THE DUNGEON 2) THE GREAT HALL 3) THE GATEHOUSE 4) CHAPEL 5) DOVECOAT\n");
+    printf("CHOOSE THE ROOM YOU WANT TO CHECK BY ENTERING A NUMBER 1-5 THAT WILL INDICATE THE CHOICES ABOVE:\n");
+    scanf("%d", &roomNum);
+
+    while(roomNum < 1 || roomNum > 5)
+    {
+        printf("INVALID ROOM NUMBER.\n");
+        printf("THERE ARE FIVE ROOMS WHERE THE GOLEM COULD BE: 1) THE DUNGEON 2) THE GREAT HALL 3) THE GATEHOUSE 4) CHAPEL 5) DOVECOAT\n");
+        printf("CHOOSE THE ROOM YOU WANT TO CHECK BY ENTERING A NUMBER 1-5 THAT WILL INDICATE THE CHOICES ABOVE:\n");
+        scanf("%d", &roomNum);
+    }
+
+    // Loop used to enter room
+    if(roomNum == 1)
+    {
+        room17RoomOneLevelOne();
+    }
+    else if(roomNum == 2)
+    {
+        room17RoomTwoLevelOne();
+    }
+    else if(roomNum == 3)
+    {
+        room17RoomThreeLevelOne();
+    }
+    else if(roomNum == 4)
+    {
+        room17RoomFourLevelOne();
+    }
+    else if(roomNum == 5)
+    {
+        room17RoomFiveLevelOne();
+    }
+}
+
+void room17RoomOneLevelOne()
+{
+    // Random number
+    int randNum = rand() % 10;
+
+    // Number User Chose for Random Number
+    int userGuess = 0;
+
+    // Number of Guesses
+    int numOfGuesses = 0;
+
+    printf("\n");
+    printf("YOU HAVE ENTERED: THE DUNGEON\n");
+    printf("NOW THAT YOU HAVE ENTERED THIS ROOM YOU ARE TO COMPLETE THE TWO LEVELS.\n");
+    printf("IT IS IMPORTANT TO NOTE THAT YOU WILL BE GIVEN FIVE CHANCES IN ORDER TO GET THE CORRECT ANSWERS FOR EACH OF THE LEVELS IN THIS ROOM.\n");
+    printf("NOW LETS BEGIN!\n");
+    printf("\n");
+    printf("\n");
+    printf("LEVEL ONE: \n");
+    printf("DIFFICULTY LEVEL: EASY\n");
+
+    while(userGuess != randNum && numOfGuesses < 5)
+    {
+        printf("TASK: GUESS A NUMBER BETWEEEN 1-10: \n");
+        scanf("%d", &userGuess);
+
+        // Counter
+        numOfGuesses++;
+
+        if(userGuess < randNum)
+        {
+            printf("YOUR GUESS WAS LESS THAN THE NUMBER.\n");
+        }
+        else if(userGuess > randNum)
+        {
+            printf("YOUR GUESS WAS HIGHER THAN THE NUMBER.\n");
+        }
+        else
+        {
+            printf("YOU GUESSED CORRECTLY!\n");
+            printf("YOU GET TO MOVE ON TO LEVEL TWO!\n");
+            room17RoomOneLevelTwo();
+        }
+    }
+
+    if(numOfGuesses == 5 && userGuess != randNum)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+
+}
+
+void room17RoomOneLevelTwo()
+{
+    // Number user guessed for math problem
+    int userMathR1Guess = 0;
+    int mathR1Answer = 1;
+    int numOfGuesses = 0;
+
+    printf("\n");
+    printf("\n");
+    printf("LEVEL TWO: \n");
+    printf("DIFFICULTY LEVEL: EASY\n");
+
+    while(userMathR1Guess != mathR1Answer && numOfGuesses < 5)
+    {
+        // Change math problem up later
+        printf("SOLVE THE MATH PROBLEM: : 7-24/8*4+6\n");
+        scanf("%d", &userMathR1Guess);
+
+        // Counter
+        numOfGuesses++;
+
+        if(userMathR1Guess == mathR1Answer)
+        {
+            printf("YOU ANSWERED CORRECTLY!\n");
+            printf("BUT SADLY THE GOLEM ISN'T HERE.\n");
+            printf("YOU'VE CLEARED THE ROOM THOUGH AND CAN NOW LOOK FOR THE GOLEM IN ANOTHER ROOM.\n");
+            chooseRoomFor17();
+        }
+    }
+
+    if(numOfGuesses == 5 && mathR1Answer != userMathR1Guess)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+
+
+}
+
+void room17RoomTwoLevelOne()
+{
+    // User binary guess
+    char binaryOneGuess[10];
+
+    // Number of Guesses user made
+    int numOfGuesses = 0;
+
+    printf("\n");
+    printf("YOU HAVE ENTERED: THE GREAT HALL\n");
+    printf("NOW THAT YOU HAVE ENTERED THIS ROOM YOU ARE TO COMPLETE THE TWO LEVELS.\n");
+    printf("IT IS IMPORTANT TO NOTE THAT YOU WILL BE GIVEN FIVE CHANCES IN ORDER TO GET THE CORRECT ANSWERS FOR EACH OF THE LEVELS IN THIS ROOM.\n");
+    printf("NOW LETS BEGIN!\n");
+    printf("\n");
+    printf("\n");
+    printf("LEVEL ONE: \n");
+    printf("GAME: BINARY CONVERSION\n");
+    printf("DIFFICULTY LEVEL: EASY\n");
+
+    while(strcmp(binaryOneGuess, "0111") !=  0 && numOfGuesses < 5)
+    {
+        printf("CONVERT THE NUMBER 7 TO A BINARY NUMBER: \n");
+        scanf("%s", binaryOneGuess);
+
+        // Counter
+        numOfGuesses++;
+
+        if(strcmp(binaryOneGuess, "0111") == 0)
+        {
+            printf("YOU ANSWERED CORRECTLY!\n");
+            printf("YOU GET TO MOVE ON TO LEVEL TWO!\n");
+            room17RoomTwoLevelTwo();
+        }
+    }
+
+    if(numOfGuesses == 5 && strcmp(binaryOneGuess, "0111") != 0)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+}
+
+void room17RoomTwoLevelTwo()
+{
+    // User binary guess
+    char binaryTwoGuess[10];
+
+    // Number of Guesses user made
+    int numOfGuesses = 0;
+
+    printf("\n");
+    printf("\n");
+    printf("LEVEL TWO: \n");
+    printf("GAME: BINARY CONVERSION\n");
+    printf("DIFFICULTY LEVEL: EASY\n");
+
+    while(strcmp(binaryTwoGuess, "1100") != 0 && numOfGuesses < 5)
+    {
+        printf("CONVERT THE NUMBER 25 TO A BINARY NUMBER: \n");
+        scanf("%s", binaryTwoGuess);
+
+        // Counter
+        numOfGuesses++;
+
+        if(strcmp(binaryTwoGuess, "1100") == 0)
+        {
+            printf("YOU ANSWERED CORRECTLY!\n");
+            printf("BUT SADLY THE GOLEM ISN'T HERE.\n");
+            printf("YOU'VE CLEARED THE ROOM THOUGH AND CAN NOW LOOK FOR THE GOLEM IN ANOTHER ROOM.\n");
+            chooseRoomFor17();
+        }
+    }
+
+    if(numOfGuesses == 5 && strcmp(binaryTwoGuess, "1100") != 0)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+
+
+}
+
+
+void room17RoomThreeLevelOne() {
+    // Number of Guesses user made
+    int numOfGuesses = 0;
+
+    char word[] = "METAMORPHOSIS";
+
+    char userWord[100];
+
+    printf("\n");
+    printf("YOU HAVE ENTERED: THE GATEHOUSE\n");
+    printf("NOW THAT YOU HAVE ENTERED THIS ROOM YOU ARE TO COMPLETE THE ONE LEVEL.\n");
+    printf("IT IS IMPORTANT TO NOTE THAT YOU WILL BE GIVEN FIVE CHANCES IN ORDER TO GET THE CORRECT ANSWERS FOR EACH OF THE LEVELS.\n");
+    printf("NOW LETS BEGIN!\n");
+    printf("\n");
+    printf("\n");
+    printf("LEVEL ONE: \n");
+    printf("GAME: UNSCRAMBLING LETTERS\n");
+    printf("DIFFICULTY LEVEL: MEDIUM\n");
+    printf("IMPORTANT NOTE: WHEN ENTERING YOUR ANSWER MAKE SURE TO TYPE IN ALL CAPS.\n");
+
+    while(strcmp(userWord, word) != 0 && numOfGuesses < 5)
+    {
+
+        printf("GIVEN THE SCRAMBLED LETTERS 'MRTISAPSMOOEH' UNSCRAMBLE THEM AND CREATE THE SECRET WORD: \n");
+        scanf("%s", userWord);
+
+        // Counter
+        numOfGuesses++;
+
+        if(strcmp(userWord, word) == 0)
+        {
+            printf("YOU ANSWERED CORRECTLY!\n");
+            printf("YOU GET TO MOVE ONTO LEVEL TWO!\n");
+            room17RoomThreeLevelTwo();
+        }
+
+    }
+
+    if(numOfGuesses == 5 && strcmp(userWord, word) != 0)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+}
+
+void room17RoomThreeLevelTwo()
+{
+    // Number of Guesses user made
+    int numOfGuesses = 0;
+
+    char wordTwo[] = "COMMUNICATION";
+
+    char userWordTwo[100];
+
+    printf("\n");
+    printf("\n");
+    printf("LEVEL TWO: \n");
+    printf("GAME: UNSCRAMBLING LETTERS\n");
+    printf("DIFFICULTY LEVEL: MEDIUM\n");
+    printf("IMPORTANT NOTE: WHEN ENTERING YOUR ANSWER MAKE SURE TO TYPE IN ALL CAPS.\n");
+
+    while(strcmp(userWordTwo, wordTwo) != 0 && numOfGuesses < 5)
+    {
+
+        printf("GIVEN THE SCRAMBLED LETTERS 'ONACMNIMIOTUC' UNSCRAMBLE THEM AND CREATE THE SECRET WORD: \n");
+        scanf("%s", userWordTwo);
+
+        // Counter
+        numOfGuesses++;
+
+        if(strcmp(userWordTwo, wordTwo) == 0)
+        {
+            printf("YOU ANSWERED CORRECTLY!\n");
+            printf("BUT SADLY THE GOLEM ISN'T HERE.\n");
+            printf("YOU'VE CLEARED THE ROOM THOUGH AND CAN NOW LOOK FOR THE GOLEM IN ANOTHER ROOM.\n");
+            chooseRoomFor17();
+        }
+
+    }
+
+    if(numOfGuesses == 5 && strcmp(userWordTwo, wordTwo) != 0)
+    {
+        printf("YOU'VE USED UP YOUR FIVE GUESSES.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+}
+
+void room17RoomFourLevelOne()
+{
+    char userChoice;
+
+    printf("\n");
+    printf("YOU HAVE ENTERED: THE CHAPEL\n");
+    printf("NOW THAT YOU HAVE ENTERED THIS ROOM YOU ARE TO COMPLETE THE ONE LEVEL.\n");
+    printf("IT IS IMPORTANT TO NOTE THAT YOU WILL ONLY BE GIVEN ONE CHANCE FOR THIS GAME IN ORDER TO GET THE CORRECT ANSWER FOR THE ONE LEVEL.\n");
+    printf("NOW LETS BEGIN!\n");
+    printf("\n");
+    printf("\n");
+    printf("LEVEL ONE: \n");
+    printf("GAME: ROCK, PAPER, SCISSORS\n");
+    printf("DIFFICULTY LEVEL: HARD\n");
+
+    printf("YOU WILL PLAY THE GAME AGAINST THE COMPUTER BUT AFTER ENTERING YOUR CHOICE AND IF YOU LOST THEN IT WONT LET YOU KNOW WHAT THE COMPUTER HOLDS ONLY WHAT YOU CHOSE\n");
+    printf("CHOOSE EITHER ROCK, PAPER, OR SCISSORS BY ENTERING 'R', 'P', OR 'S': \n");
+    scanf(" %c", &userChoice);
+
+    while(userChoice != 'R' && userChoice != 'P' && userChoice != 'S')
+    {
+        printf("INVALID CHOICE. CHOOSE EITHER ROCK, PAPER, OR SCISSORS BY ENTERING 'R', 'P', OR 'S': \n");
+        scanf(" %c", &userChoice);
+    }
+
+    if(userChoice == 'S')
+    {
+        printf("YOU CHOSE SCISSORS.\n");
+        printf("YOU LOST THE ROCK, PAPER, SCISSORS GAME.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+    else if(userChoice == 'P')
+    {
+        printf("YOU CHOSE PAPER.\n");
+        printf("YOU ANSWERED CORRECTLY!\n");
+        printf("AND YOU HAVE FOUND THE GOLEM! CONGRATULATIONS ON WINNING THE GAME!!\n");
+    }
+    else if(userChoice == 'R')
+    {
+        printf("YOU CHOSE ROCK.\n");
+        printf("YOU LOST THE ROCK, PAPER, SCISSORS GAME.\n");
+        printf("GAME OVER!!!!!\n");
+    }
+}
+
+void computerTurn(char board[3][3])
+{
+    srand(time(NULL));
+
+    int computerMove;
+
+    while(true)
+    {
+        computerMove = rand() % 9 + 1;
+
+        if(isValidMove(board, computerMove))
+        {
+            break;
+        }
+    }
+
+    printf("COMPUTER CHOSE %d\n", computerMove);
+
+    placeMove(board, computerMove, inputComputerSymbol);
+}
+
+void room17RoomFiveLevelOne()
+{
+    printf("\n");
+    printf("YOU HAVE ENTERED: THE DOVECOTE\n");
+    printf("NOW THAT YOU HAVE ENTERED THIS ROOM YOU ARE TO COMPLETE THE ONE LEVEL.\n");
+    printf("IT IS IMPORTANT TO NOTE THAT YOU WILL ONLY BE GIVEN ONE CHANCE FOR THIS GAME IN ORDER TO GET THE CORRECT ANSWER FOR THE ONE LEVEL.\n");
+    printf("NOW LETS BEGIN!\n");
+    printf("\n");
+    printf("\n");
+    printf("LEVEL ONE: \n");
+    printf("GAME: TIC TAC TOE \n");
+    printf("DIFFICULTY LEVEL: HARD\n");
+
+    char board[3][3] = {{' ', ' ', ' '}, {' ', ' ',' '}, {' ',' ', ' '}};
+
+    printBoard(board);
+
+
+    char chosenSymbol;
+
+    while(true)
+    {
+        printf("ENTER A SYMBOL (X OR O): \n");
+        scanf(" %c", &chosenSymbol);
+
+        if(chosenSymbol == 'X' || chosenSymbol == 'O')
+        {
+            break;
+        }
+        else
+        {
+            printf("INVALID SYMBOL. PLEASE ENTER EITHER 'X' OR 'O'.\n");
+        }
+    }
+    getChosenSymbol(chosenSymbol);
+
+    if(getChosenSymbol(chosenSymbol) == ('X'))
+    {
+        inputComputerSymbol = 'O';
+        inputPlayerSymbol = 'X';
+    }
+    else
+    {
+        inputComputerSymbol = 'X';
+        inputPlayerSymbol = 'O';
+    }
+
+    while(true)
+    {
+        playerTurn(board);
+
+        if(isGameFinished(board))
+        {
+            break;
+        }
+
+        printBoard(board);
+        computerTurn(board);
+
+        if(isGameFinished(board))
+        {
+            break;
+        }
+        printBoard(board);
+    }
+
+}
+
+void printBoard(char board[3][3])
+{
+    printf("%c|%c|%c\n", board[0][0], board[0][1], board[0][2]);
+    printf("-+-+-\n");
+    printf("%c|%c|%c\n", board[1][0], board[1][1], board[1][2]);
+    printf("-+-+-\n");
+    printf("%c|%c|%c\n", board[2][0], board[2][1], board[2][2]);
+}
+
+char getChosenSymbol(char c)
+{
+    return c;
+}
+
+void playerTurn(char board[3][3])
+{
+    int userInput;
+
+    while(true)
+    {
+        printf("WHERE WOULD YOU LIKE TO PLAY? (1-9) ");
+        if (scanf("%d", &userInput) != 1)
+        {
+            while (getchar() != '\n');
+            printf("INVALID INPUT. PLEASE ENTER A NUMBER BETWEEN 1 AND 9.\n");
+            continue;
+        }
+
+        printf("USER INPUT: %d\n", userInput);
+
+        if(isValidMove(board, userInput))
+        {
+            break;
+        }
+        else
+        {
+            printf("%d IS NOT A VALID MOVE.\n", userInput);
+        }
+
+
+    }
+
+    placeMove(board, userInput, inputPlayerSymbol);
+}
+
+
+void placeMove(char board[3][3], int position, char symbol)
+{
+    switch(position)
+    {
+        case 1:
+            board[0][0] = symbol;
+        break;
+        case 2:
+            board[0][1] = symbol;
+        break;
+        case 3:
+            board[0][2] = symbol;
+        break;
+        case 4:
+            board[1][0] = symbol;
+        break;
+        case 5:
+            board[1][1] = symbol;
+        break;
+        case 6:
+            board[1][2] = symbol;
+        break;
+        case 7:
+            board[2][0] = symbol;
+        break;
+        case 8:
+            board[2][1] = symbol;
+        break;
+        case 9:
+            board[2][2] = symbol;
+        break;
+        default:
+            printf(":(");
+            break;
+
+    }
+}
+
+bool isValidMove(char board[3][3], int position)
+{
+    if(position < 1 || position > 9)
+        return false;
+
+    switch(position)
+    {
+        case 1:
+            return ( board[0][0] == ' ');
+        case 2:
+            return ( board[0][1] == ' ');
+        case 3:
+            return ( board[0][2] == ' ');
+        case 4:
+            return ( board[1][0] == ' ');
+        case 5:
+            return ( board[1][1] == ' ');
+        case 6:
+            return ( board[1][2] == ' ');
+        case 7:
+            return ( board[2][0] == ' ');
+        case 8:
+            return ( board[2][1] == ' ');
+        case 9:
+            return ( board[2][2] == ' ');
+        default:
+            return false;
+
+    }
+}
+
+bool hasContestantWon(char board[3][3], char symbol)
+{
+    if((board[0][0] == symbol && board[0][1] == symbol && board[0][2] == symbol) ||
+           (board[1][0] == symbol && board[1][1] == symbol && board[1][2] == symbol) ||
+           (board[2][0] == symbol && board[2][1] == symbol && board[2][2] == symbol) ||
+
+           (board[0][0] == symbol && board[1][0] == symbol && board[2][0] == symbol) ||
+           (board[0][1] == symbol && board[1][1] == symbol && board[2][1] == symbol) ||
+           (board[0][2] == symbol && board[1][2] == symbol && board[2][2] == symbol) ||
+
+           (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) ||
+           (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol))
+    {
+
+        return true;
+    }
+    return false;
+}
+
+bool isGameFinished(char board [3][3])
+{
+    if (hasContestantWon(board, inputPlayerSymbol))
+    {
+        printBoard(board);
+        printf("YOU WON!\n");
+        printf("BUT SADLY THE GOLEM ISN'T HERE.\n");
+        printf("YOU'VE CLEARED THE ROOM THOUGH AND CAN NOW LOOK FOR THE GOLEM IN ANOTHER ROOM.\n");
+        chooseRoomFor17();
+        return true;
+    }
+
+    if (hasContestantWon(board, inputComputerSymbol))
+    {
+        printBoard(board);
+        printf("COMPUTER WINS!\n");
+        printf("YOU LOST THE TIC TAC TOE GAME.\n");
+        printf("GAME OVER!!!!!\n");
+        return true;
+    }
+
+
+
+
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            if (board[i][j] == ' ')
+            {
+                return false;
+            }
+        }
+    }
+
+    printBoard(board);
+    printf("THE GAME ENDED IN A TIE!\n");
+    printf("YOU LOST THE TIC TAC TOE GAME.\n");
+    printf("GAME OVER!!!!!\n");
+    return true;
+}
 
 
 
@@ -1672,6 +2894,126 @@ int healthBar(bool damage, int health)
 
 
 
+void playGame()
+{
+  srand(time(NULL));
+  int userChoice = 0;
+  int trainerHealth;
+  int venusaur[3] = {3, 50, 48}; //ID, HP, LEVEL Super Easy
+  int charizard[3] = {6, 40, 41}; //ID, HP, LEVEL Easy
+  int blastoise[3] = {9, 30, 36 }; //ID, HP, LEVEL Medium
+  int pikachu[3] = {25, 20, 16}; //ID, HP, LEVEL Hard
+  int eevee[3] = {133, 10, 11}; //ID, HP, LEVEL Super Hard
+  int machamp[3] = {68, 30, 32}; //ID, HP, LEVEL
+  int machampHealth = machamp[1];
+  printf("Please choose one of the five pokemons (Pick a number)\n 1. Venusaur\n 2. Charizard\n 3. Blastoise\n 4. Pikachu\n 5. Eevee\n");
+  while(userChoice <= 0 || userChoice > 5)
+    {
+      scanf("%d", &userChoice);
+      if (userChoice == 1)
+      {
+        printf("You chose Venusaur, he is number %d in the pokedex, has %d hp, and is level %d\n", venusaur[0], venusaur[1], venusaur[2]);
+        trainerHealth = venusaur[1];
+      }
+      else if(userChoice == 2)
+      {
+        printf("You chose Charizard, he is number %d in the pokedex, has %d hp, and is level %d\n", charizard[0], charizard[1], charizard[2]);
+        trainerHealth = charizard[1];
+      }
+      else if(userChoice == 3)
+      {
+        printf("You chose Blastoise, he is number %d in the pokedex, has %d hp, and is level %d\n", blastoise[0], blastoise[1], blastoise[2]);
+        trainerHealth = blastoise[1];
+      }
+      else if(userChoice == 4)
+      {
+        printf("You chose Pikachu, he is number %d in the pokedex, has %d hp, and is level %d\n", pikachu[0], pikachu[1], pikachu[2]);
+        trainerHealth = pikachu[1];
+      }
+      else if(userChoice == 5)
+      {
+        printf("You chose Eevee, he is number %d in the pokedex, has %d hp, and is level %d\n", eevee[0], eevee[1], eevee[2]);
+        trainerHealth = eevee[1];
+      }
+      else
+      {
+        printf("Please enter a valid number\n");
+      }
+  }
+  printf("\nAwesome!! Let's have our battle, I send out Machamp. He is number %d in the pokedex, has %d hp, and is level %d\n", machamp[0], machamp[1], machamp[2]);
+  printf("To attack you will pick a number between 1-3, if your number doesn't match mine, then you attack, if it does, \nthen I attack. Keep attacking until our pokemon faints at 0 health. Good luck\n");
+  while(machampHealth > 0 && trainerHealth > 0)
+    {
+      int userAttack = 0;
+      int machopAttack = rand() % 3 + 1;
+      printf("\nTrainer enter a number between 1-3\n");
+      scanf("%d", &userAttack);
+      while(userAttack <= 0 || userAttack > 3)
+      {
+        printf("Wrong input Trainer, enter your guess from 1-3\n");
+        scanf("%d", &userAttack);
+      }
+      if(userAttack == machopAttack)
+      {
+        printf("\nYou entered %d, I entered %d, I win this turn\n", userAttack, machopAttack);
+        printf("You missed, Machamp uses seismic toss dealing 10 damage\n");
+        trainerHealth = trainerHealth - 10;
+      }
+      else
+      {
+        printf("\nYou entered %d, I entered %d, You win this turn\n", userAttack, machopAttack);
+        if(userChoice == 1)
+        {
+          printf("You attack, Venusaur uses Vine Whip dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 2)
+        {
+          printf("You attack, Charizard uses Flamethrower dealing 10 damage to machamp\n");
+        }   
+        else if(userChoice == 3)
+        {
+          printf("You attack, Blastoise uses Hydro Cannon dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 4)
+        {
+          printf("You attack, Pikachu uses Thunderbolt dealing 10 damage to machamp\n");
+        }
+        else
+        {
+          printf("You attack, Eevee uses Tackle dealing 10 damage to machamp\n");
+        }
+        machampHealth = machampHealth - 10;
+      }
+      printf("Your pokemon has %d health, Machamp has %d health\n", trainerHealth, machampHealth);
+    }
+  if(machampHealth <= 0)
+  {
+    printf("Machamp has fainted, you win!!\n");
+  }
+  else
+  {
+    if(userChoice == 1)
+    {
+      printf("Venusaur has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 2)
+    {
+      printf("Charizard has fainted, you lose. Better luck next time trainer\n");
+    }   
+    else if(userChoice == 3)
+    {
+      printf("Blastoise has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 4)
+    {
+      printf("Pikachu has fainted, you lose. Better luck next time trainer\n");
+    }
+    else
+    {
+      printf("Eevee has fainted, you lose. Better luck next time trainer\n");
+    }
+  }
+}
 
 
 
@@ -1793,6 +3135,25 @@ void JanKenPon() {
   }
   
 }
+
+
+int diceResult(int user, int cpu)
+{
+	//user wins
+	if( user > cpu)
+	{
+		return 1;
+	}
+	//cpu wins
+	else if (user < cpu)
+	{
+		return 2;
+	}
+	//draw
+	else 
+	return 3;
+}
+
 void drawStraws() {
   
   int strawSet = 0;
@@ -2241,6 +3602,13 @@ bool trap_d10()
     return d2;
 }
 
+void characterSelection(int num)
+{
+    char *character[6] = {"Marceline the Vampire Queen", "Finn the Human", "Jake the Dog", "BMO", "Ice King", "Princess Bubblegum"};
+    printf("\nCharacter Guide\n-------------------------------------\nYour guide will be: %s! \n", character[num]);
+}
+
+
    int selectRandom(int lower, int upper, int count) {
             lower = 1;
             upper = 10;
@@ -2260,4 +3628,77 @@ bool trap_d10()
 
 
 
+/*
+ * Function written by Christopher Dedman-Rollet
+ */
+void exploreLocation(int locationChoice)
+{
+	const char *locationDescriptions[] = {
+			"You arrive at an Unknown Planet...\n"
+			"As you descend through the planet's turbulent atmosphere, you're greeted by a breathtaking landscape teeming with exotic flora and fauna.\n"
+			"As you venture deeper into the planet's depths, you uncover ancient ruins hinting at a civilization long forgotten.\n"
+			"You discover a lush, verdant world teeming with life. Strange creatures roam the land, and vibrant plant life thrives in the planet's rich soil.\n"
+			"You also encounter a strange alien species and learn about their culture.\n"
+			"After spending days with the alient species, you collect samples of the local flora and fauna for further study.\n"
+			"You then return to the ISS Explorer with newfound knowledge and a sense of wonder.\n",
 
+			"You encounter a Stellar Anomaly...\n"
+			"While traversing a desolate region of space, you stumble upon a peculiar anomaly—a swirling\n"
+			"vortex of cosmic energy unlike anything you've ever seen. Drawn by curiosity, you cautiously approach the anomaly, bracing yourself for the unknown.\n"
+			"You encounter strange phenomena such as time loops, spatial distortions, and quantum anomalies.\n"
+			"As you navigate through the Stellar Anomaly, you must rely on your wits and ingenuity to survive the unpredictable dangers.\n"
+			"What awaits you on the other side is beyond your wildest imagination.\n"
+			"You uncover ancient artifacts and mysterious technologies that challenge your understanding of the universe.\n"
+			"After a harrowing journey through the Stellar Anomaly, you emerge with newfound knowledge and a deeper appreciation for the mysteries of the cosmos.\n"
+			"You return to the ISS Explorer with valuable data and insights into the nature of cosmic anomalies, expanding humanity's understanding of the universe.\n",
+
+			"You navigate through a Rogue Asteroid Belt...\n"
+			"As you pilot the ISS Explorer through a treacherous asteroid belt, you must dodge massive space rocks hurtling towards you at breakneck speeds.\n"
+			"Your reflexes are put to the test as you navigate through the chaotic debris field, narrowly avoiding collisions with rogue asteroids.\n"
+			"You discover valuable resources hidden within the asteroids, including rare minerals and precious metals.\n"
+			"You also encounter a group of space pirates who attempt to plunder your ship, forcing you to engage in a thrilling space battle.\n"
+			"After a fierce confrontation, you emerge victorious and continue your journey through the asteroid belt.\n"
+			"You uncover a hidden asteroid base filled with ancient relics and forgotten treasures, shedding light on the history of the cosmos.\n"
+			"You return to the ISS Explorer with a cargo hold full of valuable resources and artifacts, ready to continue your adventures in the cosmos.\n",
+
+			"You study an Enigmatic Black Hole...\n"
+			"As you approach the event horizon of the black hole, you feel the immense gravitational pull tugging at your ship, threatening to tear it apart.\n"
+			"You witness the distortion of spacetime as you venture closer to the singularity, observing the bizarre effects of the black hole's immense gravity.\n"
+			"You discover a hidden pocket of spacetime within the black hole, a realm of infinite possibilities and mind-bending phenomena.\n"
+			"You encounter strange entities and cosmic beings that defy comprehension, challenging your understanding of the universe.\n"
+			"After a harrowing journey through the black hole, you emerge with newfound knowledge and a deeper appreciation for the mysteries of the cosmos.\n"
+			"You return to the ISS Explorer with valuable data and insights into the nature of black holes, expanding humanity's understanding of the universe.\n",
+
+			"You encounter a Cosmic Mirage...\n"
+			"As you traverse the vast expanse of space, you stumble upon a cosmic mirage—a shimmering illusion that defies explanation.\n"
+			"Drawn by curiosity, you venture closer to the mirage, unsure of what lies beyond the shimmering veil.\n"
+			"You are enveloped by a surreal dreamscape, a realm of infinite possibilities and surreal landscapes.\n"
+			"You encounter strange creatures and ethereal beings that challenge your perception of reality.\n"
+			"After a surreal journey through the cosmic mirage, you awaken with a newfound sense of wonder and a deeper appreciation for the mysteries of the universe.\n"
+			"You return to the ISS Explorer with memories of the cosmic mirage, forever changed by the experience.\n"};
+
+	if (locationChoice < 1 || locationChoice > sizeof(locationDescriptions) / sizeof(locationDescriptions[0]))
+	{
+		printf("Invalid choice! Please choose a valid location to explore.\n");
+		return;
+	}
+
+
+	printf("%s", locationDescriptions[locationChoice - 1]);
+}
+void randomTreasure()
+{
+int treasure = rand() % 100 + 1;
+if(treasure ==100)
+{
+puts("You found 1 billion gold coins.");
+}
+else if(treasure > 50)
+{
+puts("You found 1 gold coin.");
+}
+else
+{
+puts("You found nothing.");
+}
+}
