@@ -44,6 +44,9 @@ void blackJack();
 int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
+
+int positionGenerator();
+
 int diceResult(int user, int cpu);
 
 
@@ -73,6 +76,7 @@ void placeMove(char board[3][3], int position, char symbol);
 bool isValidMove(char board[3][3], int position);
 bool isGameFinished(char board[3][3]);
 bool hasContestantWon(char board[3][3], char symbol);
+
 void FinalArea(int level);
 bool trap_d10();
 int selectRandom(int lower, int upper, int count);
@@ -667,7 +671,75 @@ while (choice != 0)
 			}
 			case 18:
 			{
-				puts("room18");
+        			//Fields
+       				 char position[][10] = {"First", "Second", "Third", "Fourth", "Last"};
+      				 char racers[][20] = {"Lighting Mcqueen", "Mater", "Doc Hudson", "Jackson Storm", "Sally Carrera"};
+      				 int userInput;
+
+        
+       				 //Intro
+       				 puts("You have entered room 18.");
+        			 puts("You have been entered into a race. You must choose your racer to coach.");
+  			 	 printf("Your options are:\n");
+       				 printf("\t1.Lighting McQueen\n\t2.Mater\n\t3.Doc Hudson\n\t4.Jackon Storm\n\t5.Sally Carrera\nPick:");
+        			 scanf("%d",&userInput);
+        			 userInput--;
+       				 int finalPosition = positionGenerator();
+
+        
+       				 //Five Options
+        			 switch(userInput){
+         			 	case 0:{
+            					 printf("You have chosen %s. With 7 Piston Cups under his belt, this is not a bad option.", racers[userInput]);
+            				       	 printf("\n%s starts off the race Strong. He is a very formidable driver!", racers[userInput]);
+            					 printf("\nUltimatly, you came in %s place.\n", position[finalPosition]);
+            
+           					 break;
+     					       }
+        				case 1:{
+           					 printf("You have chosen %s. Legend has it his reversing skills are the best in the world.", racers[userInput]);
+            					 printf("\n%s starts off the race Strong. He is a very formidable driver!", racers[userInput]);
+            					 printf("\nUltimatly, you came in %s place.\n", position[finalPosition]);
+
+            
+            					 break;
+          					}
+          				case 2:{
+         					 printf("You have chosen %s. This veteran had 3 Piston Cups, he is a legend in the books.", racers[userInput]);
+            					 printf("\n%s starts off the race Strong. He is a very formidable driver!", racers[userInput]);
+           					 printf("\nUltimatly, you came in %s place.\n", position[finalPosition]);
+
+           					 break;	
+         					 }
+         				case 3:{
+           					 printf("You have chosen %s. One of the newest rookest. Exteremly aerodynamic and agile.", racers[userInput]);
+            					 printf("\n%s starts off the race Strong. He is a very formidable driver!", racers[userInput]);
+            					 printf("\nUltimatly, you came in %s place.\n", position[finalPosition]);
+
+            					 break;
+          					}
+          				case 4:{
+            					printf("You have chosen %s. She is a Porsche 911, a very iconic and fast car.", racers[userInput]);
+            					printf("\n%s starts off the race Strong. She is a very formidable driver!", racers[userInput]);
+            					printf("\nUltimatly, you came in %s place.\n", position[finalPosition]);
+            					break;
+            
+          					}
+          				default:{
+            					puts("\nYou have chosen an invalid option. You have been disqualified.\n");
+            					break;
+          					}
+        				}
+        
+        			//Outro
+        			if(finalPosition == 0){
+          				puts("-----------------------------------------");
+          				puts("Congrats you've taking home a Piston Cup!");
+        			}	
+        			else{
+          				puts("-----------------------------------------------------------");
+          				puts("Sorry, you didn't win nothing today. Better luck next time!");
+        			}
 				break;
 			}
 			case 19:
@@ -3693,6 +3765,11 @@ void rollTheDice_Highest() {
     printf("The die is cast, and it gives you the losing stink-eye.\n");
   }
   
+}
+int positionGenerator(){
+  srand(time(NULL));
+  int randomNum = (rand() % 5);
+  return randomNum;
 }
 void rollTheDice_Race(){
   int p1 = 0;
