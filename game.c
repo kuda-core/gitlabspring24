@@ -1,4 +1,7 @@
 //contributors
+
+// Subject 0023
+
 //Dom I.
 //Andre J Leos
 //Elias Dawarpana
@@ -28,6 +31,8 @@ void FinalArea(int level);
 bool trap_d10();
 
 char* pullLever(int seed);
+
+void processRoom23();
 
 int main(int argc, char *argv[])
 {
@@ -164,6 +169,7 @@ int main(int argc, char *argv[])
 			case 23:
 			{
 				puts("room23");
+				processRoom23();
 				break;
 			}
 			case 24:
@@ -971,6 +977,69 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
+void processRoom23() 
+{
+	// Initialize temporary variables
+	int choice = 99, randItemIndex;
+	bool loopVal = true;
+	char items[5][10] = {"Sword", "Shield", "Bow", "Staff", "Dagger"};
+
+	// Initialize random number generator by time
+	srand(time(NULL));
+
+	// Outputting the room number
+	printf("You have entered room 23.\n\n");
+
+	// Loop until loopVal is false
+	while(loopVal)
+	{
+		// Prompt user to enter an option
+		printf("Please select an option:\n"
+			"(1) Examine the room.\n"
+			"(2) Rummage through your belongings.\n"
+			"(3) Search the room for entities.\n"
+			"(4) Scavenge the room for items.\n"
+			"(0) Exit the room.\n\n");
+
+		// Receive user input
+		printf("Selecting: ");
+		scanf("%d", &choice);
+
+		// Switch case based on choices from 0 - 4, inclusive
+		switch(choice)
+		{
+			// Exit the room
+			case 0:
+				printf("Exiting the room...\n");
+				loopVal = false;
+				break;
+			// Examine the room
+			case 1:
+				printf("The room appears to be an empty, white box with a ceiling lamp.\n\n");
+				break;
+			// Rummage through your belongings
+			case 2:
+				printf("You search through your belongings, taking out an energy potion to refill your stamina.\n\n");
+				break;
+			// Search the room for entities
+			case 3:
+				printf("A shadowy, beast figure crawls about on the ceiling.\n\n");
+				break;
+			// Scavenge the room for items
+			case 4:
+				printf("Searching for items in the room...\n");
+				randItemIndex = rand() % 5;
+				printf("You have found a(n): %s!\n\n", items[randItemIndex]);
+				break;
+			// Default case, output an error on incorrect input
+			default:
+				printf("Error. Something went wrong!\n");
+				loopVal = false;
+				break;
+		}
+	}
+}
+
 char* pullLever(int seed)
 {
 	char* result;
@@ -1576,7 +1645,6 @@ bool trap_d10()
     bool d2 = rand() % 2;
     return d2;
 }
-
 
 
 
