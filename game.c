@@ -9,7 +9,7 @@
 //Andre J Leos
 //Elias Dawarpana
 //Gretel Castillo
-
+//Jesus Ruiz
 //Patrick Polanco
 
 //AK
@@ -44,7 +44,7 @@ int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
 int diceResult(int user, int cpu);
-
+void game_Start(void);
 
 
 // Global variables for room 17
@@ -1810,6 +1810,46 @@ while (choice != 0)
 			case 47:
 			{
 				puts("room47");
+				 //Game Description
+  printf("Welcome to the Adventure game\n");
+  printf("In this game you are gonna go on a adventure where you are lost and you trying to get back home, you are gonna be given choices to make it back home and you have to choose the correct ones in order to get home safely. You can advance 5 or 10 miles but be careful since your food bar goes down every day it passes. There is random event where it you can get extremely lucky or extremely unlucky\n");
+  printf("Press 1 to start the game or 0 to quit\n");
+
+  //Start Menu
+  int start_Choice = 0;
+  scanf("%d", &start_Choice);
+
+  if (start_Choice == 1){
+    game_Start();
+  }
+  else{
+    printf("Thank you for playing\n");
+  }
+  
+  //Play again
+  for(;;){
+    char playAgain[10];
+    printf("\n Would you like to play again? (Yes/No)\n");
+    scanf(" %s", playAgain);
+
+    if(strcmp(playAgain, "Yes") == 0){
+      game_Start();
+    }
+    else if(strcmp(playAgain, "yes") == 0){
+      game_Start();
+    }
+    else if(strcmp(playAgain, "No") == 0){
+       printf("Thank you for playign \n");
+       break;
+    }
+      else if(strcmp(playAgain, "no") == 0){
+         printf("Thank you for playing \n");
+         break;
+      }
+    else {
+      printf("Invalid input");
+    } 
+  }
 				break;
 			}
 			case 48:
@@ -3641,3 +3681,101 @@ else
 puts("You found nothing.");
 }
 }
+void game_Start(){
+  
+  //Game variables
+  srand(time(NULL));
+  int game_Choice = 0; 
+  int distance_for_home = 300;
+  int distance_tracker = 0;
+  int food_left = 10;
+  int days = 0;
+  int food_Consuption = rand() % 2 + 1;
+
+  //Game Loop
+  while (distance_for_home > 0 && food_left > 0){
+
+    printf("Day %d. You are %d miles away from home\n", days, distance_for_home);
+    printf("You food bar is %d \n", food_left);
+
+    printf("1. Travel 5 miles\n");
+    printf("2. Travel 10 miles\n");
+    printf("3. Eat food\n");
+    printf("4. Random event \n");
+    printf("5. Give Up\n");
+    scanf("%d", &game_Choice);
+
+    if(game_Choice == 1){
+      distance_for_home -= 5;
+      printf("You traveled 5 miles\n");
+      food_left -= food_Consuption;
+      days++;
+      distance_tracker +=5;
+    }
+    else if (game_Choice == 2){
+      distance_for_home -= 10;
+      printf("You traveled 10 miles\n");
+      food_left -= food_Consuption;
+      days++;
+      distance_tracker +=10;
+    }
+    else if(game_Choice == 3){
+      food_left += 5;
+      printf("You food bar went up by 5\n");
+      food_left -= food_Consuption;
+      days++;
+    }
+    else if(game_Choice == 4){
+      int random_Event = rand() % 4 + 1;
+      if(random_Event == 1){
+         distance_for_home -= 50;
+         printf("You found a shortcut, You traveled 50 miles\n");
+        food_left -= food_Consuption;
+        days++;
+        distance_tracker +=50;
+      }
+      else if(random_Event == 2){
+        food_left += 10;
+        printf("You went inside a tent and found some food\n");
+        food_left -= food_Consuption;
+        days++;
+      }
+      else if(random_Event == 3){
+        distance_for_home += 50;
+        printf("You found a shortcut but got lost, You went back 50 miles\n");
+        food_left -= food_Consuption;
+        days++;
+        distance_tracker +=50;
+      }
+      else{
+        food_left -= 5;
+        printf("You found some berries and made you throw up\n");
+        food_left -= food_Consuption;
+        days++;
+      }
+    }
+    else if(game_Choice == 5) {
+      int food_Left = food_Consuption;
+      printf("Thank you for playing\n");
+      printf("You survided %d days, traveld %d miles, and had %d food left", days, distance_tracker, food_left);
+      break;
+    }
+    else{
+      printf("Number not recognized. Enter a number between 1 and 5\n");
+    }
+  }
+  
+  //ending loops
+  if(distance_for_home <= 0 && food_left >=1){
+    int food_left = food_Consuption;
+    printf("You made it home safely\n");
+    printf("You survided %d days, traveld %d miles, and had %d food left", days, distance_tracker, food_left);
+
+  }
+  else if(food_left <= 0){
+    int food_left = food_Consuption;
+    printf("Whomp Whomp!!! You died of hunger\n");
+    printf("You survided %d days, traveld %d miles, and had 0 food left", days, distance_tracker);
+  }
+}
+
