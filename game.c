@@ -11,7 +11,11 @@
 
 //Patrick Polanco
 
+
+//Carlos
+
 //AK
+
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -30,6 +34,9 @@ void blackJack();
 int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
+int diceResult(int user, int cpu);
+
+
 
 void FinalArea(int level);
 bool trap_d10();
@@ -367,7 +374,335 @@ while (choice != 0)
 			}
 			case 19:
 			{
-				puts("room19");
+				srand(time(0));
+                int x, W = 0, L = 5;
+                printf("You look around the dim room. Then suddely, the door behind you closes shut.\nYou keep walking forward until you notice a dining table with a man sitting across from it.\nHe hands you a weird alien like device that says: \nWelcome to Room 19! Here you get to play games in order to escape. Pick any game and win 5 times.\nYou get five lives. Good Luck! \n");
+                char f;
+                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                scanf(" %c", &f);
+                while(W != 5 && L != 0)
+                        {
+                            printf("------------------------------\n");
+                            printf("Pick a game to play\n");
+                            printf("[1] - Rock Paper Scissor\n");
+                            printf("[2] - Flip a coin\n");
+                            printf("[3] - Lottery\n");
+                            printf("[4] - Dice\n");
+                            printf("[5] - ? \n");
+                            printf("Lives [%d]         Wins[%d]\n", L, W);
+                            printf("------------------------------\n");
+                            scanf("%d", &x);
+
+                            if (x == 1)
+                                {
+                                    char CPU, USER;
+                                    srand(time(0));
+                                    int number = (rand() % 3) + 1;
+                                    if (number == 1)
+                                            {
+                                                CPU = 'R';
+                                            }
+                                    else if(number == 2)
+                                            {
+                                                CPU = 'P';
+                                            }
+                                    else if(number == 3)
+                                            {
+                                                CPU = 'S';
+                                            }
+                                    int r;
+                                    printf("------------------------------\n");
+                                    printf("Rock Paper Scissor.\n");
+                                    printf("Choose!\n(1) --- Rock\n(2) --- Paper\n(3) --- Scissor\n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &r);
+                                    if (r == 1)
+                                            {
+                                                USER = 'R';
+                                            }
+                                    else if(r == 2)
+                                            {
+                                                USER = 'P';
+                                            }
+                                    else if(r == 3)
+                                            {
+                                                USER =  'S';
+                                            }
+                                    printf("------------------------------\n");
+                                    //Draw
+                                    if(USER == CPU)
+                                            {
+                                                printf("The game is a draw\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                            }
+                                    //paper wins
+                                    if(USER == 'P' && CPU == 'R')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'R' && CPU == 'P')
+                                            {
+                                                printf("You Loose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+                                    //rock wins
+                                    if (USER == 'R' && CPU == 'S')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'S' && CPU == 'R')
+                                            {
+                                                printf("You Lose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+                                     //Scissors wins
+                                    if (USER == 'S' && CPU == 'P')
+                                            {
+                                                printf("You win\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                W++;
+                                            }
+                                    else if(USER == 'P' && CPU == 'S')
+                                            {
+                                                printf("You Lose\n");
+                                                printf("You Chose: %c \n", USER);
+                                                printf("Oponent Chose: %c \n", CPU);
+                                                L--;
+                                            }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 2)
+                                {
+                                    int m;
+                                    srand(time(0));
+                                    int number = (rand() % 2) + 1;
+
+                                    printf("------------------------------\n");
+                                    printf("Feeling risky with a 50/50\nHead or Tails?\n");
+                                    printf("(1) --- Heads\n(2) --- Tails\n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &m);
+
+                                    printf("------------------------------\n");
+                                    if(number == 1 && m == 1)
+                                        {
+                                            printf("Coin lands... Heads\n");
+                                            printf("You win! Your choice: Heads\n");
+                                            W++;
+                                        }
+                                    else if(number == 1 && m == 2)
+                                        {
+                                            printf("Coin lands... Heads\n");
+                                            printf("You lose! Your choice: Tails\n");
+                                            L--;
+                                        }
+
+                                    //lands Tails
+                                    if(number == 2 && m == 2)
+                                        {
+                                            printf("Coin lands... Tails\n");
+                                            printf("You win! Your choice: Tails\n");
+                                            W++;
+                                        }
+                                    else if(number == 2 && m == 1)
+                                        {
+                                            printf("Coin lands... Tails\n");
+                                            printf("You lose! Your choice: Heads\n");
+                                            L--;
+                                        }
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 3)
+                                {
+                                    int match = 0;
+                                    int lott[7];
+                                    int winLott[7];
+                                    printf("------------------------------\n");
+                                    printf("Welcome to lotery.\nMatch 3 numbers out of the 7 and you win!\n");
+                                    for(int x = 0; x < 7; x++)
+                                    {
+
+                                        printf("Choose any number between 0-9 for each entry\n");
+                                        printf("Entry (%d) \n", x + 1);
+                                        scanf("%d", &lott[x]);
+                                    }
+
+                                    srand(time(NULL));
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        int number = (rand() %10);
+                                        winLott[x] = number;
+                                    }
+                                    printf("------------------------------\n");
+                                    printf("Your lottery\n");
+
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        printf("| %d |", lott[x]);
+                                    }
+                                    printf("\n");
+                                    printf("------------------------------\n");
+                                    printf("\n");
+
+                                    printf("------------------------------\n");
+                                    printf("Winning Numbers\n");
+                                    for(int x = 0; x < 7; x++)
+                                    {
+                                        printf("| %d |", winLott[x]);
+                                    }
+                                    printf("\n");
+                                    printf("------------------------------\n");
+                                    printf("\n");
+
+                                    for( int x = 0; x < 7; x++)
+                                    {
+                                        if(lott[x] == winLott[x])
+                                        {
+                                            match++;
+                                        }
+                                    }
+
+                                    if (match >= 3)
+                                    {
+                                        printf("Congratulation You WON!\n You have %d matches\n", match);
+                                        W++;
+                                    }
+                                    else if (match < 3)
+                                    {
+                                        printf("You loose. You have %d matches\n", match);
+                                        L--;
+                                    }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if(x == 4)
+                                {
+                                    int input, userNum, cpuNum;
+                                    srand(time(0));
+
+                                    printf("------------------------------\n");
+                                    printf("Rolling Dice\nPretty simple, if you roll a higher number you win\n");
+                                    printf("Press (1) to roll\n");
+                                    printf("------------------------------\n");
+                                    scanf("%d" , &input);
+
+                                    printf("------------------------------\n");
+                                    if (input == 1)
+                                        {
+                                            userNum = (rand() % 6 ) + 1;
+                                            cpuNum = (rand() % 6 ) + 1;
+                                        }
+
+                                    int results = diceResult(userNum, cpuNum);
+
+                                    printf("------------------------------\n");
+                                    if(results ==1)
+                                        {
+                                            printf("You win!\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+                                            W++;
+                                        }
+                                    if(results == 2 )
+                                        {
+                                            printf("You loose.\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+                                            L--;
+                                        }
+                                    else if(results == 3)
+                                        {
+                                            printf("Its a draw.\nYour roll: %d\nOppenent roll: %d\n", userNum, cpuNum);
+
+                                        }
+
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+                                }
+
+                            if (x == 5)
+                                {
+
+                                    int number, ranNum;
+                                    printf("------------------------------\n");
+                                    printf("Pick a number between 1-5 and if you guess right you win.\n");
+                                    printf("Enter number: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %d", &number);
+                                    ranNum = (rand() % 5 ) + 1;
+
+
+                                    printf("------------------------------\n");
+                                    if(number == ranNum)
+                                        {
+                                            printf("You win!!\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            W++;
+
+                                        }
+                                    else if (number > ranNum)
+                                        {
+                                            printf("You loose.\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            L--;
+
+                                        }
+                                    else if (number < ranNum)
+                                        {
+                                            printf("You loose.\n");
+                                            printf("Random number: %d\n", ranNum);
+                                            L--;
+
+                                        }
+                                    char f;
+                                    printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                    printf("------------------------------\n");
+                                    scanf(" %c", &f);
+
+                                }
+
+                    if(W == 5)
+                              {
+                                printf("You won! Says the guy sitting across the dining table.\nA dooor behind him opens switfly, you make your way towards the door and suddely hear footsteps behind you.\nYou turn around before stepping out the door and notice the blindfolded man carrying a bat and wacks you on the head with it\n" );
+								char f;
+                                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                scanf(" %c", &f);
+
+
+
+                               }
+                    if (L == 0)
+                             {
+                                 printf("You loose! Says the guy sitting across the dining table.\nBefore you can say or do anything the blindfolded man approaches you and wacks you on the head with a bat.\n");
+								 char f;
+                                printf("Press (ANY) and hit (ENTER) to Continue: \n");
+                                scanf(" %c", &f);
+                             }
+                        }
+				
 				break;
 			}
 			case 20:
@@ -1778,6 +2113,25 @@ void JanKenPon() {
   }
   
 }
+
+
+int diceResult(int user, int cpu)
+{
+	//user wins
+	if( user > cpu)
+	{
+		return 1;
+	}
+	//cpu wins
+	else if (user < cpu)
+	{
+		return 2;
+	}
+	//draw
+	else 
+	return 3;
+}
+
 void drawStraws() {
   
   int strawSet = 0;
