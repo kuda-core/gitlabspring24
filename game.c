@@ -4396,7 +4396,7 @@ void findFlower(void)
   }
 }
 
-double areaRec(int len, int h){r
+double areaRec(int len, int h){
 
     return (double) len * h;
 }
