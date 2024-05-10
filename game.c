@@ -787,6 +787,7 @@ int main(int argc, char *argv[])
         printf ("You find yourself getting the strangest sense of deja vu.\n");
                 ajlSpace();
       }
+	}
 			case 32:
 			{
 				puts("room32");
