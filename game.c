@@ -4,7 +4,7 @@
 
 
 // Subject 0023
-
+//jingle
 //Dom I.
 //Andre J Leos
 //Elias Dawarpana
@@ -26,6 +26,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <math.h>
+void randomTreasure();
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -121,6 +122,40 @@ int main(int argc, char *argv[])
 			case 1:
 			{
 				puts("room1");
+				int again = 1;
+				char animals[3][6] = {"Dog", "Cat", "Turtle"};
+				puts("You open the door and enter a room with another 5 doors.");
+				
+				while(again)
+				{
+					printf("Choose one of the 5 doors. ");
+					scanf("%d", &choice);
+					switch(choice)
+					{
+						case 1:
+							puts("You open the door and found a treasure chest!");
+							randomTreasure();
+							break;
+						case 2:
+							puts("The door is locked.");
+							break;
+						case 3:
+							puts("You open the door and get attacked!");
+							printf("You were bitten by a %s\n", animals[rand() % 3]);
+							break;
+						case 4:
+							puts("You open the door and find a friendly animal!");
+							printf("you walk up and pet the %s\n", animals[rand() % 3]);
+							break;
+						case 5:
+							puts("You open the door and find nothing.");
+							break;
+						default:
+							puts("....");
+					}
+					printf("Do you want to open another door? (1 for yes, 0 for no): ");
+					scanf("%d", &again);
+				}
 				break;
 			}
 			case 2:
@@ -3493,3 +3528,19 @@ void characterSelection(int num)
 
 
 
+void randomTreasure()
+{
+int treasure = rand() % 100 + 1;
+if(treasure ==100)
+{
+puts("You found 1 billion gold coins.");
+}
+else if(treasure > 50)
+{
+puts("You found 1 gold coin.");
+}
+else
+{
+puts("You found nothing.");
+}
+}
