@@ -1393,7 +1393,7 @@ void chooseEnding()
             strcpy(choices[4], "You chose The Wish.");
         }
     }
-
+}
 void processRoom23() 
 {
 	// Initialize temporary variables
