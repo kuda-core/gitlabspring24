@@ -9,7 +9,7 @@
 //Andre J Leos
 //Elias Dawarpana
 //Gretel Castillo
-
+//Eddie Licea-Martinez
 //Patrick Polanco
 
 //AK
@@ -54,6 +54,8 @@ int positionGenerator();
 
 
 int diceResult(int user, int cpu);
+int attemptPurchase();
+void findFlower(void);
 
 
 
@@ -528,6 +530,156 @@ while (choice != 0)
 			case 16:
 			{
 				puts("room16");
+				srand(time(NULL));
+  int money = (rand() % 20000);
+  int randNum = (rand() % 10) +1;
+  char entities[3][20] = {"Dire Wolfs", "Giant Venus Flytraps", "Igris the Blood Red"};
+  char items[4][20] = {"Health Potions","Elucidator","Shadow Spells","Dark Repulsor"};
+  bool flag = true;
+  int itemChoice;
+  int itemP;
+  int logH;
+  int hilsC;
+  int choice;
+  int rubyC;
+  int pneumaF;
+
+
+  printf("LINK START!!!\nWelcome to Aincrad, your adventure begins here.\n");
+  
+  while (flag == true)
+  {    
+    printf("\nPlease choose the floor you wish to follow:\n\n");
+    printf("1. The Town of Beginnings\n2. The Log House\n3. Wolf Plains\n4. Hill of Memories\n5. Ruby Palace\n6. Exit Game\n\nChoice:");
+    scanf("%d", &choice);
+
+    
+    //check if choice is valid
+    if(choice < 1 || choice > 6)
+    {
+      printf("\nThat wasn't one of the options. Please choose a valid path\n\n");
+    }
+
+
+    //option 1
+    else if (choice == 1)
+    {
+      printf("\nWelcome to the Town of Beginnings. Here you can buy your items to help on your adventure and be tutored on the dangers that lay outside the town.\n");
+      printf("\nDo you wish to buy an item?\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &itemChoice);
+      printf("\n");
+
+      if(itemChoice == 1)
+      {
+        for(int i = 0; i < 4; i++)
+        {
+          printf("%d. %s\n",i+1, items[i]);
+        }
+        printf("\nWhich item do you wish to purchase!\n\nChoice:");
+        scanf("%d", &itemP);
+        money = attemptPurchase(money);
+        printf("Let's head back for now!");
+      }
+      else
+      {
+        printf("Okay! Lets head back!");
+      }
+      printf("\n");
+    }
+
+      
+    //option 2
+    else if(choice == 2)
+    {
+      printf("\nYou made your way to the Log House. This house is currently on sale and gives you an amazing view to the vibrant lake of this floor alongside the lovely pine forest.\n");
+      printf("\nIt seems that this house it actually for sale! Do you want to purchase it?\n1. yes\n2. no\n\nChoice:");
+      scanf("%d", &logH);
+      
+      if(logH == 1)
+      {
+        money = attemptPurchase(money);
+      }
+      else
+      {
+        printf("Aw okay, maybe next time. Let's head back for now.\n\n");
+      }
+    }
+
+      
+    //option 3
+    else if(choice == 3)
+    {
+      printf("\nThis is the Wolf Plains, here the terrain consists mainly of grassy hills and stone ruins. As the name suggests, this floor is filled with %s that attack players on sight.\n", entities[0]);
+      printf("\nDo you wish to take the risk and move forward knowing these risks?");
+      printf("\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &hilsC);
+
+      if(hilsC == 1)
+      {
+        printf("\nYou chose to go further in. Watch out!! a whole pack of wolves are approaching you!! ");
+        printf("You don't have enough strength to defeat them, let's run away for the time being! You have been teleported back to the beginning..");
+      }
+      else
+      {
+        printf("\nGood Choice! You got saved from a pack of wolves that would have hunted you down!\nLet's head back for now.");
+      }
+      printf("\n");
+    }
+
+      
+    //option 4
+    else if(choice == 4)
+    {
+      printf("\nThis is the Hills of Memories, here the terrain consists mainly for floral fields and stone paths. Tons of people come to visit this area for the beautiful view that it offers.\nHowever safe it appears, there is a hidden danger that lies deeper within this floor.\n");
+      printf("If you continue forward, at random intervals of distance Giant Venus Flytraps will appear.\n");
+
+      printf("\nPeople take the risk to try and find the hidden Pneuma flower, this flower is said to bloom only once per year and has the power to revive deceased pets within a certain time frame.\n");
+      printf("\nDo you want to make an attempt at finding the Pneuma flower?\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &pneumaF);
+
+      if(pneumaF == 1)
+      {
+        findFlower();
+      }
+      else
+      {
+        printf("\nIf there's nothing you're looking for, let's head back for now.");
+      }
+      printf("\n");
+    }
+
+      
+    //option 5
+    else if (choice == 5)
+    {
+      printf("\nThe final floor, the Ruby Palace. This is the final floor of Aincrad that allows you to become king of the land. Here lies the chance of unearthing the Ruby Weeping Blade.\n");
+      printf("\nLegend has it that Ruby Palace is guarded by a powerful knight of the Bloods Oath, %s\n", entities[2]);
+      printf("\nDo you wish to unearth the Ruby Weeping Blade?\nOnly the chosen one is granted it.\nEnter a number from 1-10 to test your luck!:\n");
+      scanf("%d", &rubyC);
+
+      //checking if you unearth ruby blade
+      if(rubyC == randNum)
+      {
+        printf("\nYou are the chosen one! You are the lost king of Aincrad. You have gained the Ruby Weeping Blade. You are now the ruler of this land!\n ");
+        printf("\n");
+      }
+      else
+      {
+        printf("\nHow unfortunate, but it was to be expected. No one can unearth the Ruby Weeping Blade.");
+        printf("\n");
+      }
+      printf("\n");
+    }
+
+    //end of game
+    else if (choice == 6)
+    {
+      printf("\nYou left with $%d remaining, pretty rich if you ask me!", money);
+      printf("\nThank you for playing!\n\n");
+      flag = false;
+    }
+    
+  }
 				break;
 			}
 			case 17:
@@ -4078,4 +4230,38 @@ else
 {
 puts("You found nothing.");
 }
+}
+
+
+
+
+int attemptPurchase(int money)
+{
+  int price = (rand() % 5500) +1000;
+  if(money >= price)
+  {
+    printf("\nPerfect! You have enough money to purchase the item!\n");
+    printf("You have purchased the item for $%d.\n", price);
+    printf("You have $%d left that will be send to your savings.\n", money - price);
+
+    return (money-price);
+  }
+  else
+  {
+    printf("\nThis item costs $%d, You do not have enough money to purchase this item you only have $%d, sorry!\n", price, money);
+    return money;
+  }
+}
+
+void findFlower(void)
+{
+  int flower = (rand() % 3);
+  if(flower == 0)
+  {
+    printf("You found the Pneuma Flower! You can use this howerever you like. It can be sold to merchants for a high price.\nLet's head back for the meantime.\n");
+  }
+  else
+  {
+    printf("You found nothing this time, better luck next time. You can enjoy the view on your way back!\n");
+  }
 }
