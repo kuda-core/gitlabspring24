@@ -17,7 +17,11 @@
 //Patrick Polanco
 
 
+//Jose A. Ruiz
+
+
 //Joshua F.
+
 
 //AK
 
@@ -75,7 +79,9 @@ void game_Start(void);
 int attemptPurchase();
 void findFlower(void);
 
-
+double areaRec(int len, int h);
+double areaT(int b, int h);
+int factorial(int n);
 
 
 // Global variables for room 17
@@ -2847,7 +2853,133 @@ while (choice != 0)
 			}
 			case 45:
 			{
-				puts("room45");
+			int choice = 0;
+
+printf("\nWelcome to Room 45 \n" );
+printf("In this room we like numbers and math. \n");
+printf("To escape this room, you have 5 options\n");
+printf("Option 1: Solve a mathematical expression. \n");
+
+printf("Option 2: Given the length of a rectangle. You will have to enter the height\n and the area has to be within a percentage of a specific number. \n");
+
+printf("Option 3: Given the base of a triangle. You will have to enter the height\n and the area has to be within a percentage of a specific number. \n");
+
+printf("Option 4: Solve 3 factorials \n");
+
+printf(" Generate the magic number. \n");
+
+printf("Enter your choice a number from 1-5: \n");
+scanf("%d", &choice);
+
+while(choice < 1 && choice > 5){
+printf("Invalid input. Enter a number form 1-5: \n");
+scanf("%d", &choice);
+
+}
+
+if (choice == 1){
+  int result = 40;
+    int userNum;
+    printf("\nYou have selected option 1. \n");
+    printf("You have to solve this expression: (7^2 + 3 - 4 * 2 - 4! / 6) / 10 + 6^2  \n");
+    printf("Please enter your answer: \n");
+    scanf("%d", &userNum);
+
+    while (userNum != result)
+    {
+       printf("Your answer was wrong, try again: \n");
+       scanf("%d", &userNum);
+
+    }
+     printf("\n%d whas the correct answer. \n", result);
+
+}else if (choice == 2)
+{
+    printf("\nYou have selected option 2. \n");
+    printf("The area of your rectangle should be within 10 percent of 50\n");
+    srand(time(NULL));
+    int len = rand() % 10 + 1;
+    int he;
+
+    printf("The length of the rectangle is %d \n", len);
+
+    printf("Enter the height of the rectangle: \n");
+    scanf("%d", &he);
+    double calArea = areaRec(len, he);
+
+    while (calArea < 45 || calArea > 55) {
+        printf("Wrong. Try a different height: \n");
+        scanf("%d", &he);
+        calArea = areaRec(len, he);
+    }
+    printf("The calculated area %.2lf falls within the expected range \n", calArea);
+}else if (choice == 3){
+    printf("\nYou have selected option 3. \n");
+    printf("The area of your triangle should be within 30 percent of 50\n");
+    srand(time(NULL));
+    int base = rand() % 11 + 10;
+    int heig;
+
+    printf("The base of the triangle is %d \n", base);
+
+    printf("Enter the height of the Triangle: \n");
+    scanf("%d", &heig);
+    double calAreaT = areaT(base, heig);
+
+    while (calAreaT < 35 || calAreaT > 65) {
+        printf("Wrong. Try a different height: \n");
+        scanf("%d", &heig);
+        calAreaT = areaT(base, heig);
+    }
+    printf("The calculated area %.2lf falls within the expected range\n", calAreaT);
+}else if(choice == 4){
+    printf("\nYou have selected option 4. \n");
+    printf("Calculate the following factorials with no mistakes in between: 4!, 5!, 6! \n");
+
+    int factorials[3] = {4, 5, 6}; 
+    int counter = 0; 
+
+    while (counter < 3) {
+        int i;
+
+        for(i = 0; i < 3; i++){
+        int guess;
+        printf("Enter the value of factorial %d: ", factorials[i]);
+        scanf("%d", &guess);
+
+        if (guess == factorial(factorials[i])) {
+            counter++;
+        } else {
+            printf("Incorrect. Try again.\n");
+        }
+        }
+    }
+    printf("Congratulations! You have solved all 3 factorials.\n");
+
+}else if (choice == 5){
+   printf("You have selected option 5\n");
+    printf("Here you will have to roll a 12-sided die and get the magic number to exit the room\n");
+    printf("Enter 1 to roll the die: ");
+    int user;
+
+    scanf("%d", &user);
+    while (user == 1) {
+        srand(time(NULL));
+        int num = rand() % 12 + 1;
+        if (num == 8) {
+            printf("Congratulations! You have obtained the magic number %d! \n", 8);
+            break;
+        } else {
+            printf("You did not get the magic number. Enter 1 to roll the dice again:  ");
+            scanf("%d", &user);
+        }
+    }
+}
+printf("You have succesfully completed this room completed this room \n");
+printf("You may now go back to the main room now. GOOD LUCK \n)");
+
+
+				
 				break;
 			}
 			case 46:
@@ -5024,3 +5156,25 @@ void findFlower(void)
   }
 }
 
+
+double areaRec(int len, int h){
+
+    return (double) len * h;
+}
+
+double areaT(int b, int h){
+
+	double area = (double) (b * h)/2;
+	return area;
+}
+
+int factorial(int n){
+    
+    int num = 1;
+    
+    for (int i = 1; i <= n; i++) { 
+        num *= i;
+    }
+    
+    return num;
+}
