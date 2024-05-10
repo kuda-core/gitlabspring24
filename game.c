@@ -2771,7 +2771,11 @@ bool trap_d10()
             lower = 1;
             upper = 10;
             count = 10;
-
+  for (int i = 0; i < count; i++) {
+                int num = (rand() % (upper - lower)) + lower;
+                return ("%d", num);
+            }
+        }
 
 int randomNumRoom41()
 {
@@ -2787,11 +2791,7 @@ int randomNumRoom41()
 
 
 
-            for (int i = 0; i < count; i++) {
-                int num = (rand() % (upper - lower)) + lower;
-                return ("%d", num);
-            }
-        }
+            
 
 
 
