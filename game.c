@@ -1,7 +1,7 @@
 //contributors
 
 //Suave714
-
+//Paul JR Ngwoke
 // Dedman
 // Subject 0023
 //jingle
@@ -10,15 +10,28 @@
 //Elias Dawarpana
 //Gretel Castillo
 
+//Jesus Ruiz
+
+//Eddie Licea-Martinez
+
 //Patrick Polanco
 
+
+//Jose A. Ruiz
+
+
+//Joshua F.
+
+
 //AK
+
 
 
 //Carlos
 
 //AK
 
+// dailycrocs
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -30,10 +43,16 @@
 #include <math.h>
 
 
+
+void exploreRoom(int roomNo);
+void eyeGame(void);
+
+
 void exploreLocation(int locationChoice);
 
 void randomTreasure();
 void playGame();
+
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -44,9 +63,32 @@ int cardPull();
 void rollTheDice_Highest();
 void rollTheDice_Race();
 
+
+
+int randomNumRoom41();
+
+void doorChoice();
+
 int positionGenerator();
 
+
 int diceResult(int user, int cpu);
+
+
+int swordAttack();
+int bowAttack();
+int hammerAttack();
+int daggerAttack();
+int axeAttack();
+
+void game_Start(void);
+
+int attemptPurchase();
+void findFlower(void);
+
+double areaRec(int len, int h);
+double areaT(int b, int h);
+int factorial(int n);
 
 
 
@@ -55,6 +97,7 @@ char inputComputerSymbol = ' ';
 char inputPlayerSymbol = ' ';
 
 void chooseRoomFor17();
+
 
 void room17RoomOneLevelOne();
 void room17RoomOneLevelTwo();
@@ -86,6 +129,8 @@ int selectRandom(int lower, int upper, int count);
 
 char* pullLever(int seed);
 
+char* SkelStare();
+
 void processRoom23();
 
 int healthBar(bool damage, int currentHealth);
@@ -103,7 +148,7 @@ void chooseCake();
 void chooseEnding();
 
 // Vars for choices
-int doorChoice;
+int doorChoice1;
 int weaponChoice;
 int cakeChoice;
 int finalChoice;
@@ -116,6 +161,7 @@ int health = 100;
 void generateGold();
 void multiplicationGame();
 
+void dragonbarrowChoices();
 
 int main(int argc, char *argv[])
 {
@@ -411,7 +457,92 @@ while (choice != 0)
 			}
 			case 10:
 			{
-				puts("room10");
+				printf("\n There are subtle hints to follow as you explore, but this is your warning that your decisions have dire consequences... \n");
+				printf("\n Dragonbarrow Castle \n\n");
+				printf(" As you face the fortress, you notice three pathways: \n 1. Left, towards the Gardens \n 2. Forward, to the Castle Gate corridor \n 3. Right, up the stairs towards the East Tower\n");
+				int x = 0;
+				printf("\n Which path will you take?: \n\n");
+				scanf(" %d",&x);
+				while(x == 1)
+				{
+					printf("\n Gardens \n\n");
+					printf("\n As you enter the gardens, you notice a cultist statue, and a side entrance into the West Tower.\n");
+					int y = 0;
+					printf(" Where will you go?\n");
+					printf(" 1. Examine the cultist statue\n");
+					printf(" 2. Enter the West Tower entrance\n\n");
+					scanf(" %d", &y);
+					if(y == 1)
+					{
+						printf("\n The cultist statue contained a lethal curse.\n");
+						printf("\n The curse sends you back... \n\n");
+						break;
+					}
+					else if(y == 2)
+					{
+						printf("\n West Tower \n\n");
+						printf(" As you open the door, a suspicious masked peddler is seen looting decayed corpses.\n");
+						printf(" The masked peddler notices you standing in the doorway, and throws a sac over you.\n");
+						printf(" You feel yourself being moved, and hear the sound of rushing water.\n");
+						printf(" You realize you are back in the corridor full of doors...\n\n");
+						break;
+					}
+					else
+					{
+						printf(" This is not an option\n ");
+					}
+				}
+				while(x == 2)
+				{
+					printf("\n Castle Gate corridor \n\n");
+					printf(" The Castle Gate corridor leads to an open courtyard of steps with two large doors to head through.\n ");
+					printf(" One door seems to lead to the inner chambers, the other seems to lead to a dining hall.\n");
+					int z = 0;
+					printf(" Where will you go?\n");
+					printf(" 1. Inner chambers\n");
+					printf(" 2. Dining Hall\n\n");
+					scanf(" %d", &z);
+					if(z == 1)
+					{
+					dragonbarrowChoices();
+					break;
+					}
+					else if(z == 2)
+					{
+						dragonbarrowChoices();
+						break;
+					}
+					else
+					{
+						printf(" This is not an option \n");
+					}
+				}
+				while(x == 3)
+				{
+					printf("\n East Tower Entrance \n\n");
+					printf(" The East Tower courtyard is filled with undead domestic servants covered in Rot.\n");
+					printf(" However, if you are able to make your way past these undead, there are two paths available for you...\n");
+					int eastTower = 0;
+					printf(" Pick your path\n");
+					printf(" 1. Corridor past the undead\n");
+					printf(" 2. Climb stairs to the Battlement\n\n");
+					scanf(" %d", &eastTower);
+					if(eastTower == 1)
+					{
+						dragonbarrowChoices();
+						break;
+					}
+					else if(eastTower == 2)
+					{
+						printf(" At the top of the battlement, you notice a shiny stone.\n");
+						printf(" As you pick up the shiny stone, a giant crow descends upon you and brings you back to the corridor of doors...\n\n");
+						break;
+					}
+					else
+					{
+						printf(" This is not an option \n");
+					}
+				}
 				break;
 			}
 			case 11:
@@ -470,7 +601,181 @@ while (choice != 0)
 			}
 			case 12:
 			{
-				puts("room12");
+				int room = 1;
+        			int win = 0;
+        			char password[5] = "AVOID";
+        			char guess[6];
+        			int pick = 0;
+        			int maxChoices[6] = {6, 3, 5, 3, 4, 2};
+        			puts("You open the door. A rat scurries past as the door slams shut and locks behind you. You get this sinking feeling that you want to brush up on your abstract puzzle skills. Otherwise, this was a very, very poor idea.");
+        			while(win == 0)
+          			{
+            				exploreRoom(room);
+            				scanf("%d",&pick);
+            				while (pick < 1 || pick > maxChoices[room-1])
+              				{
+                				printf("NOT A VALID CHOICE. PLEASE CHOOSE AGAIN.\n");
+                				exploreRoom(room);
+                				scanf("%d",&pick);
+              				}
+            				if (room == 1)
+            				{
+              					if (pick == 1)
+              					{
+                					room = 2;
+              					}
+              					else if (pick == 2)
+              					{
+                					room = 5;
+              					}
+              					else if (pick == 3)
+              					{
+                					room = 4;
+              					}
+              					else if (pick == 4)
+              					{
+                					room = 3;
+              					}
+              					else if (pick == 5)
+              					{
+                					puts("\nUnder the cover is an even weirder painting. It appears to depict Ouroboros surrounding a minotaur in the center of the image. The painting is unfnished, but it is marked in the bottom left corner with 'M;13'. You think it's best to not touch the painting.\n");
+              					}
+						else if (pick == 6)
+						{
+							puts("\nYou've paced these few rooms for a while now and cannot make heads or tails of this puzzle. You bang on the door to try and force it back open, deciding to give up on finding anything of value in this cursed place. After 74 hours and 46 minutes, a rat in a jester's cap slowly waltz past. They look up at you, shake their head, and scurry under the door. THe door re-opens. You leave more hollow than when you entered.\n");
+							win = 46;
+							break;
+						}
+            				}
+          				else if (room == 2)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 2)
+                				{
+                  					room = 3;
+                				}
+                				else if (pick == 3)
+                				{
+                  					puts("\nYou look inside the pots and find something odd. The blue ones are filled with poker chips and playing cards. The white ones are filled with various sports balls. You think this might mean something, or it might not. Your inner thoughts don't seem very helpful right now.\n");
+                				}
+            				}
+            				else if (room == 3)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 5;
+                				}
+                				else if (pick == 2)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 3)
+                				{
+                  					room = 2;
+                				}
+                				else if (pick == 4)
+                				{
+                  					puts("\nIt reads as follows: 'Stellae sint dux vester'. Also from this distance you notice the statue's staff has tow snakes crossing paths on it. You feel like someone's watching you.\n");
+                				}
+                				else if (pick == 5)
+                				{
+                  					puts("\nPulling the chain flips off the light, dipping the room in darkness. You notice a bunch of tiny gemstones scattered across the room start to glow. You think you can hear a faint whispering in the distance. You turn the light back on for your own saftey.\n");
+                				}
+            				}
+            				else if (room == 4)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 2;
+                				}
+                				else if (pick == 2)
+                				{
+                  					puts("The scroll reads as follows:\n'Find the point drawn in the lines\nStuck above space, living beside the sea\nIt marks no spots unless you have two\n1105, 23, 5, 86, 22\nA single key is all you need to make it appear.'\n");
+                				}
+                				else if (pick == 3)
+                				{
+                  					puts("You try to play the record player. Most of the records are covered in glue, causing them to not play. However, two records seem to work. One is a record of 'Goodnight my Beautiful' by Russ Morgan. The other is a complete record of 'Peer Gynt, Op. 23' by Edvard Grieg. You listen to both. You feel a little better.");
+                				}
+            				}
+            				else if (room == 5)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 4;
+                				}
+               	 				else if (pick == 2)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 3)
+                				{
+                  					room = 6;
+                				}
+                				else if (pick == 4)
+                				{
+                  					puts("ENTER THE PASSWORD:");
+                  					scanf("%s",guess);
+                  					if (guess[0] == password[0] && guess[1] == password[1] && guess[2] == password[2] && guess[3] == password[3] && guess[4] == password[4])
+                  					{
+                    						win = (rand() % 5) + 1;
+                    						puts("CORRECT!");
+                  					}
+                  					else
+                  					{
+                    						puts("WRONG WRONG WRONG WRONG WRONG WRONG! SO VERY WRONG!");
+							}
+                				}
+            				}
+            				else if (room == 6)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 5;
+                				}
+                				else if (pick == 2)
+                				{
+                  					eyeGame();
+                				}
+              				}
+        			}
+
+				if(win != 46 && win > 0)
+				{
+        				puts("The great vault swing open wide, revealing your prize: ");
+        				switch(win)
+          				{
+            					case 1:
+            					{
+              					puts("The Jewel of Masquerade!");
+              					break;
+            					}
+            					case 2:
+            					{
+              					puts("The Golden Eye of Pob!");
+              					break;
+            					}
+            					case 3:
+            					{
+              					puts("The Casque of the Zodiac!");
+              					break;
+            					}
+            					case 4:
+            					{
+              					puts("The Last Glazed Maggufins!");
+              					break;
+            					}
+            					case 5:
+            					{
+              					puts("A big bowl of rigatoni with parmesan cheese!");
+              					break;
+            					}
+          				}
+	
+        				puts("You go to grab your prize, but at the last second a rat wearing a jesters cap runs out from behind you and grabs the treasure. You give chase. The pesky rodent runs all the way back to the parlor room and you follow after. It scurries under the entrance door, breaking the lock as it does so. It seems like that rat ran off into one of the other 54 rooms with your treasure. You need to pick a new door to try and find it...You Escaped?\n");  
+				}
 				break;
 			}
 			case 13:
@@ -523,6 +828,156 @@ while (choice != 0)
 			case 16:
 			{
 				puts("room16");
+				srand(time(NULL));
+  int money = (rand() % 20000);
+  int randNum = (rand() % 10) +1;
+  char entities[3][20] = {"Dire Wolfs", "Giant Venus Flytraps", "Igris the Blood Red"};
+  char items[4][20] = {"Health Potions","Elucidator","Shadow Spells","Dark Repulsor"};
+  bool flag = true;
+  int itemChoice;
+  int itemP;
+  int logH;
+  int hilsC;
+  int choice;
+  int rubyC;
+  int pneumaF;
+
+
+  printf("LINK START!!!\nWelcome to Aincrad, your adventure begins here.\n");
+  
+  while (flag == true)
+  {    
+    printf("\nPlease choose the floor you wish to follow:\n\n");
+    printf("1. The Town of Beginnings\n2. The Log House\n3. Wolf Plains\n4. Hill of Memories\n5. Ruby Palace\n6. Exit Game\n\nChoice:");
+    scanf("%d", &choice);
+
+    
+    //check if choice is valid
+    if(choice < 1 || choice > 6)
+    {
+      printf("\nThat wasn't one of the options. Please choose a valid path\n\n");
+    }
+
+
+    //option 1
+    else if (choice == 1)
+    {
+      printf("\nWelcome to the Town of Beginnings. Here you can buy your items to help on your adventure and be tutored on the dangers that lay outside the town.\n");
+      printf("\nDo you wish to buy an item?\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &itemChoice);
+      printf("\n");
+
+      if(itemChoice == 1)
+      {
+        for(int i = 0; i < 4; i++)
+        {
+          printf("%d. %s\n",i+1, items[i]);
+        }
+        printf("\nWhich item do you wish to purchase!\n\nChoice:");
+        scanf("%d", &itemP);
+        money = attemptPurchase(money);
+        printf("Let's head back for now!");
+      }
+      else
+      {
+        printf("Okay! Lets head back!");
+      }
+      printf("\n");
+    }
+
+      
+    //option 2
+    else if(choice == 2)
+    {
+      printf("\nYou made your way to the Log House. This house is currently on sale and gives you an amazing view to the vibrant lake of this floor alongside the lovely pine forest.\n");
+      printf("\nIt seems that this house it actually for sale! Do you want to purchase it?\n1. yes\n2. no\n\nChoice:");
+      scanf("%d", &logH);
+      
+      if(logH == 1)
+      {
+        money = attemptPurchase(money);
+      }
+      else
+      {
+        printf("Aw okay, maybe next time. Let's head back for now.\n\n");
+      }
+    }
+
+      
+    //option 3
+    else if(choice == 3)
+    {
+      printf("\nThis is the Wolf Plains, here the terrain consists mainly of grassy hills and stone ruins. As the name suggests, this floor is filled with %s that attack players on sight.\n", entities[0]);
+      printf("\nDo you wish to take the risk and move forward knowing these risks?");
+      printf("\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &hilsC);
+
+      if(hilsC == 1)
+      {
+        printf("\nYou chose to go further in. Watch out!! a whole pack of wolves are approaching you!! ");
+        printf("You don't have enough strength to defeat them, let's run away for the time being! You have been teleported back to the beginning..");
+      }
+      else
+      {
+        printf("\nGood Choice! You got saved from a pack of wolves that would have hunted you down!\nLet's head back for now.");
+      }
+      printf("\n");
+    }
+
+      
+    //option 4
+    else if(choice == 4)
+    {
+      printf("\nThis is the Hills of Memories, here the terrain consists mainly for floral fields and stone paths. Tons of people come to visit this area for the beautiful view that it offers.\nHowever safe it appears, there is a hidden danger that lies deeper within this floor.\n");
+      printf("If you continue forward, at random intervals of distance Giant Venus Flytraps will appear.\n");
+
+      printf("\nPeople take the risk to try and find the hidden Pneuma flower, this flower is said to bloom only once per year and has the power to revive deceased pets within a certain time frame.\n");
+      printf("\nDo you want to make an attempt at finding the Pneuma flower?\n1. Yes\n2. No\n\nChoice:");
+      scanf("%d", &pneumaF);
+
+      if(pneumaF == 1)
+      {
+        findFlower();
+      }
+      else
+      {
+        printf("\nIf there's nothing you're looking for, let's head back for now.");
+      }
+      printf("\n");
+    }
+
+      
+    //option 5
+    else if (choice == 5)
+    {
+      printf("\nThe final floor, the Ruby Palace. This is the final floor of Aincrad that allows you to become king of the land. Here lies the chance of unearthing the Ruby Weeping Blade.\n");
+      printf("\nLegend has it that Ruby Palace is guarded by a powerful knight of the Bloods Oath, %s\n", entities[2]);
+      printf("\nDo you wish to unearth the Ruby Weeping Blade?\nOnly the chosen one is granted it.\nEnter a number from 1-10 to test your luck!:\n");
+      scanf("%d", &rubyC);
+
+      //checking if you unearth ruby blade
+      if(rubyC == randNum)
+      {
+        printf("\nYou are the chosen one! You are the lost king of Aincrad. You have gained the Ruby Weeping Blade. You are now the ruler of this land!\n ");
+        printf("\n");
+      }
+      else
+      {
+        printf("\nHow unfortunate, but it was to be expected. No one can unearth the Ruby Weeping Blade.");
+        printf("\n");
+      }
+      printf("\n");
+    }
+
+    //end of game
+    else if (choice == 6)
+    {
+      printf("\nYou left with $%d remaining, pretty rich if you ask me!", money);
+      printf("\nThank you for playing!\n\n");
+      flag = false;
+    }
+    
+  }
 				break;
 			}
 			case 17:
@@ -1142,6 +1597,246 @@ while (choice != 0)
 			case 24:
 			{
 				puts("room24");
+				printf(">> Entering the Lair of the Lizardman <<\n\nYou stand before a formidable foe - a Lizardman. At your feet lies a sword, glinting ominously in the dim light. Do you choose to face the creature head-on, or retreat and seek refuge elsewhere?\n\n");
+
+                printf("Choose your action:\n1. Fight\n2. Run Away\n\n");
+                int actionChoice;
+                scanf("%d", &actionChoice);
+
+                if (actionChoice == 1)
+                {
+                    printf("\nYou pick up the sword, bracing yourself for the impending battle.\n\n");
+                }
+                else if (actionChoice == 2)
+                {
+                    printf("\nYou turn to flee, hoping to escape the impending danger.\n\n");
+                    printf("As you retreat, you stumble and fall into a pool of murky water from the previous room. The suffocating depths claim you, and darkness consumes your vision. Game Over.\n\n");
+                    break;
+                }
+                else
+                {
+                    printf("\nInvalid choice. Your hesitation killed you.\n\n");
+                    break;
+                }
+
+                int playerRoll, lizardRoll;
+                printf("Press ENTER to roll the dice and determine your fate: ");
+                getchar();
+                getchar();
+
+                playerRoll = (rand() % 6) + 1;
+                lizardRoll = (rand() % 6) + 1;
+
+                printf("\nYour Roll: %i\nLizardman Roll: %i\n", playerRoll, lizardRoll);
+
+                if (playerRoll == lizardRoll)
+                {
+                    printf("Both parties have rolled equal values. Try Again.\n\n");
+                }
+                else if (lizardRoll > playerRoll)
+                {
+                    printf("The Lizardman strikes you down with a swift blow. Game Over.\n\n");
+                    break;
+                }
+                else
+                {
+                    printf("You have slain the Lizardman! You may proceed!\n\n");
+
+                   
+                    char *words[2] = {"Mango", "Garrett Poppe"};
+                    char guessWord[20], wrongGuesses[6], secretWord[20], input[20];
+                    int maxTries, wrongCount = 0, correctCount = 0, difficulty, i;
+                    char guess;
+
+                    printf("After passing through the door of riddles, you stand in a room with a tall centaur statue that challenges you to a guessing game.\n");
+                    printf("If you win, you can continue your journey; if you lose, you perish. Do you choose the easy or hard difficulty? The stakes are high, and your decision could mean life or death.\n\n");
+
+                 
+                    printf("Select difficulty level (1 for Easy, 2 for Hard): ");
+                    scanf("%d", &difficulty);
+                    getchar();
+
+                   
+                    if (difficulty == 2)
+                    {
+                        strcpy(secretWord, words[1]);
+                        maxTries = 2;
+                        printf("Hint: The creator of this dungeon.\n");
+                    }
+                    else
+                    {
+                        strcpy(secretWord, words[0]);
+                        maxTries = 5;
+                        printf("Hint: A fruit.\n");
+                    }
+
+                    int wordLength = strlen(secretWord);
+
+                   
+                    for (i = 0; i < wordLength; i++)
+                    {
+                        guessWord[i] = (secretWord[i] == ' ') ? ' ' : '_';
+                    }
+                    guessWord[wordLength] = '\0';
+
+                 
+                    while (wrongCount < maxTries && correctCount < wordLength)
+                    {
+                        printf("Current word: %s\n", guessWord);
+                        printf("Guess a letter or the whole word: ");
+                        fgets(input, sizeof(input), stdin);
+                        input[strcspn(input, "\n")] = 0;  
+
+                        if (strlen(input) == 1)
+                        {
+                            guess = input[0];
+                            int found = 0;
+                            for (i = 0; i < wordLength; i++)
+                            {
+                                if (tolower(secretWord[i]) == tolower(guess) && guessWord[i] == '_')
+                                {
+                                    guessWord[i] = secretWord[i];
+                                    correctCount++;
+                                    found = 1;
+                                }
+                            }
+
+                            if (!found)
+                            {
+                                wrongGuesses[wrongCount++] = guess;
+                                wrongGuesses[wrongCount] = '\0';  
+                                printf("Wrong guesses: %s\n", wrongGuesses);
+                            }
+                        }
+                        else if (strcasecmp(input, secretWord) == 0)
+                        {
+                            strcpy(guessWord, secretWord);
+                            correctCount = wordLength;
+                            break;
+                        }
+                        else
+                        {
+                            printf("Incorrect word guess.\n");
+                            wrongGuesses[wrongCount++] = '#';
+                            wrongGuesses[wrongCount] = '\0';
+                        }
+
+                        printf("You have %d tries left.\n", maxTries - wrongCount);
+                    }
+
+                    if (correctCount == wordLength)
+                    {
+                        printf("Congratulations! You guessed the word: %s\n", secretWord);
+                        printf("\nA bright blue portal appears, offering a glimmer of escape from the dungeon nightmare. You step into it, hoping it leads to freedom.");
+                       
+               
+                        enum coin { HEADS, TAILS };
+                        int userChoice;
+                        int headsCount = 0;
+                        int tailsCount = 0;
+
+                        printf("Emerging from the portal's embrace, you find yourself in a dilemma, faced with two diverging paths. At the center of this decision looms a mischievous imp, its grin a sinister promise of guidance if you're willing to wager your fate. With a flicker of amusement in its eyes, the imp offers to reveal the correct path, but only if you dare to engage in a game of chance—a simple coin flip to determine your next move. This imp is unfortunately your only hope so you have to play his game.\n\n");
+                        printf("What would you choose?\n(5) Press 5 for \"HEADS\"\n(6) Press 6 for \"TAILS\"\n(7) *Message to Player: Press 7 for a guaranteed win to continue the story*\n");
+                        scanf("%d", &userChoice);
+   
+                        if (userChoice != 5 && userChoice != 6 && userChoice != 7)
+                        {
+                            printf("Invalid choice. Please choose 5 for \"HEADS\", 6 for \"TAILS\", or 7 for a guaranteed win to continue the story.\n");
+                            return 1;
+                        }
+   
+                        if (userChoice == 7)
+                        {
+                            printf("You chose the special option. You won and the story continues!\n");
+                            printf("\nYour victory in the coin flip game wipes the imp's grin, replacing it with a disheartened frown as it begrudgingly points towards the correct path, to the right. With newfound confidence, you stride purposefully in that direction, trusting your instinct to guide you through the crossroads.");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                if (rand() % 2 == HEADS)
+                                {
+                                    printf("HEADS\n");
+                                    headsCount++;
+                                }
+                                else
+                                {
+                                    printf("TAILS\n");
+                                    tailsCount++;
+                                }
+                            }
+   
+                            printf("Number of HEADS: %d\n", headsCount);
+                            printf("Number of TAILS: %d\n", tailsCount);
+   
+                            if ((userChoice == 5 && headsCount > tailsCount) || (userChoice == 6 && tailsCount > headsCount))
+                            {
+                                printf("\nCongratulations! You win!\n");
+                                printf("Your victory in the coin flip game wipes off the imp's grin, replacing it with a disheartened frown as it begrudgingly points towards the correct path, to the right. With newfound confidence, you stride purposefully in that direction, trusting your instinct to guide you through the crossroads.");
+                            }
+                            else if (headsCount == tailsCount)
+                            {
+                                printf("It's a tie!\n");
+                            }
+                            else
+                            {
+                                printf("\nYou have lost.\n");
+                                printf("Your defeat in the coin flip game ignites the imp's grin into a sinister, manic laughter, his joy tangible as he claims your soul as nourishment. With a shiver, you watch helplessly as your essence is consumed, lost to the insatiable hunger of the imp's malevolent appetite. Game Over.\n\n");
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        printf("\nYOU ARE DEAD.\n");
+                        printf("\nThe statue's stony facade cracks with an unsettling creak, before abruptly springing to life. With a swift and merciless strike, its stone spear descends upon your head, sealing your fate in a single, fatal blow. Game Over.\n\n");
+                        break;
+                    }
+                   
+                    char pathChoice[10];
+                    int finalChoice;
+                   
+                    printf("\n\nAs you delve deeper into your path, you come across another crossroad. To your left, a staircase spirals upwards, illuminated by an eerie glow that seems to beckon you forward, making you believe that this is the way out. On the other hand, to your right, a narrow hallway stretches into the distance, illuminated by the flickering blue light of torches. As you contemplate your options, you notice that the narrow hallway seems endless, and you cannot see anything deeper but a void of the color blue, adding an unsettling mystery to its allure. (Press Enter to Continue).");
+                    getchar();
+                   
+                    printf("\nThis is the final stretch! Which path do you want to take?\nType 'Light' for the staircase or 'Dark' for the narrow hallway: ");
+                    scanf("%s", pathChoice);
+                   
+                    if (strcmp(pathChoice, "Light") == 0)
+                    {
+                        finalChoice = 9;
+                    }
+                    else if (strcmp(pathChoice, "Dark") == 0)
+                    {
+                        finalChoice = 10;
+                    }
+                    else
+                    {
+                        printf("Invalid choice! Please enter either 'Light' or 'Dark'.\n");
+                        return 1;
+                    }
+                   
+                    switch (finalChoice)
+                    {
+                        case 9:
+                            printf("\n> You have chosen the Light option. <\n\nFueled with determination, you quickly climbed to the top of the stairs. What awaits you was not freedom but a grotesque sight awaits you: a monstrous creature with a single glowing white eyeball, its wings unfurled menacingly.\n\n");
+                           
+                            printf("The creature's gaze locks onto you, and before you can react, a searing pain pierces your mind as if a thousand needles were probing your thoughts. Your senses reel as blood begins to trickle from your eyes, nose, and mouth, and with a sickening realization, that your journey finally come to an end. Moments later, your head explodes from the pain. Game Over.\n\n");
+                            printf("\n\n >> END <<\n\n\n");
+                            break;
+                       
+                        case 10:
+                            printf("\n> You have chosen the Dark option. <\n\nWith an unwavering determination not to be deceived by false promises, you choose the blue torchlit hallway. As you cautiously tread forward, you remain vigilant for any signs of danger, wary of falling victim to another trap.\n\n");
+                           
+                            printf("With each step, the endless hallway seems to stretch on indefinitely. As you cautiously make your way down the hallway, the oppressive silence is broken by the sound of a click beneath your foot. Before you can react, a trap door swings open beneath you, sending you plummeting into a dimly lit room.\n\nAt the sudden realization and hopelessness, you have moved right back to square one.");
+                            printf("\n\n >> END <<\n\n\n");
+                            break;
+                       
+                        default:
+                            printf("Invalid choice! Please enter either 9 or 10.\n");
+                            return 1;
+                    }
+                }
 				break;
 			}
 			case 25:
@@ -1974,6 +2669,42 @@ while (choice != 0)
 			case 38:
 			{
 				puts("room38");
+				printf("You see Skeleton. What will you do?");
+				int hc = 0;
+				int r = rand() % (5+1 - 1) +1 ;
+				int health[] = {1,2,3,4,5};
+				int skel = health[r];
+				while (skel >0)
+				{
+					printf("\nPress 1 for attack\n"); 
+					printf("Press 2 for Defend\n");
+					printf("Press 3 to Sing\n");
+					printf("Press 4 to Stare\n");
+					printf("Press 5 to run\n");
+					scanf("%d",&hc);
+					if (hc == 1)
+					{
+						printf("You attacked the skeleton it looks damaged\n");
+					skel = skel -1;
+					}
+					if (hc == 2)
+					{
+						printf("The Skeleton stood there as you you blocked yourself");
+					}
+					if (hc == 3)
+                                        {
+                                                printf("%s",SkelStare());
+                                        }
+					if (hc == 4)
+                                        {
+                                                printf("%s",SkelStare());
+                                        }
+					if (hc == 5)
+					{
+						printf("You left the room");
+						break;
+					}
+				}	
 				break;
 			}
 			case 39:
@@ -2033,12 +2764,128 @@ while (choice != 0)
 				puts("room40");
 				break;
 			}
-			case 41:
+			case 41://Saul Moreno
 			{
-				puts("room41");
+				int room41 = 0;
+        int counter = 1;
+        int userNum = 0;
+        int userInput = 0;
+        int pointTotal = 0;
+        int arrayEscape[] = {0,0,0,0,0};
+				puts("Welcome! To Room 41");
+				printf("In order to survive this room you need to fill out this gauge by answering questions\n");
+        printf("The questions are based off a point system. The easier ones being low numbers, \n");
+        printf("the hard ones being high numbers. You must reach higher than 15 points to be let out\n"); 
+        printf("Since I am generous I will give you a free point between 1-5 ");
+				room41 = randomNumRoom41();
+        arrayEscape[0] = room41;
+				printf("The number is %d\n", room41);
+        while(counter < 5)
+        {
+          printf("Pick a number between 1-5: ");
+          scanf("%d", &userNum);
+          switch(userNum){
+            case 1: 
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Is two + two = 1: ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 1;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 2:
+            printf("Hit 1 for true and 2 for false\n");
+              printf("Is Ada Lovelace considered the first programmer? ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 1)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 2;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;             
+            case 3:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Is LISP The first object orientated language? ");
+              scanf("%d", &userInput);
+              
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 3;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 4:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Java is an object oriented language that has pointers? ");
+              scanf("%d", &userInput);
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 4;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            case 5:
+              printf("Hit 1 for true and 2 for false\n");
+              printf("Python provides very little support for iteration? ");
+              scanf("%d", &userInput);
+              if(userInput == 2)
+              {
+                printf("That is correct!\n");
+                arrayEscape[counter] = 5;
+              }
+              else
+              {
+                arrayEscape[counter] = 0;
+                printf("You got it wrong! No points!!!");
+              }
+              break;
+            default:
+              printf("Error!");
+              break;
+
+          }//end switch(userNum){
+
+          counter++;
+        }// end  while(counter < 5)
+
+        for(int i = 0; i < 5; i++)
+        {
+          pointTotal = arrayEscape[i] + pointTotal;
+        }
+
+        printf("------------------>Your total points are: %d <--------------------------\n", pointTotal);
+        if(pointTotal >= 15)
+          printf("You have escaped successfully!!!\n");
+        else
+          printf("You have failed. Leave your body, but your soul may move to the next room\n");
+
 				break;
 			}
-			case 42:
+			case 42: 
 			{
 				puts("room42");
 				break;
@@ -2046,6 +2893,392 @@ while (choice != 0)
 			case 43:
 			{
 				puts("room43");
+				srand(time(NULL));
+				    
+				    char weaponChoice, playersTurn;
+				    int playerHealth = 100;
+				    int monsterHealth = 100;
+				    int monsterDamage;
+				    int potion[3] = {20, 20, 20};
+				    int remainingPotions = 3;
+				    
+				    printf("Pitch Black....\nSuddenly light.\n");
+				    printf("You are in a room.\nTable and chair on one side.\nChest on the other.\n");
+				    printf("You open the chest.\n");
+				    printf("The chest contains five weapons: Sword, Bow, Hammer, Dagger, Axe\n");
+				    printf("Which will you choose:\n- s for Sword\n- b for Bow\n- h for Hammer\n- d for Dagger\n- a for Axe\n");
+				    
+				    do
+				    {
+				        printf("Choice: ");
+				        scanf(" %c", &weaponChoice);
+				    }while(weaponChoice != 's' && weaponChoice != 'b' && weaponChoice != 'h' && weaponChoice != 'd' && weaponChoice != 'a');
+				    
+				    if(weaponChoice == 's')
+				    {
+				        printf("\nYou choose Sword\n\n");
+				    }
+				    else if(weaponChoice == 'b')
+				    {
+				        printf("\nYou choose Bow\n\n");
+				    }
+				    else if(weaponChoice == 'h')
+				    {
+				        printf("\nYou choose Hammer\n\n");
+				    }
+				    else if(weaponChoice == 'd')
+				    {
+				        printf("\nYou choose Dagger\n\n");
+				    }
+				    else
+				    {
+				        printf("\nYou choose Axe\n\n");
+				    }
+				    
+				    printf("A door appears and fire spawns around you forcing you to go through.\n");
+				    printf("You are in a colosseum and there is a monster ready to fight you.\n");
+				    printf("You have 3 potions to heal, each healing 20 hp.\n");
+				    printf("You have 100hp\nMonster has 100hp.\n\n");
+				    
+				    //Sword
+				    if(weaponChoice == 's')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = swordAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Bow
+				    if(weaponChoice == 'b')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = bowAttack();
+				                attack += bowAttack();
+				                attack += bowAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Hammer
+				    if(weaponChoice == 'h')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = hammerAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 8) + 8;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            printf("Monster attacks again!\n");
+				            monsterDamage = (rand() % 11) + 5;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Dagger
+				    if(weaponChoice == 'd')
+				    {
+				        do
+				        {
+				            printf("Monster's Health: %d\n", monsterHealth);
+				            printf("Current HP: %d\n", playerHealth);
+				            printf("Remaining potions: %d\n", remainingPotions);
+				            printf("Do you attack('a') or heal('h'): ");
+				            scanf(" %c", &playersTurn);
+				            
+				            if(playersTurn != 'h')
+				            {
+				                int attack = daggerAttack();
+				                attack += daggerAttack();
+				                monsterHealth -= attack;
+				                printf("Monster's HP: %d\n\n", monsterHealth);
+				            }
+				            else
+				            {
+				                if(potion[0] == 20)
+				                {
+				                    playerHealth += potion[0];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[0] = 0;
+				                }
+				                else if(potion[1] == 20)
+				                {
+				                    playerHealth += potion[1];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[1] = 0;
+				                }
+				                else if(potion[2] == 20)
+				                {
+				                    playerHealth += potion[2];
+				                    printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+				                    remainingPotions--;
+				                    potion[2] = 0;
+				                }
+				                else
+				                {
+				                    printf("Out of potions!\n");
+				                    printf("Your HP is unchanged at: %d\n\n", playerHealth);
+				                }
+				            }
+				            
+				            printf("Monster attacks!\n");
+				            monsterDamage = (rand() % 6) + 10;
+				            playerHealth -= monsterDamage;
+				            printf("Monster does %d damage.\n", monsterDamage);
+				            printf("Your HP: %d\n\n", playerHealth);
+				            
+				            
+				        }while(playerHealth > 0 && monsterHealth > 0);
+				        
+				        if(playerHealth > 0)
+				        {
+				            printf("YOU WIN!!!\n\n");
+				        }
+				        else
+				        {
+				            printf("YOU DIED!!!\n\n");
+				        }
+				    }
+				    
+				    //Axe
+    				if(weaponChoice == 'a')
+    				{
+        				do
+        				{
+            					printf("Monster's Health: %d\n", monsterHealth);
+            					printf("Current HP: %d\n", playerHealth);
+            					printf("Remaining potions: %d\n", remainingPotions);
+            					printf("Do you attack('a') or heal('h'): ");
+            					scanf(" %c", &playersTurn);
+            
+            					if(playersTurn != 'h')
+            					{
+                					int attack = axeAttack();
+                					monsterHealth -= attack;
+                					printf("Monster's HP: %d\n\n", monsterHealth);
+            					}
+            					else
+            					{
+                					if(potion[0] == 20)
+                					{
+                    						playerHealth += potion[0];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[0] = 0;
+                					}
+                					else if(potion[1] == 20)
+                					{
+                    						playerHealth += potion[1];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[1] = 0;
+                					}
+                					else if(potion[2] == 20)
+                					{
+                    						playerHealth += potion[2];
+                    						printf("You healed 20HP.\nYour HP: %d\n\n", playerHealth);
+                    						remainingPotions--;
+                    						potion[2] = 0;
+                					}
+                					else
+                					{
+                						printf("Out of potions!\n");
+                    						printf("Your HP is unchanged at: %d\n\n", playerHealth);
+                					}
+            					}
+            
+            					printf("Monster attacks!\n");
+            					monsterDamage = (rand() % 11) + 5;
+            					playerHealth -= monsterDamage;
+            					printf("Monster does %d damage.\n", monsterDamage);
+            					printf("Your HP: %d\n\n", playerHealth);
+            
+            
+        				}while(playerHealth > 0 && monsterHealth > 0);
+        
+        				if(playerHealth > 0)
+        				{
+            					printf("YOU WIN!!!\n\n");
+        				}
+        				else
+        				{
+            					printf("YOU DIED!!!\n\n");
+        				}
+    				}
+
 				break;
 			}
 			case 44:
@@ -2055,7 +3288,133 @@ while (choice != 0)
 			}
 			case 45:
 			{
-				puts("room45");
+			int choice = 0;
+
+printf("\nWelcome to Room 45 \n" );
+printf("In this room we like numbers and math. \n");
+printf("To escape this room, you have 5 options\n");
+printf("Option 1: Solve a mathematical expression. \n");
+
+printf("Option 2: Given the length of a rectangle. You will have to enter the height\n and the area has to be within a percentage of a specific number. \n");
+
+printf("Option 3: Given the base of a triangle. You will have to enter the height\n and the area has to be within a percentage of a specific number. \n");
+
+printf("Option 4: Solve 3 factorials \n");
+
+printf(" Generate the magic number. \n");
+
+printf("Enter your choice a number from 1-5: \n");
+scanf("%d", &choice);
+
+while(choice < 1 && choice > 5){
+printf("Invalid input. Enter a number form 1-5: \n");
+scanf("%d", &choice);
+
+}
+
+if (choice == 1){
+  int result = 40;
+    int userNum;
+    printf("\nYou have selected option 1. \n");
+    printf("You have to solve this expression: (7^2 + 3 - 4 * 2 - 4! / 6) / 10 + 6^2  \n");
+    printf("Please enter your answer: \n");
+    scanf("%d", &userNum);
+
+    while (userNum != result)
+    {
+       printf("Your answer was wrong, try again: \n");
+       scanf("%d", &userNum);
+
+    }
+     printf("\n%d whas the correct answer. \n", result);
+
+}else if (choice == 2)
+{
+    printf("\nYou have selected option 2. \n");
+    printf("The area of your rectangle should be within 10 percent of 50\n");
+    srand(time(NULL));
+    int len = rand() % 10 + 1;
+    int he;
+
+    printf("The length of the rectangle is %d \n", len);
+
+    printf("Enter the height of the rectangle: \n");
+    scanf("%d", &he);
+    double calArea = areaRec(len, he);
+
+    while (calArea < 45 || calArea > 55) {
+        printf("Wrong. Try a different height: \n");
+        scanf("%d", &he);
+        calArea = areaRec(len, he);
+    }
+    printf("The calculated area %.2lf falls within the expected range \n", calArea);
+}else if (choice == 3){
+    printf("\nYou have selected option 3. \n");
+    printf("The area of your triangle should be within 30 percent of 50\n");
+    srand(time(NULL));
+    int base = rand() % 11 + 10;
+    int heig;
+
+    printf("The base of the triangle is %d \n", base);
+
+    printf("Enter the height of the Triangle: \n");
+    scanf("%d", &heig);
+    double calAreaT = areaT(base, heig);
+
+    while (calAreaT < 35 || calAreaT > 65) {
+        printf("Wrong. Try a different height: \n");
+        scanf("%d", &heig);
+        calAreaT = areaT(base, heig);
+    }
+    printf("The calculated area %.2lf falls within the expected range\n", calAreaT);
+}else if(choice == 4){
+    printf("\nYou have selected option 4. \n");
+    printf("Calculate the following factorials with no mistakes in between: 4!, 5!, 6! \n");
+
+    int factorials[3] = {4, 5, 6}; 
+    int counter = 0; 
+
+    while (counter < 3) {
+        int i;
+
+        for(i = 0; i < 3; i++){
+        int guess;
+        printf("Enter the value of factorial %d: ", factorials[i]);
+        scanf("%d", &guess);
+
+        if (guess == factorial(factorials[i])) {
+            counter++;
+        } else {
+            printf("Incorrect. Try again.\n");
+        }
+        }
+    }
+    printf("Congratulations! You have solved all 3 factorials.\n");
+
+}else if (choice == 5){
+   printf("You have selected option 5\n");
+    printf("Here you will have to roll a 12-sided die and get the magic number to exit the room\n");
+    printf("Enter 1 to roll the die: ");
+    int user;
+
+    scanf("%d", &user);
+    while (user == 1) {
+        srand(time(NULL));
+        int num = rand() % 12 + 1;
+        if (num == 8) {
+            printf("Congratulations! You have obtained the magic number %d! \n", 8);
+            break;
+        } else {
+            printf("You did not get the magic number. Enter 1 to roll the dice again:  ");
+            scanf("%d", &user);
+        }
+    }
+}
+printf("You have succesfully completed this room completed this room \n");
+printf("You may now go back to the main room now. GOOD LUCK \n)");
+
+
+				
 				break;
 			}
 			case 46:
@@ -2066,6 +3425,46 @@ while (choice != 0)
 			case 47:
 			{
 				puts("room47");
+				 //Game Description
+  printf("Welcome to the Adventure game\n");
+  printf("In this game you are gonna go on a adventure where you are lost and you trying to get back home, you are gonna be given choices to make it back home and you have to choose the correct ones in order to get home safely. You can advance 5 or 10 miles but be careful since your food bar goes down every day it passes. There is random event where it you can get extremely lucky or extremely unlucky\n");
+  printf("Press 1 to start the game or 0 to quit\n");
+
+  //Start Menu
+  int start_Choice = 0;
+  scanf("%d", &start_Choice);
+
+  if (start_Choice == 1){
+    game_Start();
+  }
+  else{
+    printf("Thank you for playing\n");
+  }
+  
+  //Play again
+  for(;;){
+    char playAgain[10];
+    printf("\n Would you like to play again? (Yes/No)\n");
+    scanf(" %s", playAgain);
+
+    if(strcmp(playAgain, "Yes") == 0){
+      game_Start();
+    }
+    else if(strcmp(playAgain, "yes") == 0){
+      game_Start();
+    }
+    else if(strcmp(playAgain, "No") == 0){
+       printf("Thank you for playign \n");
+       break;
+    }
+      else if(strcmp(playAgain, "no") == 0){
+         printf("Thank you for playing \n");
+         break;
+      }
+    else {
+      printf("Invalid input");
+    } 
+  }
 				break;
 			}
 			case 48:
@@ -2147,6 +3546,7 @@ while (choice != 0)
 	puts("Game Over");
 	return EXIT_SUCCESS;
 }
+
 
 
 
@@ -3239,6 +4639,116 @@ void room49()
 
 
 
+//Sword does 5 - 10 damage and attacks every turn
+int swordAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 5;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Bow does 2 - 5 damage but shoots 3 times per turn 
+int bowAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 4) + 2;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Hammer does 15 - 25 damage but hits every other turn
+int hammerAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 15;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Dagger does 4 - 8 damage but hits twice per turn
+int daggerAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 5) + 4;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+//Axe does 3 - 12 damage and hits every turn
+int axeAttack()
+{
+    srand(time(NULL));
+    int attack = (rand() % 10) + 3;
+    printf("Attack did %d damage.\n", attack);
+    return attack;
+}
+
+
+
+
+
+
+
+
+
+void exploreRoom(int roomNo)
+{
+	switch(roomNo)
+    	{
+      		case 1:
+      		{
+      			puts("You enter what appears to be a makeshift parlor. There is a grand fireplace at the back of the room, with intricate stone carvings in the mantle of various woodland animals. Above that is a large painting of a rat wearing a jester's cap with a pyrite frame. The walls are adorned with scraps of paper and loose string tying them all together. Off to the side is an easel with an covered painting. Along the faded green walls are four doors, two to your right, and to to your left. The doors are labeled 5, 26, 1, and 13 when read in clockwise order. What do you do?");
+        		puts("1) Enter door 5\n2) Enter door 26\n3) Enter door 1\n4) Enter door 13\n5) Uncover the painting\n6) GIVE UP [ENDS GAME EARLY IF PUZZLE CANNOT BE SOLVED]");
+        		break;
+      		}
+      		case 2:
+      		{
+        		puts("You enter an extremely frigid room. The floor is tiled with 64 large blue and white tiles, which are extremely slippery. In the room is an ice sculture of a king and queen atop their thrones. Their eyes are closed, and it appears the king's right hand was broken off. Elsewhere in the room is several small pots, each matching the color of the tile they are on, with 16 in total. In the back is a server tower, but its clearly not powered. There are two wooden doors, one to your right and one to your left. The leftmost one is marked with the head of a horse and an upside-down horse shoe. The other is marked with a key and a question mark. What do you do?");
+      			puts("1) Enter the horse door\n2) Enter the key door\n3) Open the pots");
+      			break;
+      		}
+      		case 3:
+      		{
+        		puts("You enter a rather large room. Before you is a statue of a man wearing a winged helmet and holding a staff. At the base of the statue is a plaque. At your feet is a circle with a dot in the middle, and an arrow pointing right at the statue. Confusingly, to the right of the statue seems to be a hole dug through the floor, broken flooring and dirt piled into the corner of the room, a shovel sticking out of the pile. On the other side of the statue, there is a table with a globe on it, and a trident leaning against the back wall behind it. Around the entire room is a wallpaper of cats and fish. On the roof is a single lightbulb emitting a soft glow, and a chain danging down from it with a metal ring attached to the end. On either wall of the room is a door. To the right is one with a female symbol painted on it. On the other side is a door with a male symbol scratched into it. What do you do?");
+        		puts("1) Go down the hole\n2) Enter the right door\n3) Enter the left door\n4) Read the statue's plaque\n5) Pull on the chain");
+        		break;
+      		}
+      		case 4:
+      		{
+        		puts("You enter a very dark room. Along the walls are rows of vases, jars, and other pottery. Hanging off the right wall is a TV with a broken screen. In the middle of the room is a triangular table with a record player and several records. There is a running popcorn machine in the back left corner of the room. It has creaky, wooden floors and dark purple walls. Finally, there is a single door across from you. Stabbed into the door is a knife, which is holding a scroll in place. What do you do?");
+        		puts("1) Enter the only door\n2) Read the scroll\n3) Play the record player");
+        		break;
+      		}
+      		case 5:
+      		{
+        		puts("You have found a very important room. Above hums fluorescent lights and the walls have a metalic shine. There is a large computer in the middle of the room, with wires scattered across the floor and hanging off the walls like overgrown vines. Behind the computer is a vault. There is definitely treasure inside. The computer screen currently reads as follows: 'Please enter the password. It is hidden along the path'. There are two doors behind you, without labels of any kind. Also behind you is a button on the wall and a screen with a closed eye. You are very confused. What do you do?");
+        		puts("1)Enter the first door \n2) Enter the second door\n3) Look at the button\n4) ENTER THE PASSWORD");
+        		break;
+      		}
+      		case 6:
+      		{
+        		puts("Looking at the eye and the button reveals a message. 'Test your Luck! 1 in 5 Win! A clue to the password hides within!'\n You REALLY want to press that button now. What do you do?");
+        		puts("1)Leave \n2) Push Button");
+        		break;
+      		}
+	}
+}
+
+void eyeGame(void)
+{
+	int cool = (rand() % 5) + 1;
+  	if(cool == 4)
+  	{
+		puts("\nYOU WIN!\nNow, your clue:\nEach room contains a piece of the whole. Use them all for your goal. The first is the second of the numbers on doors. The second is the answer to the blade's question. The third is the fifth of what's missing on ice. The fourth is the fourth of what's missing in the statue's room. Finally, the fifth is your prize for winning this game: 'D'.\nPut all 5 together and that's the password. GOOD LUCK!\n");
+  	}
+  	else
+  	{
+		puts("You lose. Try again.");
+  	}
+}
+
+
 
 void generateGold() {
 	int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -3251,17 +4761,23 @@ void generateGold() {
 	printf("You found %d gold coins!\n", randomNumber);
 }
 
+char* SkelStare()
+{
+	return "The skeleton look at you strangely \n";
+}
+
+
 void chooseDoor()
 {
 // First choice (door)
-    scanf("%d", &doorChoice);
-    if (doorChoice == 1)
+    scanf("%d", &doorChoice1);
+    if (doorChoice1 == 1)
     {
         printf("\nSteeling your nerve, you choose the warped metal door. It may look scary but judging by the scratches on the metal it"
                " likely contains something valuable if the beast was so eager to gain entrance.\n\n");
         strcpy(choices[0], "You chose the metal door.");
     }
-    else if (doorChoice == 2)
+    else if (doorChoice1 == 2)
     {
         printf("\nSteeling your nerve, you choose the ancient marble door. Judging by its design it was likely very expensive and time-consuming"
                " to make, so you can only assume something valuable lies behind. \n\n");
@@ -4319,6 +5835,7 @@ void playGame()
 
 
 
+
 void ajlSpace()
 {
     while (getchar() != '\n')
@@ -4913,15 +6430,34 @@ void characterSelection(int num)
             lower = 1;
             upper = 10;
             count = 10;
-
-            for (int i = 0; i < count; i++) {
+  for (int i = 0; i < count; i++) {
                 int num = (rand() % (upper - lower)) + lower;
                 return ("%d", num);
             }
         }
 
+
+int randomNumRoom41()
+{
+ srand(time(NULL));
+ int randomNum = rand() % 5 + 1;
+ return randomNum;
+}
+
+
+
+
+
+
+
+
+            
+
+
+
 void multiplicationGame() {
     int num1, num2, userAnswer, correctAnswer;
+
 
     do {
         // Generate two random numbers between 1 and 10
@@ -4950,7 +6486,50 @@ void multiplicationGame() {
 
 
 
+void dragonbarrowChoices()
+{
+	const char *conseq[] =
+	{
+		" Upon opening the door, you find yourself among a barricade of colossal ballistas set up by Exiled Foot soldiers awaiting your arrival, and proceed to shoot you. \n\n YOU DIED.\n",
+		" The door creaks open to reveal a room with a chest. Upon closer inspection, you notice the slight breathing and carefully step away.\n\n",
+		" Upon opening the heavy door, you find yourself face to face with a ferocious dragon. You quickly flee and are able to make your way to safety.\n\n",
+		" Upon opening the heavy door, you find yourself in a room filled with Rot. You slowly lose consciousness and feel yourself being dragged.\n\n",
+		" Upon opening the heavy door, you find yourself in the boss room.\n Defeat Diarmuid, Descendant of Fianna to discover a Great Rune and a path to escape the fortress.\n\n"
+	};
 
+	int random_index = rand() % 5;
+
+	if(random_index == 4)
+	{
+		srand(time(NULL));
+		int randomNum = rand() % 100 + 1;
+		int guessAttack;
+
+		printf(" Diarmuid, Descendant of Fianna is the Cursed Lord of this stronghold.\n");
+		printf(" Defeat him to gain his Great Rune and escape the cursed fortress.\n");
+		printf(" You must cast an attack value (1-100), and it must be higher than Diarmuid's\n");
+		printf(" Enter attack value: \n");
+		scanf(" %d", &guessAttack);
+
+		if(guessAttack > randomNum)
+		{
+			printf(" Diarmuid, Descendant of Fianna has been slain!\n");
+			printf(" Collect the Great Rune and make your way back to the corridor of doors...\n\n");
+		}
+		else if(guessAttack < randomNum)
+		{
+			printf(" Diarmuid's strength has overpowered you..\n\n YOU DIED \n");
+		}
+		else
+		{
+			printf(" The overwhelming strength converges...\n");
+		}
+	}
+		else
+		{
+			printf("%s\n", conseq[random_index]);
+		}
+}
 
 
 
@@ -5029,4 +6608,161 @@ else
 {
 puts("You found nothing.");
 }
+}
+
+void game_Start(){
+  
+  //Game variables
+  srand(time(NULL));
+  int game_Choice = 0; 
+  int distance_for_home = 300;
+  int distance_tracker = 0;
+  int food_left = 10;
+  int days = 0;
+  int food_Consuption = rand() % 2 + 1;
+
+  //Game Loop
+  while (distance_for_home > 0 && food_left > 0){
+
+    printf("Day %d. You are %d miles away from home\n", days, distance_for_home);
+    printf("You food bar is %d \n", food_left);
+
+    printf("1. Travel 5 miles\n");
+    printf("2. Travel 10 miles\n");
+    printf("3. Eat food\n");
+    printf("4. Random event \n");
+    printf("5. Give Up\n");
+    scanf("%d", &game_Choice);
+
+    if(game_Choice == 1){
+      distance_for_home -= 5;
+      printf("You traveled 5 miles\n");
+      food_left -= food_Consuption;
+      days++;
+      distance_tracker +=5;
+    }
+    else if (game_Choice == 2){
+      distance_for_home -= 10;
+      printf("You traveled 10 miles\n");
+      food_left -= food_Consuption;
+      days++;
+      distance_tracker +=10;
+    }
+    else if(game_Choice == 3){
+      food_left += 5;
+      printf("You food bar went up by 5\n");
+      food_left -= food_Consuption;
+      days++;
+    }
+    else if(game_Choice == 4){
+      int random_Event = rand() % 4 + 1;
+      if(random_Event == 1){
+         distance_for_home -= 50;
+         printf("You found a shortcut, You traveled 50 miles\n");
+        food_left -= food_Consuption;
+        days++;
+        distance_tracker +=50;
+      }
+      else if(random_Event == 2){
+        food_left += 10;
+        printf("You went inside a tent and found some food\n");
+        food_left -= food_Consuption;
+        days++;
+      }
+      else if(random_Event == 3){
+        distance_for_home += 50;
+        printf("You found a shortcut but got lost, You went back 50 miles\n");
+        food_left -= food_Consuption;
+        days++;
+        distance_tracker +=50;
+      }
+      else{
+        food_left -= 5;
+        printf("You found some berries and made you throw up\n");
+        food_left -= food_Consuption;
+        days++;
+      }
+    }
+    else if(game_Choice == 5) {
+      int food_Left = food_Consuption;
+      printf("Thank you for playing\n");
+      printf("You survided %d days, traveld %d miles, and had %d food left", days, distance_tracker, food_left);
+      break;
+    }
+    else{
+      printf("Number not recognized. Enter a number between 1 and 5\n");
+    }
+  }
+  
+  //ending loops
+  if(distance_for_home <= 0 && food_left >=1){
+    int food_left = food_Consuption;
+    printf("You made it home safely\n");
+    printf("You survided %d days, traveld %d miles, and had %d food left", days, distance_tracker, food_left);
+
+  }
+  else if(food_left <= 0){
+    int food_left = food_Consuption;
+    printf("Whomp Whomp!!! You died of hunger\n");
+    printf("You survided %d days, traveld %d miles, and had 0 food left", days, distance_tracker);
+  }
+}
+
+
+
+
+
+
+int attemptPurchase(int money)
+{
+  int price = (rand() % 5500) +1000;
+  if(money >= price)
+  {
+    printf("\nPerfect! You have enough money to purchase the item!\n");
+    printf("You have purchased the item for $%d.\n", price);
+    printf("You have $%d left that will be send to your savings.\n", money - price);
+
+    return (money-price);
+  }
+  else
+  {
+    printf("\nThis item costs $%d, You do not have enough money to purchase this item you only have $%d, sorry!\n", price, money);
+    return money;
+  }
+}
+
+void findFlower(void)
+{
+  int flower = (rand() % 3);
+  if(flower == 0)
+  {
+    printf("You found the Pneuma Flower! You can use this howerever you like. It can be sold to merchants for a high price.\nLet's head back for the meantime.\n");
+  }
+  else
+  {
+    printf("You found nothing this time, better luck next time. You can enjoy the view on your way back!\n");
+  }
+}
+
+
+double areaRec(int len, int h){
+
+    return (double) len * h;
+}
+
+double areaT(int b, int h){
+
+	double area = (double) (b * h)/2;
+	return area;
+}
+
+int factorial(int n){
+    
+    int num = 1;
+    
+    for (int i = 1; i <= n; i++) { 
+        num *= i;
+    }
+    
+    return num;
 }
