@@ -195,6 +195,19 @@ int main(int argc, char *argv[])
 			case 28:
 			{
 				puts("room28");
+				int gameRuns = 1;
+  printf("Hello new trainer, welcome to the world of pokemon\nLet's have a practice battle\n\n");
+  while(gameRuns == 1)
+    {
+      playGame();
+      printf("Would you like to battle me again? You can pick a new pokemon too\n1: Yes, 0: No\n");
+      scanf("%d", &gameRuns);
+      if(gameRuns == 1)
+      {
+        printf("\nAwesome, lets have another battle\n");
+      }
+    }
+  printf("Thank you for battling with me trainer, I hope to see you again");
 				break;
 			}
 
@@ -1076,7 +1089,126 @@ char* pullLever(int seed)
 
 
 
-
+void playGame()
+{
+  srand(time(NULL));
+  int userChoice = 0;
+  int trainerHealth;
+  int venusaur[3] = {3, 50, 48}; //ID, HP, LEVEL Super Easy
+  int charizard[3] = {6, 40, 41}; //ID, HP, LEVEL Easy
+  int blastoise[3] = {9, 30, 36 }; //ID, HP, LEVEL Medium
+  int pikachu[3] = {25, 20, 16}; //ID, HP, LEVEL Hard
+  int eevee[3] = {133, 10, 11}; //ID, HP, LEVEL Super Hard
+  int machamp[3] = {68, 30, 32}; //ID, HP, LEVEL
+  int machampHealth = machamp[1];
+  printf("Please choose one of the five pokemons (Pick a number)\n 1. Venusaur\n 2. Charizard\n 3. Blastoise\n 4. Pikachu\n 5. Eevee\n");
+  while(userChoice <= 0 || userChoice > 5)
+    {
+      scanf("%d", &userChoice);
+      if (userChoice == 1)
+      {
+        printf("You chose Venusaur, he is number %d in the pokedex, has %d hp, and is level %d\n", venusaur[0], venusaur[1], venusaur[2]);
+        trainerHealth = venusaur[1];
+      }
+      else if(userChoice == 2)
+      {
+        printf("You chose Charizard, he is number %d in the pokedex, has %d hp, and is level %d\n", charizard[0], charizard[1], charizard[2]);
+        trainerHealth = charizard[1];
+      }
+      else if(userChoice == 3)
+      {
+        printf("You chose Blastoise, he is number %d in the pokedex, has %d hp, and is level %d\n", blastoise[0], blastoise[1], blastoise[2]);
+        trainerHealth = blastoise[1];
+      }
+      else if(userChoice == 4)
+      {
+        printf("You chose Pikachu, he is number %d in the pokedex, has %d hp, and is level %d\n", pikachu[0], pikachu[1], pikachu[2]);
+        trainerHealth = pikachu[1];
+      }
+      else if(userChoice == 5)
+      {
+        printf("You chose Eevee, he is number %d in the pokedex, has %d hp, and is level %d\n", eevee[0], eevee[1], eevee[2]);
+        trainerHealth = eevee[1];
+      }
+      else
+      {
+        printf("Please enter a valid number\n");
+      }
+  }
+  printf("\nAwesome!! Let's have our battle, I send out Machamp. He is number %d in the pokedex, has %d hp, and is level %d\n", machamp[0], machamp[1], machamp[2]);
+  printf("To attack you will pick a number between 1-3, if your number doesn't match mine, then you attack, if it does, \nthen I attack. Keep attacking until our pokemon faints at 0 health. Good luck\n");
+  while(machampHealth > 0 && trainerHealth > 0)
+    {
+      int userAttack = 0;
+      int machopAttack = rand() % 3 + 1;
+      printf("\nTrainer enter a number between 1-3\n");
+      scanf("%d", &userAttack);
+      while(userAttack <= 0 || userAttack > 3)
+      {
+        printf("Wrong input Trainer, enter your guess from 1-3\n");
+        scanf("%d", &userAttack);
+      }
+      if(userAttack == machopAttack)
+      {
+        printf("\nYou entered %d, I entered %d, I win this turn\n", userAttack, machopAttack);
+        printf("You missed, Machamp uses seismic toss dealing 10 damage\n");
+        trainerHealth = trainerHealth - 10;
+      }
+      else
+      {
+        printf("\nYou entered %d, I entered %d, You win this turn\n", userAttack, machopAttack);
+        if(userChoice == 1)
+        {
+          printf("You attack, Venusaur uses Vine Whip dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 2)
+        {
+          printf("You attack, Charizard uses Flamethrower dealing 10 damage to machamp\n");
+        }   
+        else if(userChoice == 3)
+        {
+          printf("You attack, Blastoise uses Hydro Cannon dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 4)
+        {
+          printf("You attack, Pikachu uses Thunderbolt dealing 10 damage to machamp\n");
+        }
+        else
+        {
+          printf("You attack, Eevee uses Tackle dealing 10 damage to machamp\n");
+        }
+        machampHealth = machampHealth - 10;
+      }
+      printf("Your pokemon has %d health, Machamp has %d health\n", trainerHealth, machampHealth);
+    }
+  if(machampHealth <= 0)
+  {
+    printf("Machamp has fainted, you win!!\n");
+  }
+  else
+  {
+    if(userChoice == 1)
+    {
+      printf("Venusaur has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 2)
+    {
+      printf("Charizard has fainted, you lose. Better luck next time trainer\n");
+    }   
+    else if(userChoice == 3)
+    {
+      printf("Blastoise has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 4)
+    {
+      printf("Pikachu has fainted, you lose. Better luck next time trainer\n");
+    }
+    else
+    {
+      printf("Eevee has fainted, you lose. Better luck next time trainer\n");
+    }
+  }
+}
 
 
 
