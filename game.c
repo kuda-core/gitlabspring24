@@ -27,7 +27,7 @@ void rollTheDice_Race();
 void FinalArea(int level);
 bool trap_d10();
 
-char* words();
+char* SkeleStare();
 
 int main(int argc, char *argv[])
 {
@@ -846,11 +846,11 @@ int main(int argc, char *argv[])
 					}
 					if (hc == 3)
                                         {
-                                                printf("%s",words());
+                                                printf("%s",SkeleStare());
                                         }
 					if (hc == 4)
                                         {
-                                                printf("%s",words());
+                                                printf("%s",SkeleStare());
                                         }
 					if (hc == 5)
 					{
@@ -1001,27 +1001,13 @@ void ajlSpace()
         ;
 }
 
-<<<<<<< HEAD
 
-char* words()
+char* SkeleStare()
 {
 	return "The skeleton look at you strangely \n";
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 45e646c144fcf467f602919e0b358f3474be7c57
 void coinFlip() {
   int call = 0;
 
