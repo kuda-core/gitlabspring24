@@ -16,7 +16,11 @@
 
 //Patrick Polanco
 
+
+//Joshua F.
+
 //AK
+
 
 
 //Carlos
@@ -34,10 +38,16 @@
 #include <math.h>
 
 
+
+void exploreRoom(int roomNo);
+void eyeGame(void);
+
+
 void exploreLocation(int locationChoice);
 
 void randomTreasure();
 void playGame();
+
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -485,7 +495,181 @@ while (choice != 0)
 			}
 			case 12:
 			{
-				puts("room12");
+				int room = 1;
+        			int win = 0;
+        			char password[5] = "AVOID";
+        			char guess[6];
+        			int pick = 0;
+        			int maxChoices[6] = {6, 3, 5, 3, 4, 2};
+        			puts("You open the door. A rat scurries past as the door slams shut and locks behind you. You get this sinking feeling that you want to brush up on your abstract puzzle skills. Otherwise, this was a very, very poor idea.");
+        			while(win == 0)
+          			{
+            				exploreRoom(room);
+            				scanf("%d",&pick);
+            				while (pick < 1 || pick > maxChoices[room-1])
+              				{
+                				printf("NOT A VALID CHOICE. PLEASE CHOOSE AGAIN.\n");
+                				exploreRoom(room);
+                				scanf("%d",&pick);
+              				}
+            				if (room == 1)
+            				{
+              					if (pick == 1)
+              					{
+                					room = 2;
+              					}
+              					else if (pick == 2)
+              					{
+                					room = 5;
+              					}
+              					else if (pick == 3)
+              					{
+                					room = 4;
+              					}
+              					else if (pick == 4)
+              					{
+                					room = 3;
+              					}
+              					else if (pick == 5)
+              					{
+                					puts("\nUnder the cover is an even weirder painting. It appears to depict Ouroboros surrounding a minotaur in the center of the image. The painting is unfnished, but it is marked in the bottom left corner with 'M;13'. You think it's best to not touch the painting.\n");
+              					}
+						else if (pick == 6)
+						{
+							puts("\nYou've paced these few rooms for a while now and cannot make heads or tails of this puzzle. You bang on the door to try and force it back open, deciding to give up on finding anything of value in this cursed place. After 74 hours and 46 minutes, a rat in a jester's cap slowly waltz past. They look up at you, shake their head, and scurry under the door. THe door re-opens. You leave more hollow than when you entered.\n");
+							win = 46;
+							break;
+						}
+            				}
+          				else if (room == 2)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 2)
+                				{
+                  					room = 3;
+                				}
+                				else if (pick == 3)
+                				{
+                  					puts("\nYou look inside the pots and find something odd. The blue ones are filled with poker chips and playing cards. The white ones are filled with various sports balls. You think this might mean something, or it might not. Your inner thoughts don't seem very helpful right now.\n");
+                				}
+            				}
+            				else if (room == 3)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 5;
+                				}
+                				else if (pick == 2)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 3)
+                				{
+                  					room = 2;
+                				}
+                				else if (pick == 4)
+                				{
+                  					puts("\nIt reads as follows: 'Stellae sint dux vester'. Also from this distance you notice the statue's staff has tow snakes crossing paths on it. You feel like someone's watching you.\n");
+                				}
+                				else if (pick == 5)
+                				{
+                  					puts("\nPulling the chain flips off the light, dipping the room in darkness. You notice a bunch of tiny gemstones scattered across the room start to glow. You think you can hear a faint whispering in the distance. You turn the light back on for your own saftey.\n");
+                				}
+            				}
+            				else if (room == 4)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 2;
+                				}
+                				else if (pick == 2)
+                				{
+                  					puts("The scroll reads as follows:\n'Find the point drawn in the lines\nStuck above space, living beside the sea\nIt marks no spots unless you have two\n1105, 23, 5, 86, 22\nA single key is all you need to make it appear.'\n");
+                				}
+                				else if (pick == 3)
+                				{
+                  					puts("You try to play the record player. Most of the records are covered in glue, causing them to not play. However, two records seem to work. One is a record of 'Goodnight my Beautiful' by Russ Morgan. The other is a complete record of 'Peer Gynt, Op. 23' by Edvard Grieg. You listen to both. You feel a little better.");
+                				}
+            				}
+            				else if (room == 5)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 4;
+                				}
+               	 				else if (pick == 2)
+                				{
+                  					room = 1;
+                				}
+                				else if (pick == 3)
+                				{
+                  					room = 6;
+                				}
+                				else if (pick == 4)
+                				{
+                  					puts("ENTER THE PASSWORD:");
+                  					scanf("%s",guess);
+                  					if (guess[0] == password[0] && guess[1] == password[1] && guess[2] == password[2] && guess[3] == password[3] && guess[4] == password[4])
+                  					{
+                    						win = (rand() % 5) + 1;
+                    						puts("CORRECT!");
+                  					}
+                  					else
+                  					{
+                    						puts("WRONG WRONG WRONG WRONG WRONG WRONG! SO VERY WRONG!");
+							}
+                				}
+            				}
+            				else if (room == 6)
+              				{
+                				if (pick == 1)
+                				{
+                  					room = 5;
+                				}
+                				else if (pick == 2)
+                				{
+                  					eyeGame();
+                				}
+              				}
+        			}
+
+				if(win != 46 && win > 0)
+				{
+        				puts("The great vault swing open wide, revealing your prize: ");
+        				switch(win)
+          				{
+            					case 1:
+            					{
+              					puts("The Jewel of Masquerade!");
+              					break;
+            					}
+            					case 2:
+            					{
+              					puts("The Golden Eye of Pob!");
+              					break;
+            					}
+            					case 3:
+            					{
+              					puts("The Casque of the Zodiac!");
+              					break;
+            					}
+            					case 4:
+            					{
+              					puts("The Last Glazed Maggufins!");
+              					break;
+            					}
+            					case 5:
+            					{
+              					puts("A big bowl of rigatoni with parmesan cheese!");
+              					break;
+            					}
+          				}
+	
+        				puts("You go to grab your prize, but at the last second a rat wearing a jesters cap runs out from behind you and grabs the treasure. You give chase. The pesky rodent runs all the way back to the parlor room and you follow after. It scurries under the entrance door, breaking the lock as it does so. It seems like that rat ran off into one of the other 54 rooms with your treasure. You need to pick a new door to try and find it...You Escaped?\n");  
+				}
 				break;
 			}
 			case 13:
@@ -2467,6 +2651,62 @@ while (choice != 0)
 	}
 	puts("Game Over");
 	return EXIT_SUCCESS;
+}
+
+void exploreRoom(int roomNo)
+{
+	switch(roomNo)
+    	{
+      		case 1:
+      		{
+      			puts("You enter what appears to be a makeshift parlor. There is a grand fireplace at the back of the room, with intricate stone carvings in the mantle of various woodland animals. Above that is a large painting of a rat wearing a jester's cap with a pyrite frame. The walls are adorned with scraps of paper and loose string tying them all together. Off to the side is an easel with an covered painting. Along the faded green walls are four doors, two to your right, and to to your left. The doors are labeled 5, 26, 1, and 13 when read in clockwise order. What do you do?");
+        		puts("1) Enter door 5\n2) Enter door 26\n3) Enter door 1\n4) Enter door 13\n5) Uncover the painting\n6) GIVE UP [ENDS GAME EARLY IF PUZZLE CANNOT BE SOLVED]");
+        		break;
+      		}
+      		case 2:
+      		{
+        		puts("You enter an extremely frigid room. The floor is tiled with 64 large blue and white tiles, which are extremely slippery. In the room is an ice sculture of a king and queen atop their thrones. Their eyes are closed, and it appears the king's right hand was broken off. Elsewhere in the room is several small pots, each matching the color of the tile they are on, with 16 in total. In the back is a server tower, but its clearly not powered. There are two wooden doors, one to your right and one to your left. The leftmost one is marked with the head of a horse and an upside-down horse shoe. The other is marked with a key and a question mark. What do you do?");
+      			puts("1) Enter the horse door\n2) Enter the key door\n3) Open the pots");
+      			break;
+      		}
+      		case 3:
+      		{
+        		puts("You enter a rather large room. Before you is a statue of a man wearing a winged helmet and holding a staff. At the base of the statue is a plaque. At your feet is a circle with a dot in the middle, and an arrow pointing right at the statue. Confusingly, to the right of the statue seems to be a hole dug through the floor, broken flooring and dirt piled into the corner of the room, a shovel sticking out of the pile. On the other side of the statue, there is a table with a globe on it, and a trident leaning against the back wall behind it. Around the entire room is a wallpaper of cats and fish. On the roof is a single lightbulb emitting a soft glow, and a chain danging down from it with a metal ring attached to the end. On either wall of the room is a door. To the right is one with a female symbol painted on it. On the other side is a door with a male symbol scratched into it. What do you do?");
+        		puts("1) Go down the hole\n2) Enter the right door\n3) Enter the left door\n4) Read the statue's plaque\n5) Pull on the chain");
+        		break;
+      		}
+      		case 4:
+      		{
+        		puts("You enter a very dark room. Along the walls are rows of vases, jars, and other pottery. Hanging off the right wall is a TV with a broken screen. In the middle of the room is a triangular table with a record player and several records. There is a running popcorn machine in the back left corner of the room. It has creaky, wooden floors and dark purple walls. Finally, there is a single door across from you. Stabbed into the door is a knife, which is holding a scroll in place. What do you do?");
+        		puts("1) Enter the only door\n2) Read the scroll\n3) Play the record player");
+        		break;
+      		}
+      		case 5:
+      		{
+        		puts("You have found a very important room. Above hums fluorescent lights and the walls have a metalic shine. There is a large computer in the middle of the room, with wires scattered across the floor and hanging off the walls like overgrown vines. Behind the computer is a vault. There is definitely treasure inside. The computer screen currently reads as follows: 'Please enter the password. It is hidden along the path'. There are two doors behind you, without labels of any kind. Also behind you is a button on the wall and a screen with a closed eye. You are very confused. What do you do?");
+        		puts("1)Enter the first door \n2) Enter the second door\n3) Look at the button\n4) ENTER THE PASSWORD");
+        		break;
+      		}
+      		case 6:
+      		{
+        		puts("Looking at the eye and the button reveals a message. 'Test your Luck! 1 in 5 Win! A clue to the password hides within!'\n You REALLY want to press that button now. What do you do?");
+        		puts("1)Leave \n2) Push Button");
+        		break;
+      		}
+	}
+}
+
+void eyeGame(void)
+{
+	int cool = (rand() % 5) + 1;
+  	if(cool == 4)
+  	{
+		puts("\nYOU WIN!\nNow, your clue:\nEach room contains a piece of the whole. Use them all for your goal. The first is the second of the numbers on doors. The second is the answer to the blade's question. The third is the fifth of what's missing on ice. The fourth is the fourth of what's missing in the statue's room. Finally, the fifth is your prize for winning this game: 'D'.\nPut all 5 together and that's the password. GOOD LUCK!\n");
+  	}
+  	else
+  	{
+		puts("You lose. Try again.");
+  	}
 }
 
 void generateGold() {
