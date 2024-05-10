@@ -33,7 +33,7 @@
 void exploreLocation(int locationChoice);
 
 void randomTreasure();
-
+void playGame();
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -3640,4 +3640,4 @@ else
 {
 puts("You found nothing.");
 }
-
+}
