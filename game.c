@@ -110,7 +110,7 @@ void chooseCake();
 void chooseEnding();
 
 // Vars for choices
-int doorChoice;
+int doorChoice1;
 int weaponChoice;
 int cakeChoice;
 int finalChoice;
@@ -2435,14 +2435,14 @@ void generateGold() {
 void chooseDoor()
 {
 // First choice (door)
-    scanf("%d", &doorChoice);
-    if (doorChoice == 1)
+    scanf("%d", &doorChoice1);
+    if (doorChoice1 == 1)
     {
         printf("\nSteeling your nerve, you choose the warped metal door. It may look scary but judging by the scratches on the metal it"
                " likely contains something valuable if the beast was so eager to gain entrance.\n\n");
         strcpy(choices[0], "You chose the metal door.");
     }
-    else if (doorChoice == 2)
+    else if (doorChoice1 == 2)
     {
         printf("\nSteeling your nerve, you choose the ancient marble door. Judging by its design it was likely very expensive and time-consuming"
                " to make, so you can only assume something valuable lies behind. \n\n");
