@@ -2,15 +2,17 @@
 
 //Suave714
 
-
+// Dedman
 // Subject 0023
-
+//jingle
 //Dom I.
 //Andre J Leos
 //Elias Dawarpana
 //Gretel Castillo
 
 //Patrick Polanco
+
+//AK
 
 
 //Carlos
@@ -26,6 +28,12 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <math.h>
+
+
+void exploreLocation(int locationChoice);
+
+void randomTreasure();
+void playGame();
 void ajlSpace();      
 void coinFlip();
 void JanKenPon();
@@ -73,6 +81,7 @@ bool isGameFinished(char board[3][3]);
 bool hasContestantWon(char board[3][3], char symbol);
 void FinalArea(int level);
 bool trap_d10();
+int selectRandom(int lower, int upper, int count);
 
 void randomEffect(int potionIndex);
 
@@ -81,6 +90,11 @@ int selectRandom(int lower, int upper, int count);
 char* pullLever(int seed);
 
 void processRoom23();
+
+int healthBar(bool damage, int currentHealth);
+
+void characterSelection(int num);
+
 
 void chooseDoor();
 void chooseWeapon();
@@ -100,6 +114,7 @@ char choices[5][100];
 int health = 100;
 
 void generateGold();
+void multiplicationGame();
 
 
 int main(int argc, char *argv[])
@@ -127,6 +142,40 @@ int main(int argc, char *argv[])
 			case 1:
 			{
 				puts("room1");
+				int again = 1;
+				char animals[3][6] = {"Dog", "Cat", "Turtle"};
+				puts("You open the door and enter a room with another 5 doors.");
+				
+				while(again)
+				{
+					printf("Choose one of the 5 doors. ");
+					scanf("%d", &choice);
+					switch(choice)
+					{
+						case 1:
+							puts("You open the door and found a treasure chest!");
+							randomTreasure();
+							break;
+						case 2:
+							puts("The door is locked.");
+							break;
+						case 3:
+							puts("You open the door and get attacked!");
+							printf("You were bitten by a %s\n", animals[rand() % 3]);
+							break;
+						case 4:
+							puts("You open the door and find a friendly animal!");
+							printf("you walk up and pet the %s\n", animals[rand() % 3]);
+							break;
+						case 5:
+							puts("You open the door and find nothing.");
+							break;
+						default:
+							puts("....");
+					}
+					printf("Do you want to open another door? (1 for yes, 0 for no): ");
+					scanf("%d", &again);
+				}
 				break;
 			}
 			case 2:
@@ -368,6 +417,55 @@ while (choice != 0)
 			case 11:
 			{
 				puts("room11");
+				printf("You have entered the chest room! 5 chests are guarded by a monster.\n");
+                                printf("Your health is at 100 HP.\n");
+                                printf("Open each chest one by one and try to guess the one integer passcode.\n");
+                                printf("You will have five tries to guess the passcode that is between 0 & 9.\n");
+                                printf("Each incorrect guess is a 20 HP blow by the monster.\n");
+                                printf("Goodluck!\n");
+
+                                srand(time(NULL));
+                                int numChests[] = {1, 2, 3, 4, 5};
+                                int currentHealth = 100;
+                                int choice = 0;
+
+                                for(int i = 0; i < sizeof(numChests) / sizeof(numChests[0]); i++)
+                                {
+                                        bool damage = false;
+                                        for(int j = 0; j < 5; j++)
+                                        {
+                                                int randNum = rand() % 10;
+                                                printf("\nGuess Chest %d's passcode: \n", i + 1);
+                                                scanf("%d", &choice);
+
+                                                while(choice != randNum)
+                                                {
+                                                        damage = true;
+                                                        currentHealth = healthBar(damage, currentHealth);
+                                                        printf("STRUCK! You have lost 20 HP. Your current health is %d \n", currentHealth);
+                                                        if(currentHealth <= 0)
+                                                        {
+                                                                printf("You have died. Game over.");
+                                                                return EXIT_SUCCESS;
+                                                        }
+                                                        if(choice < randNum)
+                                                        {
+                                                                printf("Your guess is too low.\n");
+                                                        }
+                                                        else if (choice > randNum)
+                                                        {
+                                                                printf("Your guess is too high.\n");
+                                                        }
+                                                        printf("Try again: ");
+                                                        scanf("%d", &choice);
+                                                }
+                                                printf("\nYou guessed the correct passcode!\nHealth restored!\n");
+                                                currentHealth = 100;
+                                                break;
+                                        }
+                                }
+                                printf("\n\nCongratualtions traveler! You have survived the chest room!\n");
+                                break;
 				break;
 			}
 			case 12:
@@ -387,7 +485,39 @@ while (choice != 0)
 			}
 			case 15:
 			{
-				puts("room15");
+        int choice        = 0;
+        int galacticDate  = rand() % 3000 + 7000;
+        char exploreAgain = 'y';
+
+        printf("Welcome to the Infinite Frontier! Galactic date: %d\n", galacticDate);
+        printf("\nIn the vast expanse of the cosmos, humanity's thirst for exploration knows no bounds. ");
+        printf("Our story begins aboard the ISS Explorer, a state-of-the-art spacecraft embarking ");
+        printf("on a daring mission to chart uncharted territories and uncover the mysteries of the universe.\n");
+
+        printf("\nAs a member of the crew, you play a crucial role in this epic journey. ");
+        printf("Your mission is to explore the Infinite Frontier, a region of space teeming with exotic worlds, ");
+        printf("cosmic anomalies, and enigmatic phenomena waiting to be discovered.\n");
+        printf("\nAre you ready to embark on an adventure of a lifetime? Let's begin!\n");
+
+        while (tolower(exploreAgain) != 'n')
+        {
+          puts("\nChoose a location to explore:");
+          puts("\t1. Unknown Planet");
+          puts("\t2. Stellar Anomaly");
+          puts("\t3. Rogue Asteroid Belt");
+          puts("\t4. Enigmatic Black Hole");
+          puts("\t5. Cosmic Mirage\n");
+          puts("Enter your choice: ");
+          scanf("%d", &choice);
+
+          exploreLocation(choice);
+
+          puts("\nDo you want to explore another location? (y/n):");
+          scanf(" %c", &exploreAgain);
+        }
+
+        printf("Thanks %s for exploring the Infinite Frontier!\n", name);
+        printf("\n");
 				break;
 			}
 			case 16:
@@ -796,7 +926,134 @@ while (choice != 0)
 			case 20:
 			{
 				puts("room20");
-				break;
+				puts("room20");
+			puts("You've entered room 20, the BEST room in this RPG.\n");
+			puts("You will face a series of 3 challenges(mini-games) in order to proceed. \n");
+			puts("First a simple riddle, second a number guessing challenge, and third a multiplication problem. \n");
+
+			//RIDDLE GAME - GAME 1
+
+			printf("Welcome to the Riddle Game!\n");
+			printf("Here is your first riddle(answer in all lowercase, no adjectives) \n");
+
+			#define NUM_RIDDLES 8
+			//riddle list, coordinates with the answers list
+			char* riddles[NUM_RIDDLES] = {
+				"David’s parents have three sons: Snap, Crackle, and what’s the name of the third son?",
+				"What invention lets you look right through a wall?",
+				"What can you catch, but not throw?",
+				"The person who makes it has no need of it; the person who buys it has no use for it. The person who uses it can neither see nor feel it. What is it?",
+				"What has a head, a tail, is brown, and has no legs?",
+				"If you drop me I’m sure to crack, but give me a smile and I’ll always smile back. What am I",
+				"What gets wetter as it dries?",
+				"I’m tall when I’m young, and I’m short when I’m old. What am I"
+			};
+
+			char* answers[] = {
+				"david",
+				"window",
+				"cold",
+				"coffin",
+				"penny",
+				"mirror",
+				"towel",
+				"candle"
+			};
+
+			int numRiddles = sizeof(riddles);
+			srand(time(NULL));
+			int randomIndex = rand() % NUM_RIDDLES;
+
+			bool solved = false;
+			while (!solved) {
+				printf("\nRiddle: %s\n", riddles[randomIndex]);
+
+				char userAnswer[50];
+				// 3 tries
+				for (int attempts = 1; attempts <= 3; attempts++) {
+					printf("Attempt #%d: Enter your answer (or type 'new' for a new riddle): ", attempts);
+					scanf("%s", userAnswer);
+					// give new riddle 
+					if (strcmp(userAnswer, "new") == 0) {
+						randomIndex = rand() % numRiddles;
+						break;
+					}
+					// compare answer to user input
+					if (strcmp(userAnswer, answers[randomIndex]) == 0) {
+						printf("Correct! You solved the riddle!\n");
+						solved = true;
+						break;
+					}
+					else {
+						printf("Sorry, that's incorrect. Try again.\n");
+					}
+				}
+
+				if (!solved) {
+					printf("Sorry, you've run out of attempts. The correct answer is: %s\n", answers[randomIndex]);
+					printf("Would you like to try another riddle? (yes/no): ");
+
+					char choice[4];
+					scanf("%s", choice);
+
+					if (strcmp(choice, "no") == 0) {
+						break;
+					}
+					else if (strcmp(choice, "yes") == 0) {
+						randomIndex = rand() % numRiddles;
+					}
+					else {
+						printf("Invalid input. Exiting riddle game.\n");
+						break;
+					}
+				}
+			}
+			printf("Congratulations on completeting STAGE 1 of the BEST room(room 20), only 2 stages remaining: \n");
+			
+			//NUMBER GUESSING GAME - GAME 2
+			printf("Welcome to the Number Guessing Game!\n");
+			printf("I'm thinking of a number between 1 and 100. Can you guess it?\n");
+
+			int secretNumber = rand() % 100 + 1;
+			int guess;
+			int attempts = 0;
+
+			do {
+				printf("Enter your guess: ");
+				scanf("%d", &guess);
+				attempts++;
+
+				if (guess < secretNumber) {
+					printf("Too low! Try again.\n");
+				}
+				else if (guess > secretNumber) {
+					printf("Too high! Try again.\n");
+				}
+				else {
+					printf("Congratulations! You guessed the number %d in %d attempts!\n", secretNumber, attempts);
+					printf("You have now completed STAGE 1 & STAGE 2 of the BEST ROOM(room 20), proceed to STAGE 3!\n");
+				}
+			} while (guess != secretNumber);
+
+
+			//Multiplication GAME - GAME 3 
+			printf("Welcome to the Multiplication Math Game!\n");
+    		printf("I'm going to give you a simple multiplication problem. Can you solve it?\n");
+
+			multiplicationGame();
+
+			printf("Congratulations on completing all 3 stages!\n");
+			printf(" __   __            _    _ _        \n");
+			printf(" \\ \\ / /           | |  | (_)       \n");
+			printf("  \\ V /___  _   _  | |  | |_ _ __   \n");
+			printf("   \\ // _ \\| | | | | |\\| | | '_ \\  \n");
+			printf("   | | (_) | |_| | \\  /\\  / | | | | \n");
+			printf("   \\_/\\___/ \\__,_|  \\/  \\/|_|_| |_| \n");
+			printf("\n");
+			printf("You will now return to the main Cave. Come again to the BEST ROOM (room 20) anytime! \n\n");
+
+			break;
+
 			}
 			case 21:
 			{
@@ -837,6 +1094,19 @@ while (choice != 0)
 			case 28:
 			{
 				puts("room28");
+				int gameRuns = 1;
+  printf("Hello new trainer, welcome to the world of pokemon\nLet's have a practice battle\n\n");
+  while(gameRuns == 1)
+    {
+      playGame();
+      printf("Would you like to battle me again? You can pick a new pokemon too\n1: Yes, 0: No\n");
+      scanf("%d", &gameRuns);
+      if(gameRuns == 1)
+      {
+        printf("\nAwesome, lets have another battle\n");
+      }
+    }
+  printf("Thank you for battling with me trainer, I hope to see you again");
 				break;
 			}
 
@@ -860,6 +1130,62 @@ while (choice != 0)
 			case 30:
 			{
 				puts("room30");
+				    srand(time(NULL));
+
+    int choice;
+    do
+    {
+        printf("\nAdventure Time RPG Menu\n-----------------------------\n");
+        printf("1. Select Character\n");
+        printf("2. Choose Weapons for Adventure Pack\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int randomIndex = rand() % 6;
+            characterSelection(randomIndex);
+            break;
+        }
+        case 2:
+        {
+            // Inventory
+            int adventurePack[3];
+            char *inventory[] = {"Mushroom Bomb", "Finn's Sword", "Ax Bass", "Candy Cane Shot Gun", "Demon Blood Sword", "Peppermint Butler's Steak Collection"};
+            printf("\nWeapons\n--------------------------------------\n");
+            for (int i = 0; i < 6; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[i]);
+            }
+
+            printf("Please choose three weapons to put in your adventure pack.\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("Enter Selection %d: ", i + 1);
+                scanf("%d", &adventurePack[i]);
+            }
+
+            printf("Adventure Pack:\n");
+            for (int i = 0; i < 3; i++)
+            {
+                printf("%d. %s\n", i + 1, inventory[adventurePack[i] - 1]);
+            }
+            break;
+        }
+        case 3:
+            printf("Exiting the Adventure Time RPG. Goodbye!\n");
+            break;
+        default:
+            printf("Invalid choice. Please enter a number between 1 and 3.\n");
+            break;
+        }
+
+    } while (choice != 3);
+
+
 				break;
 			}
 			case 31:
@@ -2160,7 +2486,15 @@ char* pullLever(int seed)
 }
 
 
-
+int healthBar(bool damage, int health) 
+{
+  int tempHealth  = health;
+  if (damage == true)
+  {
+    tempHealth = health - 20;
+  }
+  return tempHealth;
+}
 
 
 
@@ -2811,7 +3145,126 @@ bool isGameFinished(char board [3][3])
 
 
 
-
+void playGame()
+{
+  srand(time(NULL));
+  int userChoice = 0;
+  int trainerHealth;
+  int venusaur[3] = {3, 50, 48}; //ID, HP, LEVEL Super Easy
+  int charizard[3] = {6, 40, 41}; //ID, HP, LEVEL Easy
+  int blastoise[3] = {9, 30, 36 }; //ID, HP, LEVEL Medium
+  int pikachu[3] = {25, 20, 16}; //ID, HP, LEVEL Hard
+  int eevee[3] = {133, 10, 11}; //ID, HP, LEVEL Super Hard
+  int machamp[3] = {68, 30, 32}; //ID, HP, LEVEL
+  int machampHealth = machamp[1];
+  printf("Please choose one of the five pokemons (Pick a number)\n 1. Venusaur\n 2. Charizard\n 3. Blastoise\n 4. Pikachu\n 5. Eevee\n");
+  while(userChoice <= 0 || userChoice > 5)
+    {
+      scanf("%d", &userChoice);
+      if (userChoice == 1)
+      {
+        printf("You chose Venusaur, he is number %d in the pokedex, has %d hp, and is level %d\n", venusaur[0], venusaur[1], venusaur[2]);
+        trainerHealth = venusaur[1];
+      }
+      else if(userChoice == 2)
+      {
+        printf("You chose Charizard, he is number %d in the pokedex, has %d hp, and is level %d\n", charizard[0], charizard[1], charizard[2]);
+        trainerHealth = charizard[1];
+      }
+      else if(userChoice == 3)
+      {
+        printf("You chose Blastoise, he is number %d in the pokedex, has %d hp, and is level %d\n", blastoise[0], blastoise[1], blastoise[2]);
+        trainerHealth = blastoise[1];
+      }
+      else if(userChoice == 4)
+      {
+        printf("You chose Pikachu, he is number %d in the pokedex, has %d hp, and is level %d\n", pikachu[0], pikachu[1], pikachu[2]);
+        trainerHealth = pikachu[1];
+      }
+      else if(userChoice == 5)
+      {
+        printf("You chose Eevee, he is number %d in the pokedex, has %d hp, and is level %d\n", eevee[0], eevee[1], eevee[2]);
+        trainerHealth = eevee[1];
+      }
+      else
+      {
+        printf("Please enter a valid number\n");
+      }
+  }
+  printf("\nAwesome!! Let's have our battle, I send out Machamp. He is number %d in the pokedex, has %d hp, and is level %d\n", machamp[0], machamp[1], machamp[2]);
+  printf("To attack you will pick a number between 1-3, if your number doesn't match mine, then you attack, if it does, \nthen I attack. Keep attacking until our pokemon faints at 0 health. Good luck\n");
+  while(machampHealth > 0 && trainerHealth > 0)
+    {
+      int userAttack = 0;
+      int machopAttack = rand() % 3 + 1;
+      printf("\nTrainer enter a number between 1-3\n");
+      scanf("%d", &userAttack);
+      while(userAttack <= 0 || userAttack > 3)
+      {
+        printf("Wrong input Trainer, enter your guess from 1-3\n");
+        scanf("%d", &userAttack);
+      }
+      if(userAttack == machopAttack)
+      {
+        printf("\nYou entered %d, I entered %d, I win this turn\n", userAttack, machopAttack);
+        printf("You missed, Machamp uses seismic toss dealing 10 damage\n");
+        trainerHealth = trainerHealth - 10;
+      }
+      else
+      {
+        printf("\nYou entered %d, I entered %d, You win this turn\n", userAttack, machopAttack);
+        if(userChoice == 1)
+        {
+          printf("You attack, Venusaur uses Vine Whip dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 2)
+        {
+          printf("You attack, Charizard uses Flamethrower dealing 10 damage to machamp\n");
+        }   
+        else if(userChoice == 3)
+        {
+          printf("You attack, Blastoise uses Hydro Cannon dealing 10 damage to machamp\n");
+        }
+        else if(userChoice == 4)
+        {
+          printf("You attack, Pikachu uses Thunderbolt dealing 10 damage to machamp\n");
+        }
+        else
+        {
+          printf("You attack, Eevee uses Tackle dealing 10 damage to machamp\n");
+        }
+        machampHealth = machampHealth - 10;
+      }
+      printf("Your pokemon has %d health, Machamp has %d health\n", trainerHealth, machampHealth);
+    }
+  if(machampHealth <= 0)
+  {
+    printf("Machamp has fainted, you win!!\n");
+  }
+  else
+  {
+    if(userChoice == 1)
+    {
+      printf("Venusaur has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 2)
+    {
+      printf("Charizard has fainted, you lose. Better luck next time trainer\n");
+    }   
+    else if(userChoice == 3)
+    {
+      printf("Blastoise has fainted, you lose. Better luck next time trainer\n");
+    }
+    else if(userChoice == 4)
+    {
+      printf("Pikachu has fainted, you lose. Better luck next time trainer\n");
+    }
+    else
+    {
+      printf("Eevee has fainted, you lose. Better luck next time trainer\n");
+    }
+  }
+}
 
 
 
@@ -3401,6 +3854,13 @@ bool trap_d10()
     return d2;
 }
 
+void characterSelection(int num)
+{
+    char *character[6] = {"Marceline the Vampire Queen", "Finn the Human", "Jake the Dog", "BMO", "Ice King", "Princess Bubblegum"};
+    printf("\nCharacter Guide\n-------------------------------------\nYour guide will be: %s! \n", character[num]);
+}
+
+
    int selectRandom(int lower, int upper, int count) {
             lower = 1;
             upper = 10;
@@ -3410,6 +3870,7 @@ bool trap_d10()
                 return ("%d", num);
             }
         }
+
 
 int randomNumRoom41()
 {
@@ -3429,6 +3890,34 @@ int randomNumRoom41()
 
 
 
+void multiplicationGame() {
+    int num1, num2, userAnswer, correctAnswer;
+
+
+    do {
+        // Generate two random numbers between 1 and 10
+        num1 = rand() % 10 + 1;
+        num2 = rand() % 10 + 1;
+
+        // Display the multiplication problem
+        printf("What is %d * %d?\n", num1, num2);
+
+        // Get the user's answer
+        printf("Your answer: ");
+        scanf("%d", &userAnswer);
+
+        // Calculate the correct answer
+        correctAnswer = num1 * num2;
+
+        // Check if the user's answer is correct
+        if (userAnswer == correctAnswer) {
+            printf("Congratulations! %d * %d = %d. You got it right!\n", num1, num2, correctAnswer);
+        } else {
+            printf("Sorry, that's incorrect. %d * %d = %d.\n", num1, num2, correctAnswer);
+            printf("Try again.\n");
+        }
+    } while (userAnswer != correctAnswer);
+}
 
 
 
@@ -3437,3 +3926,78 @@ int randomNumRoom41()
 
 
 
+
+/*
+ * Function written by Christopher Dedman-Rollet
+ */
+void exploreLocation(int locationChoice)
+{
+	const char *locationDescriptions[] = {
+			"You arrive at an Unknown Planet...\n"
+			"As you descend through the planet's turbulent atmosphere, you're greeted by a breathtaking landscape teeming with exotic flora and fauna.\n"
+			"As you venture deeper into the planet's depths, you uncover ancient ruins hinting at a civilization long forgotten.\n"
+			"You discover a lush, verdant world teeming with life. Strange creatures roam the land, and vibrant plant life thrives in the planet's rich soil.\n"
+			"You also encounter a strange alien species and learn about their culture.\n"
+			"After spending days with the alient species, you collect samples of the local flora and fauna for further study.\n"
+			"You then return to the ISS Explorer with newfound knowledge and a sense of wonder.\n",
+
+			"You encounter a Stellar Anomaly...\n"
+			"While traversing a desolate region of space, you stumble upon a peculiar anomaly—a swirling\n"
+			"vortex of cosmic energy unlike anything you've ever seen. Drawn by curiosity, you cautiously approach the anomaly, bracing yourself for the unknown.\n"
+			"You encounter strange phenomena such as time loops, spatial distortions, and quantum anomalies.\n"
+			"As you navigate through the Stellar Anomaly, you must rely on your wits and ingenuity to survive the unpredictable dangers.\n"
+			"What awaits you on the other side is beyond your wildest imagination.\n"
+			"You uncover ancient artifacts and mysterious technologies that challenge your understanding of the universe.\n"
+			"After a harrowing journey through the Stellar Anomaly, you emerge with newfound knowledge and a deeper appreciation for the mysteries of the cosmos.\n"
+			"You return to the ISS Explorer with valuable data and insights into the nature of cosmic anomalies, expanding humanity's understanding of the universe.\n",
+
+			"You navigate through a Rogue Asteroid Belt...\n"
+			"As you pilot the ISS Explorer through a treacherous asteroid belt, you must dodge massive space rocks hurtling towards you at breakneck speeds.\n"
+			"Your reflexes are put to the test as you navigate through the chaotic debris field, narrowly avoiding collisions with rogue asteroids.\n"
+			"You discover valuable resources hidden within the asteroids, including rare minerals and precious metals.\n"
+			"You also encounter a group of space pirates who attempt to plunder your ship, forcing you to engage in a thrilling space battle.\n"
+			"After a fierce confrontation, you emerge victorious and continue your journey through the asteroid belt.\n"
+			"You uncover a hidden asteroid base filled with ancient relics and forgotten treasures, shedding light on the history of the cosmos.\n"
+			"You return to the ISS Explorer with a cargo hold full of valuable resources and artifacts, ready to continue your adventures in the cosmos.\n",
+
+			"You study an Enigmatic Black Hole...\n"
+			"As you approach the event horizon of the black hole, you feel the immense gravitational pull tugging at your ship, threatening to tear it apart.\n"
+			"You witness the distortion of spacetime as you venture closer to the singularity, observing the bizarre effects of the black hole's immense gravity.\n"
+			"You discover a hidden pocket of spacetime within the black hole, a realm of infinite possibilities and mind-bending phenomena.\n"
+			"You encounter strange entities and cosmic beings that defy comprehension, challenging your understanding of the universe.\n"
+			"After a harrowing journey through the black hole, you emerge with newfound knowledge and a deeper appreciation for the mysteries of the cosmos.\n"
+			"You return to the ISS Explorer with valuable data and insights into the nature of black holes, expanding humanity's understanding of the universe.\n",
+
+			"You encounter a Cosmic Mirage...\n"
+			"As you traverse the vast expanse of space, you stumble upon a cosmic mirage—a shimmering illusion that defies explanation.\n"
+			"Drawn by curiosity, you venture closer to the mirage, unsure of what lies beyond the shimmering veil.\n"
+			"You are enveloped by a surreal dreamscape, a realm of infinite possibilities and surreal landscapes.\n"
+			"You encounter strange creatures and ethereal beings that challenge your perception of reality.\n"
+			"After a surreal journey through the cosmic mirage, you awaken with a newfound sense of wonder and a deeper appreciation for the mysteries of the universe.\n"
+			"You return to the ISS Explorer with memories of the cosmic mirage, forever changed by the experience.\n"};
+
+	if (locationChoice < 1 || locationChoice > sizeof(locationDescriptions) / sizeof(locationDescriptions[0]))
+	{
+		printf("Invalid choice! Please choose a valid location to explore.\n");
+		return;
+	}
+
+
+	printf("%s", locationDescriptions[locationChoice - 1]);
+}
+void randomTreasure()
+{
+int treasure = rand() % 100 + 1;
+if(treasure ==100)
+{
+puts("You found 1 billion gold coins.");
+}
+else if(treasure > 50)
+{
+puts("You found 1 gold coin.");
+}
+else
+{
+puts("You found nothing.");
+}
+}
